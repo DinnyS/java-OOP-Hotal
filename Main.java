@@ -140,6 +140,5 @@ public class Main {
 
         }while (true); // Loop ของ Main Menu
 
-
     }
 }
