@@ -12,6 +12,5 @@ public class Main {
         System.out.println(" == Select == ");
         System.out.println(" 1. Info Room ");
         System.out.println(" 2. Booking");
-
     }
 }
