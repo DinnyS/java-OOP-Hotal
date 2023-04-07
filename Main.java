@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import Booking.Booking;
 public class Main {
     public static void main(String[] args) {
 
@@ -15,7 +16,7 @@ public class Main {
             System.out.println();
 
             System.out.println(" == Select == "); // เลือกหัวข้อ
-            System.out.println(" 1. Information Hotel Room "); // ข้อมูลของโรงแรม
+            System.out.println(" 1. Information Hotel Booking.Room "); // ข้อมูลของโรงแรม
             System.out.println(" 2. Booking"); // การจอง
             System.out.println();
             System.out.print(" : ");
@@ -28,22 +29,22 @@ public class Main {
             if (select.equals("1")) {
                 System.out.println();
                 System.out.println();
-                System.out.println(" == Information Hotel Room == ");
+                System.out.println(" == Information Hotel Booking.Room == ");
                 System.out.println();
-                System.out.println(" - Hotel Room ");
-                System.out.println("     1. Basic Room (1-3)         3,500 Baht/day");
-                System.out.println("     2. Deluxe Room (4-6)        5,500 Baht/day");
-                System.out.println("     3. Super Deluxe Room (7-8)  8,000 Baht/day");
+                System.out.println(" - Hotel Booking.Room ");
+                System.out.println("     1. Basic Booking.Room (1-3)         3,500 Baht/day");
+                System.out.println("     2. Deluxe Booking.Room (4-6)        5,500 Baht/day");
+                System.out.println("     3. Super Deluxe Booking.Room (7-8)  8,000 Baht/day");
                 System.out.println();
-                System.out.println(" - Meeting Room ");
+                System.out.println(" - Meeting Booking.Room ");
                 System.out.println("     1. The Universe (250)      50,000 Baht/day");
                 System.out.println("     2. The World (100)         30,000 Baht/day");
                 System.out.println("     3. The Mini World (50)     20,000 Baht/day");
                 System.out.println("     4. The Town (50)           20,000 Baht/day");
 
                 System.out.println(" == Privileges if staying this Hotel == ");
-                System.out.println(" - Steam Room");
-                System.out.println(" - Massage Room");
+                System.out.println(" - Steam Booking.Room");
+                System.out.println(" - Massage Booking.Room");
                 System.out.println(" - Swimming Pool");
                 System.out.println(" - Jacuzzi");
 
@@ -59,31 +60,40 @@ public class Main {
                     System.out.println();
                     System.out.println();
                     System.out.println(" ----- Booking -----");
-                    System.out.println(" 1. Hotel Room ");
-                    System.out.println(" 2. Meeting Room ");
+                    System.out.println(" 1. Hotel Booking.Room ");
+                    System.out.println(" 2. Meeting Booking.Room ");
                     System.out.println(" 3. Back to Menu");
                     System.out.println();
                     System.out.println(" == Select == ");
                     System.out.print(" : ");
 
-                    int selectbooking = scan.nextInt(); // จะใช้ตัวแปรเป็น int มีชื่อว่า selectbooking
-
-                    // --------------- Booking Hotel Room ----------------------
+                    int selectbooking = scan.nextInt(); // จะใช้ตัวแปรเป็น int มีชื่อว่า select booking
+                    Booking booking = new Booking();
+                    // --------------- Booking Hotel Booking.Room ----------------------
 
                     if (selectbooking == 1) {
                         System.out.println();
-                        System.out.println(" ===== Booking Hotel Room ===== ");
+                        System.out.println(" ===== Booking Hotel Booking.Room ===== ");
                         System.out.println();
+
+                        booking.checkIn();
+                        booking.checkOut(selectbooking);
+                        booking.name();
+                        booking.phone();
                     }
 
 
-                    // --------------- Booking Meeting Room --------------------
+                    // --------------- Booking Meeting Booking.Room --------------------
 
                     else if (selectbooking == 2) {
                         System.out.println();
-                        System.out.println(" ===== Booking Meeting Room ===== ");
+                        System.out.println(" ===== Booking Meeting Booking.Room ===== ");
                         System.out.println();
 
+                        booking.checkIn();
+                        booking.checkOut(selectbooking);
+                        booking.name();
+                        booking.phone();
                     }
 
                     else if (selectbooking == 3 ) {
@@ -109,7 +119,7 @@ public class Main {
                 do {
                     System.out.println();
                     System.out.println(" -----===== ADMIN =====----- ");
-                    System.out.println(" 1. Show All Room Data ");
+                    System.out.println(" 1. Show All Booking.Room Data ");
                     System.out.println(" 2. Change Data");
                     System.out.println(" 3. Back to Menu");
 
@@ -117,24 +127,26 @@ public class Main {
                     System.out.println(" ----- select ----- ");
                     System.out.print(" : ");
 
-                    int adminselect = scan.nextInt();
+                    int adminSelect = scan.nextInt();
 
-                    if (adminselect == 1 ){ // แสดงข้อมูลทั้งหมด
-
-                    }
-
-                    else if(adminselect == 2 ){ // แก้ไขข้อมูล
+                    if (adminSelect == 1 ){ // แสดงข้อมูลทั้งหมด
 
                     }
 
-                    else if (adminselect == 3) { // กลับไปหน้ากมนู
+                    else if(adminSelect == 2 ){ // แก้ไขข้อมูล
+
+                    }
+
+                    else if (adminSelect == 3) { // กลับไปหน้าเมนู
                         break;
                     }
 
                     else {
                         System.out.println("Error!!! Please Try Again"); // ต้องกรอกข้อมูลหน้านี้ใหม้
                     }
-                }while (true);} // Loop ของ Admin
+                }while (true);
+
+            } // Loop ของ Admin
 
 
 
