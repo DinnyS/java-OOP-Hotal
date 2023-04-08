@@ -30,12 +30,13 @@ public class Booking {
                 int month = Integer.parseInt(parts[1]);
                 int year = Integer.parseInt(parts[2]);
 
-                if (year >= currentDate.getYear() && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
+                if (year == currentDate.getYear() && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
+                    check = true;
+                } else if (year > currentDate.getYear() || (year == currentDate.getYear() && month > currentDate.getMonthValue())) {
                     check = true;
                 } else {
                     System.out.println("Invalid date!");
                 }
-
             } else {
                 System.out.println("Invalid date format!");
             }
