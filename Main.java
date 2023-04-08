@@ -37,10 +37,10 @@ public class Main {
                 System.out.println("     3. Super Deluxe Booking.Room (7-8)  8,000 Baht/day");
                 System.out.println();
                 System.out.println(" - Meeting Booking.Room ");
-                System.out.println("     1. The Universe (250)      50,000 Baht/day");
-                System.out.println("     2. The World (100)         30,000 Baht/day");
-                System.out.println("     3. The Mini World (50)     20,000 Baht/day");
-                System.out.println("     4. The Town (50)           20,000 Baht/day");
+                System.out.println("     1. The Universe (250)      50,000 Baht/day    25,000 Baht/half day ");
+                System.out.println("     2. The World (100)         30,000 Baht/day    15,000 Baht/half day ");
+                System.out.println("     3. The Mini World (50)     20,000 Baht/day    10,000 Baht/half day ");
+                System.out.println("     4. The Town (50)           20,000 Baht/day    10,000 Baht/half day ");
 
                 System.out.println(" == Privileges if staying this Hotel == ");
                 System.out.println(" - Steam Booking.Room");
