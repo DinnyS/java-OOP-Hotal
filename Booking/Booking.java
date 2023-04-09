@@ -53,7 +53,13 @@ public class Booking {
 
         else if (selectBooking == 2) {
             System.out.println("---------- Check out ----------");
-            System.out.println("How many hours will you be booking ?");
+            System.out.println("Which package do you need?");
+            System.out.println(" == Select == ");
+            System.out.println(" 1. All day");
+            System.out.println(" 2. Half day (Morning)");
+            System.out.println(" 3. Half day (Afternoon)");
+            System.out.println();
+            System.out.print(" : ");
             hours = in.nextLine();
         }
 
