@@ -77,12 +77,14 @@ public class Room {
     Room(int selectBooking){
         if (selectBooking == 1){
             infoHotel();
-            System.out.println("Enter number of room(s) : ");
+            System.out.print("Enter number of room(s) : ");
             int numRoom = in.nextInt();
 
             for (int i =1; i<= numRoom; i++){
-
-                System.out.print("Enter number of customers ( " + i + " ) : ");
+                if (i==0){
+                    i=1;
+                }
+                System.out.print("Enter number of customers ( " + (i) + " ) : ");
                 int numCustomers = in.nextInt();
                 Room room = Room.suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
 
@@ -90,7 +92,9 @@ public class Room {
                     System.out.println("Suggested room : " + room.getType());
 
                 } else {
-                    System.out.println("No available rooms for " + numCustomers + " customers.");
+                    System.out.println("!!!There is no room of the right size for " + numCustomers + " customers.!!!");
+                    i=i-1;
+
                 }
             }
 
