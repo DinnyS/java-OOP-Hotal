@@ -76,10 +76,7 @@ public class Main {
                         System.out.println(" ===== Booking Hotel Booking.Room ===== ");
                         System.out.println();
 
-                        booking.checkIn();
-                        booking.checkOut(selectbooking);
-                        booking.name();
-                        booking.phone();
+                        booking.startBooking(selectbooking);
                     }
 
 
@@ -90,10 +87,7 @@ public class Main {
                         System.out.println(" ===== Booking Meeting Booking.Room ===== ");
                         System.out.println();
 
-                        booking.checkIn();
-                        booking.checkOut(selectbooking);
-                        booking.name();
-                        booking.phone();
+                        booking.startBooking(selectbooking);
                     }
 
                     else if (selectbooking == 3 ) {

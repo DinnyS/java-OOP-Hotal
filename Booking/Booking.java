@@ -22,7 +22,7 @@ public class Booking {
 
         while (!check) {
             System.out.print("Enter a date (dd/mm/yyyy) : ");
-            date = in.next();
+            date = in.nextLine();
             String[] parts = date.split("/");
 
             if (parts.length == 3) {
@@ -61,12 +61,12 @@ public class Booking {
             System.out.println();
             System.out.print(" : ");
             hours = in.nextLine();
+
         }
 
     }
 
     public void name(){
-        in.nextLine();
         System.out.print("name : ");
         name = in.nextLine();
     }
@@ -89,6 +89,15 @@ public class Booking {
         }
 
     }
+
+    public void startBooking(int selectBooking){
+        checkIn();
+        checkOut(selectBooking);
+        Room bookRoom = new Room(selectBooking);
+        name();
+        phone();
+    }
+
 
 
 
