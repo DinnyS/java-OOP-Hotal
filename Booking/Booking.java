@@ -6,12 +6,11 @@ public class Booking {
     private String year;
     private String month;
     private String day;
-    private int hours;
+    private String hours;
 
     private String name;
 
     private String phone;
-
 
 
     Scanner in = new Scanner(System.in);
@@ -19,10 +18,9 @@ public class Booking {
     public void checkIn(){
         LocalDate currentDate = LocalDate.now();
         boolean check = false;
-        String date = null;
+        String date;
 
         while (!check) {
-            System.out.println("***** Please enter the number as a Gregorian data *****");
             System.out.print("Enter a date (dd/mm/yyyy) : ");
             date = in.nextLine();
             String[] parts = date.split("/");
@@ -45,62 +43,28 @@ public class Booking {
         }
     }
 
-    public void Information(int selectBooking){
+    public void checkOut(int selectBooking){
 
         if (selectBooking == 1){
-            System.out.println("---------- Information ----------");
+            System.out.println("---------- Check out ----------");
             System.out.print("How long will you be staying ? : ");
             day += in.nextLine();
         }
 
         else if (selectBooking == 2) {
-            boolean check = true;
-            System.out.println("---------- Information ----------");
-            System.out.println("Which package do you need?");
-            System.out.println("*** The half day price will be half the full day price ***");
-            System.out.println(" == Select == ");
-            System.out.println(" 1. All day");
-            System.out.println(" 2. Half day (Morning)");
-            System.out.println(" 3. Half day (Afternoon)");
-            System.out.println();
-            System.out.print(" : ");
-            hours = in.nextInt();
-            while (check) {
-                if (hours<1||hours>3){
-                    System.out.println("!!! Please select only the options available here !!!");
-                    System.out.println("Which package do you need?");
-                    System.out.println("*** The half day price will be half the full day price ***");
-                    System.out.println(" == Select == ");
-                    System.out.println(" 1. All day");
-                    System.out.println(" 2. Half day (Morning)");
-                    System.out.println(" 3. Half day (Afternoon)");
-                    System.out.println();
-                    System.out.print(" : ");
-                    hours = in.nextInt();
-                }
-                else {
-                    check = false;
-                }
-
-            }
-
+            System.out.print("");
         }
 
     }
 
     public void name(){
-        System.out.print("name ");
-        System.out.println();
-        System.out.print(" : ");
+        System.out.print("name : ");
         name = in.nextLine();
-        System.out.println();
     }
 
     public void phone(){
 
-        System.out.print("Phone number ");
-        System.out.println();
-        System.out.print(" : ");
+        System.out.print("Phone number : ");
         phone = in.nextLine();
         String phoneLimit = "\\d{10}";
         boolean check = true;
@@ -119,11 +83,16 @@ public class Booking {
 
     public void startBooking(int selectBooking){
         checkIn();
-        Information(selectBooking);
-        Room bookRoom = new Room(selectBooking);
+        checkOut(selectBooking);
+        Room room = new Room(selectBooking);
         name();
         phone();
     }
+
+
+
+
+
 
 
 }
