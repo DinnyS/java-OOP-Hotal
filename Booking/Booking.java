@@ -66,6 +66,7 @@ public class Booking {
     }
 
     public void name(){
+        in.nextLine();
         System.out.print("name : ");
         name = in.nextLine();
     }
