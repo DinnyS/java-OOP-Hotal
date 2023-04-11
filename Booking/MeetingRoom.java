@@ -3,6 +3,15 @@ import java.util.*;
 
 public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
     private int numRoom;
+    private int time;
+
+    public void setNumRoom(int numRoom) {
+        this.numRoom = numRoom;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 
     public int getNumRoom() {
         return numRoom;
@@ -11,8 +20,6 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
     public int getTime() {
         return time;
     }
-
-    private int time;
 
     protected MeetingRoom(String type, int price, int available) {
         super(type, price, available);
@@ -50,12 +57,14 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
         System.out.print("Enter the number type : ");
         numRoom = in.nextInt();
         while (check) {
+
             if (numRoom<1||numRoom>4){
                 System.out.println("!!! Please select only the options available here !!!");
                 System.out.print("Enter the number type : ");
                 numRoom = in.nextInt();
             }
             else {
+                setNumRoom(numRoom);
                 check = false;
             }
 
@@ -68,6 +77,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
         System.out.println(" ========================= ");
         System.out.print(" Enter : ");
         time = in.nextInt();
+
         boolean checks = true;
         while (checks) {
             if (time<1||time>3){
@@ -80,8 +90,10 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
                 System.out.println(" ========================= ");
                 System.out.print(" Enter : ");
                 time = in.nextInt();
+
             }
             else {
+                setTime(time);
                 checks = false;
             }
 

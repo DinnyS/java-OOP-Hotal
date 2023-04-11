@@ -7,6 +7,20 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     private int numRoom;
     private int numCustomers;
 
+    public void setNumRoom(int numRoom) {
+        this.numRoom = numRoom;
+    }
+
+    public void setNumCustomers(int numCustomers) {
+        this.numCustomers = numCustomers;
+    }
+
+    public void setNumType(int numType) {
+        this.numType = numType;
+    }
+
+    private int numType;
+
     public int getNumRoom() {
         return numRoom;
     }
@@ -19,7 +33,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
         return numType;
     }
 
-    private int numType;
+
 
     public HotelRoom(String type, int capacity, int price, int available) {
         super(type, capacity, price, available);
@@ -65,6 +79,9 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     public void selectBooking() {
         System.out.print("Enter number of room(s) : ");
         numRoom = in.nextInt();
+        setNumRoom(numRoom);
+
+
         if (numRoom > 40) {
             numRoom = 40;
         }
@@ -88,6 +105,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                     i = 1;
                 }
                 if (numCustomers <= 8) {
+                    setNumCustomers(numCustomers);
                     break;
                 }
             }
@@ -97,6 +115,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
             System.out.print("Enter the number : ");
             numType = in.nextInt();
+
             boolean check = true;
             while (check) {
                 if (numType < 1 || numType > 3) {
@@ -107,6 +126,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                     numType = in.nextInt();
 
                 } else {
+                    setNumType(numType);
                     check = false;
                 }
 

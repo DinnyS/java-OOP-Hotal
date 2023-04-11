@@ -6,16 +6,35 @@ public class Booking {
     private String year;
     private String month;
     private String day;
-    private String hours;
 
     private String name;
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
 
     private String phone;
 
 
     Scanner in = new Scanner(System.in);
 
-    public void checkIn(){
+    private void checkIn(){
         LocalDate currentDate = LocalDate.now();
         boolean check = false;
         String date;
@@ -43,7 +62,7 @@ public class Booking {
         }
     }
 
-    public void checkOut(int selectBooking){
+    private void checkOut(int selectBooking){
 
         if (selectBooking == 1){
             System.out.println("---------- Check out ----------");
@@ -57,12 +76,12 @@ public class Booking {
 
     }
 
-    public void name(){
+    private void name(){
         System.out.print("name : ");
         name = in.nextLine();
     }
 
-    public void phone(){
+    private void phone(){
 
         System.out.print("Phone number : ");
         phone = in.nextLine();

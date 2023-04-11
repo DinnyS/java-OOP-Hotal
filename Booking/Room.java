@@ -43,6 +43,7 @@ public class Room {
     Scanner in = new Scanner(System.in);
 
     Room(int selectBooking){
+
         if (selectBooking == 1){
             HotelRoom hotelRoom = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable());
             hotelRoom.infoRoom();
@@ -55,7 +56,5 @@ public class Room {
         }
     }
 
-    private void setAvailable(int available) {
-        this.available=available;
-    }
+
 }
