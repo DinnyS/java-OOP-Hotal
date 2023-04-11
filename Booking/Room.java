@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Room {
-
     private String type;
     private int capacity;
     private int price;
@@ -59,6 +58,4 @@ public class Room {
     private void setAvailable(int available) {
         this.available=available;
     }
-
-
 }

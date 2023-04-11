@@ -2,7 +2,6 @@ package Booking;
 import java.util.*;
 
 public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
-
     private int numRoom;
 
     public int getNumRoom() {
@@ -47,15 +46,46 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
 
     @Override
     public void selectBooking() {
+        boolean check = true;
         System.out.print("Enter the number type : ");
         numRoom = in.nextInt();
+        while (check) {
+            if (numRoom<1||numRoom>4){
+                System.out.println("!!! Please select only the options available here !!!");
+                System.out.print("Enter the number type : ");
+                numRoom = in.nextInt();
+            }
+            else {
+                check = false;
+            }
+
+        }
         System.out.println(" ====== Select time ====== ");
+        System.out.println("*** The half day price will be half the full day price ***");
         System.out.format("%-2s %-2s%n","","1. All day");
         System.out.format("%-2s %-2s%n","","2. Half day (Morning)");
         System.out.format("%-2s %-2s%n","","3. Half day (Afternoon)");
         System.out.println(" ========================= ");
         System.out.print(" Enter : ");
         time = in.nextInt();
+        boolean checks = true;
+        while (checks) {
+            if (time<1||time>3){
+                System.out.println("!!! Please select only the options available here !!!");
+                System.out.println("Which package do you need?");
+                System.out.println("*** The half day price will be half the full day price ***");
+                System.out.format("%-2s %-2s%n","","1. All day");
+                System.out.format("%-2s %-2s%n","","2. Half day (Morning)");
+                System.out.format("%-2s %-2s%n","","3. Half day (Afternoon)");
+                System.out.println(" ========================= ");
+                System.out.print(" Enter : ");
+                time = in.nextInt();
+            }
+            else {
+                checks = false;
+            }
+
+        }
         System.out.println("------------------------------------------------------------------------------");
     }
 }

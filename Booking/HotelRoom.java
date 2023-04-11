@@ -65,20 +65,54 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     public void selectBooking() {
         System.out.print("Enter number of room(s) : ");
         numRoom = in.nextInt();
+        if (numRoom > 40) {
+            numRoom = 40;
+        }
 
-        for (int i =1; i<= numRoom; i++){
+        for (int i = 1; i <= numRoom; i++) {
+
+            if (i == 0) {
+                i = 1;
+                System.out.println("!!! Please enter the information again !!!");
+            }
 
             System.out.print("Enter number of customers/room ( room " + i + " ) : ");
             numCustomers = in.nextInt();
+
+            while (numCustomers > 8) {
+                System.out.println("!!!There is no room of the right size for " + numCustomers + " customers.!!!");
+                System.out.print("Enter number of customers/room ( room " + i + " ) : ");
+                numCustomers = in.nextInt();
+                i = -1;
+                if (i <= 0) {
+                    i = 1;
+                }
+                if (numCustomers <= 8) {
+                    break;
+                }
+            }
+
             System.out.println("-----------------------------------------------------------------------------");
-            System.out.println("You can choose typ of room :");
-            suggestRoom(HotelRoom.getHotelRooms(),numCustomers);
+            System.out.println("You can choose typ of room :");// เลือก choice
+            suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
             System.out.print("Enter the number : ");
             numType = in.nextInt();
+            boolean check = true;
+            while (check) {
+                if (numType < 1 || numType > 3) {
+                    System.out.println("!!! Please select only the options available here !!!");
+                    System.out.println("You can choose typ of room :");// เลือก choice
+                    suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
+                    System.out.print("Enter the number : ");
+                    numType = in.nextInt();
+
+                } else {
+                    check = false;
+                }
+
+            }
             System.out.println("-----------------------------------------------------------------------------");
 
         }
     }
-
-
 }
