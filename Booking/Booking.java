@@ -3,21 +3,66 @@ import java.util.*;
 import java.time.LocalDate;
 
 public class Booking {
-    private String year;
-    private String month;
-    private String day;
+    private int year;
+    private int month;
+    private int day;
+    private int numDay;
+    private String checkInDate;
+    private String checkOutDate;
+
+    LocalDate currentDate = LocalDate.now();
+
+    public void setCheckInDate(int day, int month, int year) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+
+        checkInDate = day + "/" + month + "/" + year;
+    }
+
+    public String getCheckInDate() {
+        return checkInDate;
+    }
+
+    public String getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(int numDay){
+        day = getDay();
+        month = getMonth();
+        year = getYear();
+
+        day += numDay-1;
+
+        if (day > currentDate.getDayOfMonth()){
+            if (month == 12){
+                month = 1;
+                day = numDay;
+                year +=1;
+            } else if (month == 4 && day > 28 || day > 29 ) {
+                day = numDay;
+                month += 1;
+            } else if (day == 32 || day == 31) {
+                day = numDay;
+                month += 1;
+            }
+        }
+
+        checkOutDate = day + "/" + month + "/" + year;
+    }
 
     private String name;
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
@@ -35,7 +80,7 @@ public class Booking {
     Scanner in = new Scanner(System.in);
 
     private void checkIn(){
-        LocalDate currentDate = LocalDate.now();
+
         boolean check = false;
         String date;
 
@@ -45,17 +90,25 @@ public class Booking {
             String[] parts = date.split("/");
 
             if (parts.length == 3) {
-                int day = Integer.parseInt(parts[0]);
-                int month = Integer.parseInt(parts[1]);
-                int year = Integer.parseInt(parts[2]);
+                day = Integer.parseInt(parts[0]);
+                month = Integer.parseInt(parts[1]);
+                year = Integer.parseInt(parts[2]);
 
-                if (year == currentDate.getYear() && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
+                if ((year == currentDate.getYear() && year < 2025 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
                     check = true;
-                } else if (year > currentDate.getYear() || (year == currentDate.getYear() && month > currentDate.getMonthValue())) {
+                } else if ((year > currentDate.getYear() && year < 2025 ) || (year == currentDate.getYear() && month > currentDate.getMonthValue())) {
                     check = true;
                 } else {
-                    System.out.println("Invalid date!");
+                    if (year <= 2025){
+                        System.out.println("* Sorry, the hotel can only be booked until 2024. Please try again *");
+                    }else {
+                        System.out.println("Invalid date!");
+                    }
+
                 }
+
+                setCheckInDate(day,month,year);
+
             } else {
                 System.out.println("Invalid date format!");
             }
@@ -67,16 +120,20 @@ public class Booking {
         if (selectBooking == 1){
             System.out.println("---------- Check out ----------");
             System.out.print("How long will you be staying ? : ");
-            day += in.nextLine();
+            numDay = in.nextInt();
+            setCheckOutDate(numDay);
         }
 
         else if (selectBooking == 2) {
-            System.out.print("");
+            System.out.println("");
+        } else {
+            System.out.println("Invalid data!");
         }
 
     }
 
     private void name(){
+        in.nextLine();
         System.out.print("name : ");
         name = in.nextLine();
     }
@@ -106,6 +163,13 @@ public class Booking {
         Room room = new Room(selectBooking);
         name();
         phone();
+        System.out.println(getCheckInDate());
+        System.out.println(getCheckOutDate());
+    }
+
+    public static void main(String[] args) {
+        Booking booking = new Booking();
+        booking.startBooking(1);
     }
 
 
