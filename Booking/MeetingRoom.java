@@ -7,6 +7,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
 
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
+
     }
 
     public void setTime(int time) {
@@ -53,51 +54,44 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
 
     @Override
     public void selectBooking() {
-        boolean check = true;
-        System.out.print("Enter the number type : ");
-        numRoom = in.nextInt();
-        while (check) {
+        do{
+            System.out.print("Enter the number type : ");
+            String strNumRoom = in.nextLine();
 
-            if (numRoom<1||numRoom>4){
+            if (!strNumRoom.equals("1") && !strNumRoom.equals("2") && !strNumRoom.equals("3") && !strNumRoom.equals("4")){
                 System.out.println("!!! Please select only the options available here !!!");
-                System.out.print("Enter the number type : ");
-                numRoom = in.nextInt();
             }
+
             else {
+                numRoom = Integer.parseInt(strNumRoom);
                 setNumRoom(numRoom);
-                check = false;
+                break;
             }
 
-        }
-        System.out.println(" ====== Select time ====== ");
-        System.out.println("*** The half day price will be half the full day price ***");
-        System.out.format("%-2s %-2s%n","","1. All day");
-        System.out.format("%-2s %-2s%n","","2. Half day (Morning)");
-        System.out.format("%-2s %-2s%n","","3. Half day (Afternoon)");
-        System.out.println(" ========================= ");
-        System.out.print(" Enter : ");
-        time = in.nextInt();
+        }while (true);
 
-        boolean checks = true;
-        while (checks) {
-            if (time<1||time>3){
+        do{
+            System.out.println("\n ====== Select time ====== ");
+            System.out.println("*** The half day price will be half the full day price ***");
+            System.out.format("%-2s %-2s%n","","1. All day");
+            System.out.format("%-2s %-2s%n","","2. Half day (Morning)");
+            System.out.format("%-2s %-2s%n","","3. Half day (Afternoon)");
+            System.out.println(" ========================= ");
+            System.out.print(" Enter : ");
+            String strTime = in.nextLine();
+
+            if(!strTime.equals("1") && !strTime.equals("2") && !strTime.equals("3")){
                 System.out.println("!!! Please select only the options available here !!!");
-                System.out.println("Which package do you need?");
-                System.out.println("*** The half day price will be half the full day price ***");
-                System.out.format("%-2s %-2s%n","","1. All day");
-                System.out.format("%-2s %-2s%n","","2. Half day (Morning)");
-                System.out.format("%-2s %-2s%n","","3. Half day (Afternoon)");
-                System.out.println(" ========================= ");
-                System.out.print(" Enter : ");
-                time = in.nextInt();
-
             }
+
             else {
+                time = Integer.parseInt(strTime);
                 setTime(time);
-                checks = false;
+                break;
             }
 
-        }
+        }while (true);
+
         System.out.println("------------------------------------------------------------------------------");
     }
 }
