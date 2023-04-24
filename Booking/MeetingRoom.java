@@ -56,7 +56,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
     public void selectBooking() {
         do{
             System.out.print("Enter the number type : ");
-            String strNumRoom = in.nextLine();
+            String strNumRoom = in.nextLine().trim();
 
             if (!strNumRoom.equals("1") && !strNumRoom.equals("2") && !strNumRoom.equals("3") && !strNumRoom.equals("4")){
                 System.out.println("!!! Please select only the options available here !!!");
@@ -78,7 +78,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
             System.out.format("%-2s %-2s%n","","3. Half day (Afternoon)");
             System.out.println(" ========================= ");
             System.out.print(" Enter : ");
-            String strTime = in.nextLine();
+            String strTime = in.nextLine().trim();
 
             if(!strTime.equals("1") && !strTime.equals("2") && !strTime.equals("3")){
                 System.out.println("!!! Please select only the options available here !!!");
