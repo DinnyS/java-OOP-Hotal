@@ -120,20 +120,22 @@ public class Booking {
         if (selectBooking == 1){
             System.out.println("---------- Check out ----------");
             System.out.print("How long will you be staying ? : ");
-            numDay = in.nextInt();
+            String strNumDay = in.nextLine();
+            numDay = Integer.parseInt(strNumDay);
             setCheckOutDate(numDay);
         }
 
         else if (selectBooking == 2) {
             System.out.println("");
-        } else {
+        }
+
+        else {
             System.out.println("Invalid data!");
         }
 
     }
 
     private void name(){
-        in.nextLine();
         System.out.print("name : ");
         name = in.nextLine();
     }
@@ -165,6 +167,7 @@ public class Booking {
         phone();
         System.out.println(getCheckInDate());
         System.out.println(getCheckOutDate());
+        room.bill();
     }
 
     public static void main(String[] args) {

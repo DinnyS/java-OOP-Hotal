@@ -9,7 +9,6 @@ public class Room {
     private int price;
     private int available;
 
-
     public Room(String type, int price, int available) {
         this.type = type;
         this.price = price;
@@ -53,8 +52,12 @@ public class Room {
             MeetingRoom meetingRoom = new MeetingRoom(getType(),getPrice(),getCapacity());
             meetingRoom.infoRoom();
             meetingRoom.selectBooking();
+            meetingRoom.showPrice();
+
         }
     }
 
+    public void bill(){
 
+    }
 }

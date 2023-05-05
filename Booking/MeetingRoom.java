@@ -1,13 +1,11 @@
 package Booking;
 import java.util.*;
 
-public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
+public class MeetingRoom extends Room implements InfoRoom , SelectBooking , CalTotalPrice {
     private int numRoom;
     private int time;
-
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
-
     }
 
     public void setTime(int time) {
@@ -25,6 +23,8 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
     protected MeetingRoom(String type, int price, int available) {
         super(type, price, available);
     }
+
+
 
     private static List<MeetingRoom> meetingRooms = new ArrayList<>();
 
@@ -93,5 +93,18 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking {
         }while (true);
 
         System.out.println("------------------------------------------------------------------------------");
+    }
+    @Override
+    public double calTotalPrice(int numRoom) {
+        if(getTime() ==1) {
+            return meetingRooms.get((getNumRoom())-1).getPrice();
+        }
+        else {
+            return (meetingRooms.get((getNumRoom())-1).getPrice()) / 2;
+        }
+    }
+
+    public void showPrice(){
+        System.out.println("Total price : " + calTotalPrice(getNumRoom()) + "THB");
     }
 }
