@@ -67,30 +67,32 @@ public class Main {
                     System.out.println(" == Select == ");
                     System.out.print(" : ");
 
-                    int selectbooking = scan.nextInt(); // จะใช้ตัวแปรเป็น int มีชื่อว่า select booking
+                    String strSelectBooking = scan.nextLine();
+                    int selectBooking = Integer.parseInt(strSelectBooking); // จะใช้ตัวแปรเป็น int มีชื่อว่า select booking
                     Booking booking = new Booking();
                     // --------------- Booking Hotel Booking.Room ----------------------
 
-                    if (selectbooking == 1) {
+                    if (selectBooking == 1) {
                         System.out.println();
                         System.out.println(" ===== Booking Hotel Booking.Room ===== ");
                         System.out.println();
 
-                        booking.startBooking(selectbooking);
+                        booking.startBooking(selectBooking);
                     }
 
 
                     // --------------- Booking Meeting Booking.Room --------------------
 
-                    else if (selectbooking == 2) {
+                    else if (selectBooking == 2) {
                         System.out.println();
                         System.out.println(" ===== Booking Meeting Booking.Room ===== ");
                         System.out.println();
 
-                        booking.startBooking(selectbooking);
+                        booking.startBooking(selectBooking);
+                        booking.checkBill(selectBooking);
                     }
 
-                    else if (selectbooking == 3 ) {
+                    else if (selectBooking == 3 ) {
                         break;
                     }
 

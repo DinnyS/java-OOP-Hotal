@@ -11,7 +11,13 @@ public class Booking {
     private String checkOutDate;
 
     LocalDate currentDate = LocalDate.now();
+    public int getNumDay() {
+        return numDay;
+    }
 
+    public void setNumDay(int numDay) {
+        this.numDay = numDay;
+    }
     public void setCheckInDate(int day, int month, int year) {
         this.day = day;
         this.month = month;
@@ -118,15 +124,16 @@ public class Booking {
     private void checkOut(int selectBooking){
 
         if (selectBooking == 1){
-            System.out.println("---------- Check out ----------");
-            System.out.print("How long will you be staying ? : ");
+            System.out.println("----------- Check out -----------");
+            System.out.println("How long will you be staying ? : ");
             String strNumDay = in.nextLine();
             numDay = Integer.parseInt(strNumDay);
             setCheckOutDate(numDay);
+            setNumDay(numDay);
         }
 
         else if (selectBooking == 2) {
-            System.out.println("");
+
         }
 
         else {
@@ -166,8 +173,21 @@ public class Booking {
         name();
         phone();
         System.out.println(getCheckInDate());
-        System.out.println(getCheckOutDate());
-        room.bill();
+        if (selectBooking == 1){
+            System.out.println(getCheckOutDate());
+        }
+    }
+
+    public void checkBill(int selectBooking){
+        System.out.println("\n------------------------------ Booking Summary ------------------------------");
+        System.out.println("Name : " + name);
+        System.out.println("Telephone number : " + phone);
+        System.out.println("Check in : " + getCheckInDate());
+        if (selectBooking == 1){
+            System.out.println("Check out : " + getCheckOutDate());
+        }
+        Room roomBill = new Room(getNumDay(),selectBooking);
+        System.out.println("------------------------------------------------------------------------------");
     }
 
     public static void main(String[] args) {

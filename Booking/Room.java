@@ -9,6 +9,7 @@ public class Room {
     private int price;
     private int available;
 
+
     public Room(String type, int price, int available) {
         this.type = type;
         this.price = price;
@@ -52,12 +53,17 @@ public class Room {
             MeetingRoom meetingRoom = new MeetingRoom(getType(),getPrice(),getCapacity());
             meetingRoom.infoRoom();
             meetingRoom.selectBooking();
-            meetingRoom.showPrice();
-
         }
     }
 
-    public void bill(){
-
+    public Room(int numDay, int  selectBooking){
+        if(selectBooking == 1){
+            HotelRoom hotelBill = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable());
+        }
+        else if(selectBooking == 2){
+            MeetingRoom meetingBill = new MeetingRoom(getType(),getPrice(),getCapacity());
+            meetingBill.showDetail();
+            meetingBill.showPrice();
+        }
     }
 }

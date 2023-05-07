@@ -1,17 +1,15 @@
 package Booking;
 import java.util.*;
 
-public class MeetingRoom extends Room implements InfoRoom , SelectBooking , CalTotalPrice {
-    private int numRoom;
-    private int time;
+public class MeetingRoom extends Room implements InfoRoom , SelectBooking , CallPrice{
+    private static int numRoom;
+    private static int time;
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
     }
-
     public void setTime(int time) {
         this.time = time;
     }
-
     public int getNumRoom() {
         return numRoom;
     }
@@ -19,27 +17,19 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking , CalT
     public int getTime() {
         return time;
     }
-
     protected MeetingRoom(String type, int price, int available) {
         super(type, price, available);
     }
-
-
-
     private static List<MeetingRoom> meetingRooms = new ArrayList<>();
-
     static {
         meetingRooms.add(new MeetingRoom("1. The Universe (250 people)", 50000, 1));
         meetingRooms.add(new MeetingRoom("2. The World (100 people)",30000,1));
         meetingRooms.add(new MeetingRoom("3. The Mini World (50 people)", 20000,1));
         meetingRooms.add(new MeetingRoom("4. The Town (50 people)",20000,1));
     }
-
     protected static List<MeetingRoom> getMeetingRooms(){
         return meetingRooms;
     }
-
-
     @Override
     public void infoRoom() {
         List<MeetingRoom> rooms = MeetingRoom.getMeetingRooms();
@@ -51,7 +41,6 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking , CalT
         }
         System.out.println("------------------------------------------------------------------------------");
     }
-
     @Override
     public void selectBooking() {
         do{
@@ -94,17 +83,18 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking , CalT
 
         System.out.println("------------------------------------------------------------------------------");
     }
-    @Override
-    public double calTotalPrice(int numRoom) {
-        if(getTime() ==1) {
-            return meetingRooms.get((getNumRoom())-1).getPrice();
+    public double callPrice(int indexRoom) {
+        if(getTime() == 1) {
+            return meetingRooms.get(indexRoom-1).getPrice();
         }
         else {
-            return (meetingRooms.get((getNumRoom())-1).getPrice()) / 2;
+            return (meetingRooms.get(indexRoom-1).getPrice()) / 2;
         }
     }
-
-    public void showPrice(){
-        System.out.println("Total price : " + calTotalPrice(getNumRoom()) + "THB");
+    public void showPrice() {
+        System.out.println("Total price : " + callPrice(getNumRoom()) + " THB");
+    }
+    public void showDetail() {
+        System.out.format("Type : %s \n",meetingRooms.get(getNumRoom()-1).getType());
     }
 }
