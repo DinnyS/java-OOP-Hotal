@@ -1,7 +1,7 @@
 package Booking;
 import java.util.*;
 
-public class MeetingRoom extends Room implements InfoRoom , SelectBooking , CallPrice{
+public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
     private static int numRoom;
     private static int time;
     public void setNumRoom(int numRoom) {
@@ -92,9 +92,9 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking , Call
         }
     }
     public void showPrice() {
-        System.out.println("Total price : " + callPrice(getNumRoom()) + " THB");
+        System.out.println("\nTotal price : " + callPrice(getNumRoom()) + " THB");
     }
     public void showDetail() {
-        System.out.format("Type : %s \n",meetingRooms.get(getNumRoom()-1).getType());
+        System.out.format("\nType : %s \n",meetingRooms.get(getNumRoom()-1).getType());
     }
 }

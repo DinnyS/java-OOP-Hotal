@@ -78,6 +78,7 @@ public class Main {
                         System.out.println();
 
                         booking.startBooking(selectBooking);
+                        booking.checkBill(selectBooking);
                     }
 
 

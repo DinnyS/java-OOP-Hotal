@@ -125,7 +125,7 @@ public class Booking {
 
         if (selectBooking == 1){
             System.out.println("----------- Check out -----------");
-            System.out.println("How long will you be staying ? : ");
+            System.out.print("How long will you be staying ? : ");
             String strNumDay = in.nextLine();
             numDay = Integer.parseInt(strNumDay);
             setCheckOutDate(numDay);

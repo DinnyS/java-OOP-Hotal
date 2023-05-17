@@ -1,44 +1,32 @@
 package Booking;
 import java.util.*;
-
-
 public class HotelRoom extends Room implements InfoRoom , SelectBooking{
-
     private int numRoom;
-    private int numCustomers;
-
+    private static int numCustomers;
+    private static double storePrice = 0;
+    private static int numType;
+    private static String storeRoom = "";
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
     }
-
     public void setNumCustomers(int numCustomers) {
         this.numCustomers = numCustomers;
     }
-
     public void setNumType(int numType) {
         this.numType = numType;
     }
-
-    private int numType;
-
     public int getNumRoom() {
         return numRoom;
     }
-
     public int getNumCustomers() {
         return numCustomers;
     }
-
     public int getNumType() {
         return numType;
     }
-
-
-
     public HotelRoom(String type, int capacity, int price, int available) {
         super(type, capacity, price, available);
     }
-
     private static List<HotelRoom> hotelRooms = new ArrayList<>();
 
     static {
@@ -46,7 +34,6 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
         hotelRooms.add(new HotelRoom("2. Deluxe Room", 6, 5500, 15));
         hotelRooms.add(new HotelRoom("3. Super Deluxe Room", 8, 8000, 5));
     }
-
     protected static List<HotelRoom> getHotelRooms() {
         return hotelRooms;
     }
@@ -58,7 +45,6 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             if (room.getCapacity() >= numCustomers && room.getAvailable() > 0) {
                 numCustomers++;
                 System.out.format("%-2s %-30s%n", "",room.getType());
-
             }
         }
     }
@@ -81,7 +67,6 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
         numRoom = in.nextInt();
         setNumRoom(numRoom);
 
-
         if (numRoom > 40) {
             numRoom = 40;
         }
@@ -100,7 +85,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 System.out.println("!!!There is no room of the right size for " + numCustomers + " customers.!!!");
                 System.out.print("Enter number of customers/room ( room " + i + " ) : ");
                 numCustomers = in.nextInt();
-                i = -1;
+                //i = -1;
                 if (i <= 0) {
                     i = 1;
                 }
@@ -111,28 +96,41 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             }
 
             System.out.println("-----------------------------------------------------------------------------");
-            System.out.println("You can choose typ of room :");// เลือก choice
-            suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
-            System.out.print("Enter the number : ");
-            numType = in.nextInt();
 
-            boolean check = true;
-            while (check) {
-                if (numType < 1 || numType > 3) {
+            do{
+                System.out.println("You can choose type of room :");// เลือก choice
+                suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
+                System.out.print("Enter the number : ");
+                String numTypeStr = in.nextLine().trim();
+
+                if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3")){
                     System.out.println("!!! Please select only the options available here !!!");
-                    System.out.println("You can choose typ of room :");// เลือก choice
-                    suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
-                    System.out.print("Enter the number : ");
-                    numType = in.nextInt();
-
-                } else {
-                    setNumType(numType);
-                    check = false;
                 }
 
-            }
+                else{
+                    numType = Integer.parseInt(numTypeStr);
+                    setNumType(numType);
+                    storePrice += hotelRooms.get(getNumType()-1).getPrice();
+                    storeRoom += hotelRooms.get(getNumType()-1).getType() + "\n";
+                    break;
+                }
+            }while(true);
+
             System.out.println("-----------------------------------------------------------------------------");
 
         }
+    }
+
+    public double callPrice(double x) {
+        double thesePrice = x;
+        storePrice = 0;
+        return thesePrice;
+    }
+
+    public void showPrice(int numDay) {
+        System.out.println("Total price : " + callPrice(storePrice)*numDay + " THB");
+    }
+    public void showDetail(){
+        System.out.println("\nType : \n"+storeRoom);
     }
 }

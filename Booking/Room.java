@@ -59,6 +59,8 @@ public class Room {
     public Room(int numDay, int  selectBooking){
         if(selectBooking == 1){
             HotelRoom hotelBill = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable());
+            hotelBill.showDetail();
+            hotelBill.showPrice(numDay);
         }
         else if(selectBooking == 2){
             MeetingRoom meetingBill = new MeetingRoom(getType(),getPrice(),getCapacity());
