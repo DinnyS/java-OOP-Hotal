@@ -1,6 +1,5 @@
 package Booking;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class Room {
@@ -58,14 +57,13 @@ public class Room {
 
     public Room(int numDay, int  selectBooking){
         if(selectBooking == 1){
-            HotelRoom hotelBill = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable());
-            hotelBill.showDetail();
-            hotelBill.showPrice(numDay);
+            Bill hotelBill = new Bill(numDay);
+            System.out.println("( "+ (numDay+1) + " Day(s) , " + numDay + " Night(s) )");
+            hotelBill.showBill();
         }
         else if(selectBooking == 2){
-            MeetingRoom meetingBill = new MeetingRoom(getType(),getPrice(),getCapacity());
-            meetingBill.showDetail();
-            meetingBill.showPrice();
+            Bill meetingBill = new Bill();
+            meetingBill.showBill();
         }
     }
 }

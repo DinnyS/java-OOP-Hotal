@@ -1,11 +1,11 @@
 package Booking;
 import java.util.*;
+import java.util.regex.Pattern;
+
 public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     private int numRoom;
-    private static int numCustomers;
-    private static double storePrice = 0;
-    private static int numType;
-    private static String storeRoom = "";
+    private int numCustomers;
+    private int numType;
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
     }
@@ -63,37 +63,58 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
     @Override
     public void selectBooking() {
-        System.out.print("Enter number of room(s) : ");
-        numRoom = in.nextInt();
-        setNumRoom(numRoom);
+        do{ //input number of room in String ✓✓
+            System.out.print("Enter number of room(s) : ");
+            String numRoomSTR = in.nextLine().trim();
 
-        if (numRoom > 40) {
-            numRoom = 40;
-        }
+            if (Pattern.matches("\\d+$",numRoomSTR)){
+                numRoom = Integer.parseInt(numRoomSTR);
+                setNumRoom(numRoom);
+                Bill storeBill = new Bill("for create array",getNumRoom());
 
-        for (int i = 1; i <= numRoom; i++) {
+                if (getNumRoom() > 40) {
+                    setNumRoom(40);
+                }
+
+                break;
+            }
+
+            else{
+                System.out.println("\n !!!Please enter only integer!!! \n");
+            }
+
+        }while (true);
+
+        for (int i = 1; i <= getNumRoom(); i++) {
 
             if (i == 0) {
                 i = 1;
-                System.out.println("!!! Please enter the information again !!!");
+                System.out.println("\n!!! Please enter the information again !!!\n");
             }
 
-            System.out.print("Enter number of customers/room ( room " + i + " ) : ");
-            numCustomers = in.nextInt();
-
-            while (numCustomers > 8) {
-                System.out.println("!!!There is no room of the right size for " + numCustomers + " customers.!!!");
+            do{ // enter amount of customers in String ✓✓
                 System.out.print("Enter number of customers/room ( room " + i + " ) : ");
-                numCustomers = in.nextInt();
-                //i = -1;
-                if (i <= 0) {
-                    i = 1;
+                String numCustomerSTR = in.nextLine().trim();
+
+                if(Pattern.matches("^\\d+$", numCustomerSTR)){
+                    numCustomers = Integer.parseInt(numCustomerSTR);
+                    if(numCustomers > 8){
+                        System.out.println("\n!!!There is no room of the right size for " + numCustomers + " customers.!!!\n");
+                    }
+                    else {
+                        if (i <= 0) {
+                            i = 1;
+                        }
+                        if (numCustomers <= 8) {
+                            setNumCustomers(numCustomers);
+                            break;
+                        }
+                    }
                 }
-                if (numCustomers <= 8) {
-                    setNumCustomers(numCustomers);
-                    break;
+                else{
+                    System.out.println("\n!!!Please enter only integer!!!\n");
                 }
-            }
+            }while (true);
 
             System.out.println("-----------------------------------------------------------------------------");
 
@@ -104,14 +125,13 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 String numTypeStr = in.nextLine().trim();
 
                 if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3")){
-                    System.out.println("!!! Please select only the options available here !!!");
+                    System.out.println("\n!!! Please select only the options available here !!!\n");
                 }
 
                 else{
                     numType = Integer.parseInt(numTypeStr);
                     setNumType(numType);
-                    storePrice += hotelRooms.get(getNumType()-1).getPrice();
-                    storeRoom += hotelRooms.get(getNumType()-1).getType() + "\n";
+                    Bill hotelBill = new Bill(hotelRooms.get(getNumType()-1).getPrice(),hotelRooms.get(getNumType()-1).getType());
                     break;
                 }
             }while(true);
@@ -119,18 +139,5 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             System.out.println("-----------------------------------------------------------------------------");
 
         }
-    }
-
-    public double callPrice(double x) {
-        double thesePrice = x;
-        storePrice = 0;
-        return thesePrice;
-    }
-
-    public void showPrice(int numDay) {
-        System.out.println("Total price : " + callPrice(storePrice)*numDay + " THB");
-    }
-    public void showDetail(){
-        System.out.println("\nType : \n"+storeRoom);
     }
 }

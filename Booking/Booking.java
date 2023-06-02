@@ -1,6 +1,7 @@
 package Booking;
 import java.util.*;
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 public class Booking {
     private int year;
@@ -79,10 +80,7 @@ public class Booking {
     public String getPhone() {
         return phone;
     }
-
     private String phone;
-
-
     Scanner in = new Scanner(System.in);
 
     private void checkIn(){
@@ -115,7 +113,8 @@ public class Booking {
 
                 setCheckInDate(day,month,year);
 
-            } else {
+            }
+            else {
                 System.out.println("Invalid date format!");
             }
         }
@@ -125,11 +124,20 @@ public class Booking {
 
         if (selectBooking == 1){
             System.out.println("----------- Check out -----------");
-            System.out.print("How long will you be staying ? : ");
-            String strNumDay = in.nextLine();
-            numDay = Integer.parseInt(strNumDay);
-            setCheckOutDate(numDay);
-            setNumDay(numDay);
+            do{
+                System.out.print("How long will you be staying ? : ");
+                String strNumDay = in.nextLine().trim();
+                if (Pattern.matches("\\d+$",strNumDay)){ //input amount of day in String ✓✓
+                    numDay = Integer.parseInt(strNumDay);
+                    setCheckOutDate(numDay);
+                    setNumDay(numDay);
+                    break;
+                }
+                else{
+                    System.out.println("\n !!!Please enter only integer!!! \n");
+                }
+            }while (true);
+
         }
 
         else if (selectBooking == 2) {
@@ -178,7 +186,7 @@ public class Booking {
         }
     }
 
-    public void checkBill(int selectBooking){
+    public void bookingSummary(int selectBooking){
         System.out.println("\n------------------------------ Booking Summary ------------------------------");
         System.out.println("Name : " + name);
         System.out.println("Telephone number : " + phone);

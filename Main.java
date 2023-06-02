@@ -78,7 +78,7 @@ public class Main {
                         System.out.println();
 
                         booking.startBooking(selectBooking);
-                        booking.checkBill(selectBooking);
+                        booking.bookingSummary(selectBooking);
                     }
 
 
@@ -90,7 +90,7 @@ public class Main {
                         System.out.println();
 
                         booking.startBooking(selectBooking);
-                        booking.checkBill(selectBooking);
+                        booking.bookingSummary(selectBooking);
                     }
 
                     else if (selectBooking == 3 ) {

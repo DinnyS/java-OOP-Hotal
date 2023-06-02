@@ -2,8 +2,8 @@ package Booking;
 import java.util.*;
 
 public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
-    private static int numRoom;
-    private static int time;
+    private int numRoom;
+    private int time;
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
     }
@@ -20,6 +20,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
     protected MeetingRoom(String type, int price, int available) {
         super(type, price, available);
     }
+
     private static List<MeetingRoom> meetingRooms = new ArrayList<>();
     static {
         meetingRooms.add(new MeetingRoom("1. The Universe (250 people)", 50000, 1));
@@ -48,7 +49,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
             String strNumRoom = in.nextLine().trim();
 
             if (!strNumRoom.equals("1") && !strNumRoom.equals("2") && !strNumRoom.equals("3") && !strNumRoom.equals("4")){
-                System.out.println("!!! Please select only the options available here !!!");
+                System.out.println("\n!!! Please select only the options available here !!!\n");
             }
 
             else {
@@ -70,7 +71,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
             String strTime = in.nextLine().trim();
 
             if(!strTime.equals("1") && !strTime.equals("2") && !strTime.equals("3")){
-                System.out.println("!!! Please select only the options available here !!!");
+                System.out.println("\n!!! Please select only the options available here !!!\n");
             }
 
             else {
@@ -81,20 +82,8 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
 
         }while (true);
 
+        Bill meetingBill = new Bill(getTime(),meetingRooms.get(getNumRoom()-1).getPrice(),meetingRooms.get(getNumRoom()-1).getType());
+
         System.out.println("------------------------------------------------------------------------------");
-    }
-    public double callPrice(int indexRoom) {
-        if(getTime() == 1) {
-            return meetingRooms.get(indexRoom-1).getPrice();
-        }
-        else {
-            return (meetingRooms.get(indexRoom-1).getPrice()) / 2;
-        }
-    }
-    public void showPrice() {
-        System.out.println("\nTotal price : " + callPrice(getNumRoom()) + " THB");
-    }
-    public void showDetail() {
-        System.out.format("\nType : %s \n",meetingRooms.get(getNumRoom()-1).getType());
     }
 }
