@@ -39,7 +39,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     }
 
     private static void suggestRoom(List<? extends Room> rooms, int numCustomers) {
-
+        //แสดงห้องที่เหมาะกับำนวนลูกค้าที่เข้าพัก
         for (Room room : rooms) {
 
             if (room.getCapacity() >= numCustomers && room.getAvailable() > 0) {
@@ -56,6 +56,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
         System.out.format("%-30s %-15s %-15s %-10s%n", "Room Type", "Capacity", "Price (Baht)", "Room available");
         System.out.println("-----------------------------------------------------------------------------");
         for (HotelRoom hotelRoom : rooms) {
+            //แสดง detail ต่างๆ ของของให้ user ได้เลือก
             System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), hotelRoom.getAvailable());
         }
         System.out.println("-----------------------------------------------------------------------------");
@@ -63,16 +64,21 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
     @Override
     public void selectBooking() {
-        do{ //input number of room in String ✓✓
+        do{
+            //input number of room in String ✓✓
+            //ถาม user ว่าจะจองกี่ห้อง
             System.out.print("Enter number of room(s) : ");
             String numRoomSTR = in.nextLine().trim();
 
             if (Pattern.matches("\\d+$",numRoomSTR)){
                 numRoom = Integer.parseInt(numRoomSTR);
                 setNumRoom(numRoom);
+
                 Bill storeBill = new Bill("for create array",getNumRoom());
+                //ส่งค่าจำนวนห้องที่จองไป constructor ในคลาส Bill เพื่อสร้าง array ไว้เก็บข้อมูล
 
                 if (getNumRoom() > 40) {
+                    //ถ้า user กรอกจำนวนห้องมามากกว่า 40 ระบบะเซตให้จำนวนห้องที่ลูกค้าจะจองเป็น 40 ทันที่
                     setNumRoom(40);
                 }
 
@@ -85,6 +91,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
         }while (true);
 
+        //loop ถาม user ตามจำนวนห้องที่จองว่าแต่ละห้องมีผู้พักกี่คน และ จพเลือก type ไหน
         for (int i = 1; i <= getNumRoom(); i++) {
 
             if (i == 0) {
@@ -92,7 +99,9 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 System.out.println("\n!!! Please enter the information again !!!\n");
             }
 
-            do{ // enter amount of customers in String ✓✓
+            do{
+                // enter amount of customers in String ✓✓
+                // user ระบุคนที่มาพัก/ห้อง
                 System.out.print("Enter number of customers/room ( room " + i + " ) : ");
                 String numCustomerSTR = in.nextLine().trim();
 
@@ -119,7 +128,8 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             System.out.println("-----------------------------------------------------------------------------");
 
             do{
-                System.out.println("You can choose type of room :");// เลือก choice
+                //เลือก type ของห้อง ตามที่ระบบแนะนำมาโดยอ้างอิงจากจำนวนผู้เข้าพัก
+                System.out.println("You can choose type of room :");// เลือกรูปแบบของห้อง
                 suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
                 System.out.print("Enter the number : ");
                 String numTypeStr = in.nextLine().trim();
@@ -132,6 +142,11 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                     numType = Integer.parseInt(numTypeStr);
                     setNumType(numType);
                     Bill hotelBill = new Bill(hotelRooms.get(getNumType()-1).getPrice(),hotelRooms.get(getNumType()-1).getType());
+                    /*
+                        ส่งค่าที่ user เลือก ไป constructor ของคลาส Bill
+                        โดย hotelRooms.get(getNumType()-1).getPrice() คือ ราคาของห้องที่ user จองไว้
+                        hotelRooms.get(getNumType()-1).getType() ตือ type ของห้องที่ user จอง
+                     */
                     break;
                 }
             }while(true);

@@ -8,20 +8,20 @@ public class Room {
     private int price;
     private int available;
 
-
     public Room(String type, int price, int available) {
+        //ใช้ใน hotel room
         this.type = type;
         this.price = price;
         this.available = available;
     }
 
     public Room(String type, int capacity, int price, int available) {
+        //ใช้ใน meeting room
         this.type = type;
         this.capacity = capacity;
         this.price = price;
         this.available = available;
     }
-
 
     public String getType() {
         return type;
@@ -56,14 +56,15 @@ public class Room {
     }
 
     public Room(int numDay, int  selectBooking){
+        //เป็น constructor ที่สร้างมาจาก bookingSummary จากคลาส Booking
         if(selectBooking == 1){
-            Bill hotelBill = new Bill(numDay);
-            System.out.println("( "+ (numDay+1) + " Day(s) , " + numDay + " Night(s) )");
-            hotelBill.showBill();
+            Bill hotelBill = new Bill(numDay); //ส่งค่า numDay ไปเอาไว้ใช้ตอนคิดเงินของ hotel room
+            System.out.println("( "+ (numDay+1) + " Day(s) , " + numDay + " Night(s) )"); //print ให้เห็นว่าพักกี่วันกี่คืน
+            hotelBill.showBill(); //เรียกฟังก์ชัน showBill() เพื่อแสดงผลที่จองไป
         }
         else if(selectBooking == 2){
             Bill meetingBill = new Bill();
-            meetingBill.showBill();
+            meetingBill.showBill(); //เรียกฟังก์ชัน showBill() เพื่อแดงผลที่จองไป
         }
     }
 }

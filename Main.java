@@ -70,6 +70,7 @@ public class Main {
                     String strSelectBooking = scan.nextLine();
                     int selectBooking = Integer.parseInt(strSelectBooking); // จะใช้ตัวแปรเป็น int มีชื่อว่า select booking
                     Booking booking = new Booking();
+
                     // --------------- Booking Hotel Booking.Room ----------------------
 
                     if (selectBooking == 1) {
@@ -77,8 +78,8 @@ public class Main {
                         System.out.println(" ===== Booking Hotel Booking.Room ===== ");
                         System.out.println();
 
-                        booking.startBooking(selectBooking);
-                        booking.bookingSummary(selectBooking);
+                        booking.startBooking(selectBooking); //เข้าหน้าการจอง
+                        booking.bookingSummary(selectBooking); //โชว์ผลการจอง
                     }
 
 
@@ -89,8 +90,8 @@ public class Main {
                         System.out.println(" ===== Booking Meeting Booking.Room ===== ");
                         System.out.println();
 
-                        booking.startBooking(selectBooking);
-                        booking.bookingSummary(selectBooking);
+                        booking.startBooking(selectBooking); //เข้าหน้าการจอง
+                        booking.bookingSummary(selectBooking); //
                     }
 
                     else if (selectBooking == 3 ) {

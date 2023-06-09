@@ -44,7 +44,9 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
     }
     @Override
     public void selectBooking() {
+        //เลือก type และ เวลา ที่จะจองห้องประชุม
         do{
+            //เลือก type ของห้อง
             System.out.print("Enter the number type : ");
             String strNumRoom = in.nextLine().trim();
 
@@ -61,6 +63,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
         }while (true);
 
         do{
+            //เลือกเวลาที่จะจองห้องประชุม
             System.out.println("\n ====== Select time ====== ");
             System.out.println("*** The half day price will be half the full day price ***");
             System.out.format("%-2s %-2s%n","","1. All day");
@@ -83,6 +86,12 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
         }while (true);
 
         Bill meetingBill = new Bill(getTime(),meetingRooms.get(getNumRoom()-1).getPrice(),meetingRooms.get(getNumRoom()-1).getType());
+        /*
+            ส่งค่าที่ user เลือก ไป constructor ของคลาส Bill
+            โดย getTime() คือ เวลาที่เลือกจอง (int)
+            meetingRooms.get(getNumRoom()-1).getPrice() คือ ราคาของห้องที่ได้จองไว้ (int)
+            meetingRooms.get(getNumRoom()-1).getType() คือ type ของห้องที่ได้จองไว้ (String)
+         */
 
         System.out.println("------------------------------------------------------------------------------");
     }

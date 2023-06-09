@@ -10,12 +10,13 @@ public class Booking {
     private int numDay;
     private String checkInDate;
     private String checkOutDate;
+    private String name;
+    private String phone;
 
     LocalDate currentDate = LocalDate.now();
     public int getNumDay() {
         return numDay;
     }
-
     public void setNumDay(int numDay) {
         this.numDay = numDay;
     }
@@ -58,9 +59,6 @@ public class Booking {
 
         checkOutDate = day + "/" + month + "/" + year;
     }
-
-    private String name;
-
     public int getYear() {
         return year;
     }
@@ -80,7 +78,7 @@ public class Booking {
     public String getPhone() {
         return phone;
     }
-    private String phone;
+
     Scanner in = new Scanner(System.in);
 
     private void checkIn(){
@@ -120,13 +118,13 @@ public class Booking {
         }
     }
 
-    private void checkOut(int selectBooking){
+    private void checkOut(int selectBooking){ //รับค่ามาเชตว่าจองห้องโรงแรมหรือห้องประชุม
 
-        if (selectBooking == 1){
+        if (selectBooking == 1){ //Hotel room
             System.out.println("----------- Check out -----------");
-            do{
+            do{ //ใช้ loop เพื่อเชคค่า input ที่เข้ามาว่าถูกต้องไหม ถ้าไม่ถูกให้วนถามใหม่
                 System.out.print("How long will you be staying ? : ");
-                String strNumDay = in.nextLine().trim();
+                String strNumDay = in.nextLine().trim(); //ถามจำนวนวันที่จะเข้าพัก
                 if (Pattern.matches("\\d+$",strNumDay)){ //input amount of day in String ✓✓
                     numDay = Integer.parseInt(strNumDay);
                     setCheckOutDate(numDay);
@@ -141,7 +139,7 @@ public class Booking {
         }
 
         else if (selectBooking == 2) {
-
+            //ในส่วนของ meeting room จะไม่ได้มีการถามอะไรเพิ่มเติม
         }
 
         else {
@@ -151,15 +149,18 @@ public class Booking {
     }
 
     private void name(){
+        //method ถามชื่อ
         System.out.print("name : ");
         name = in.nextLine();
     }
 
     private void phone(){
-
+        //method ถามเบอร์โทร
         System.out.print("Phone number : ");
         phone = in.nextLine();
+
         String phoneLimit = "\\d{10}";
+
         boolean check = true;
         while (check){
             if (!phone.matches(phoneLimit)){
@@ -171,36 +172,38 @@ public class Booking {
                 check = false;
             }
         }
-
     }
 
     public void startBooking(int selectBooking){
         checkIn();
         checkOut(selectBooking);
         Room room = new Room(selectBooking);
+        /*เริ่มการจองแบบจริงๆ โดยใช้ constructor
+        ส่งตัวเลือกการจอง ว่าจะเลือกจองห้องแบบไหน
+            1 == จองห้องพักโรงแรม
+            2 == จองห้องประชุม
+         */
         name();
         phone();
         System.out.println(getCheckInDate());
         if (selectBooking == 1){
+            //ถ้าเป็นการของโรงแรม จะมีการโชว์วัน check out
             System.out.println(getCheckOutDate());
         }
     }
 
     public void bookingSummary(int selectBooking){
+        //method แสดงรายละเอียดการจองทั้งหมด (ในแต่ละ Bill จะจองได้แค่อย่างใดอย่างหนึ่ง ไม่ห้องพักก็ห้องประชุม)
         System.out.println("\n------------------------------ Booking Summary ------------------------------");
         System.out.println("Name : " + name);
         System.out.println("Telephone number : " + phone);
         System.out.println("Check in : " + getCheckInDate());
         if (selectBooking == 1){
+            //ถ้าเป็นการของโรงแรม จะมีการโชว์วัน check out
             System.out.println("Check out : " + getCheckOutDate());
         }
-        Room roomBill = new Room(getNumDay(),selectBooking);
+        Room roomBill = new Room(getNumDay(),selectBooking); //ส่งต่า numDay และ selectBooking ไปใช้ใน class Room
         System.out.println("------------------------------------------------------------------------------");
-    }
-
-    public static void main(String[] args) {
-        Booking booking = new Booking();
-        booking.startBooking(1);
     }
 
 
