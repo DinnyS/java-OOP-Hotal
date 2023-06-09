@@ -2,6 +2,7 @@ package Booking;
 
 public class Bill {
     private static int bookedTime;
+    private static String showTime;
     private int bookedDay; //มีแก้ตรงนี้นะ เอา static ออก
     private static String bookedMeeting;
     private static String[] bookedHotel;
@@ -22,6 +23,17 @@ public class Bill {
         this.bookedTime = time; // เก็บเวลาที่ได้จองไว้
         this.meetingPrice = price; //เก็ยราคาของ meeting room
         this.bookedMeeting = type; //เก็บ type ของ meeting room
+
+        if(bookedTime == 1){
+            showTime = "All day";
+        }
+        else if(bookedTime == 2){
+            showTime = "Half day (Morning)";
+        }
+        else if(bookedTime == 3){
+            showTime = "Half day (Afternoon)";
+        }
+        //บอกรายละเอียดช่วงเวลาที่ได้จองห้อง meeting
     }
 
     public Bill(String a, int numRoom){
@@ -68,6 +80,9 @@ public class Bill {
         if(bookedDay == 0) {
             System.out.println("Type : " + bookedMeeting);
             //แสดงว่า user ได้จองห้องไหนไปบ้าง
+
+            System.out.println("Time : " + showTime);
+            //แดสงว่า user ได้จองห้องในเวลาไหน
 
             System.out.println("Total price : " + calPriceMeeting() + " THB");
             //แสดงราคารวมของ bill นี้โดยดึงค่ามาจาก calMeetingPrice()
