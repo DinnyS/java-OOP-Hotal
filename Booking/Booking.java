@@ -44,15 +44,22 @@ public class Booking {
         day += numDay;
 
         if (day > currentDate.getDayOfMonth()){
-            if (month == 12 && day > 31 ){
+            if (month == 12 && day > 31 ){ // ขึ้นปีใหม่
                 month = 1;
                 day = day - 31;
                 year +=1;
-            } else if (month == 2 && day > 28 || day > 29 ) {
-                day = numDay;
+            } else if (month == 2 && year %4 == 0 && day > 29) { // เดือน 2 ที่มี 29 วัน
+                day = day - 29;
                 month += 1;
-            } else if (day == 32 || day == 31) {
-                day = numDay;
+            }else if (month == 2 && day > 28) { // เดือน 2 ที่มี 28 วัน
+                    day = day - 28;
+                    month += 1;
+            } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 && day > 31){ // เดือนที่มี 31 วัน (คม)
+                day = day - 31;
+                month += 1;
+            }
+            else if (month == 4 || month == 6 || month == 9 || month == 11 && day > 30){ // เดือนที่มี 30 วัน (ยน)
+                day = day - 30;
                 month += 1;
             }
         }
@@ -96,13 +103,31 @@ public class Booking {
                 month = Integer.parseInt(parts[1]);
                 year = Integer.parseInt(parts[2]);
 
-                if ((year == currentDate.getYear() && year < 2025 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
+                if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 && day > 31){ // เช็ควัน ห้ามเกิน 31 วัน
+                    System.out.println("Please input correct date");
+                }
+                else if(month == 4 || month == 6 || month == 9 || month == 11 && day > 30){ // เช็ควัน ห้ามเกิน 30 วัน
+                    System.out.println("Please input correct date");
+                }
+
+                else if (month == 2 && year %4 == 0 && day > 29) { // เดือน 2 ห้ามเกิน 29 วัน
+                    System.out.println("Please input correct date");
+                }
+                else if (month == 2 && day > 28) { // เดือน 2 ห้ามเกิน 28 วัน
+                    System.out.println("Please input correct date");
+                }
+
+                else if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
                     check = true;
-                } else if ((year > currentDate.getYear() && year < 2025 ) || (year == currentDate.getYear() && month > currentDate.getMonthValue())) {
+
+                } 
+
+                else if ((year > currentDate.getYear() && year < 2026 ) || (year == currentDate.getYear() && month > currentDate.getMonthValue())) {
                     check = true;
-                } else {
-                    if (year <= 2025){
-                        System.out.println("* Sorry, the hotel can only be booked until 2024. Please try again *");
+                } 
+                else {
+                    if (year >= 2026){
+                        System.out.println("* Sorry, the hotel can only be booked until 2025. Please try again *");
                     }else {
                         System.out.println("Invalid date!");
                     }
@@ -185,11 +210,6 @@ public class Booking {
          */
         name();
         phone();
-        System.out.println(getCheckInDate());
-        if (selectBooking == 1){
-            //ถ้าเป็นการของโรงแรม จะมีการโชว์วัน check out
-            System.out.println(getCheckOutDate());
-        }
     }
 
     public void bookingSummary(int selectBooking){
