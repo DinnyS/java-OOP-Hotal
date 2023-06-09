@@ -41,7 +41,7 @@ public class Booking {
         month = getMonth();
         year = getYear();
 
-        day += numDay-1;
+        day += numDay;
 
         if (day > currentDate.getDayOfMonth()){
             if (month == 12){
