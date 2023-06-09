@@ -123,7 +123,7 @@ public class Booking {
         if (selectBooking == 1){ //Hotel room
             System.out.println("----------- Check out -----------");
             do{ //ใช้ loop เพื่อเชคค่า input ที่เข้ามาว่าถูกต้องไหม ถ้าไม่ถูกให้วนถามใหม่
-                System.out.print("How long will you be staying ? : ");
+                System.out.print("How long will you be staying ? (Night): ");
                 String strNumDay = in.nextLine().trim(); //ถามจำนวนวันที่จะเข้าพัก
                 if (Pattern.matches("\\d+$",strNumDay)){ //input amount of day in String ✓✓
                     numDay = Integer.parseInt(strNumDay);
