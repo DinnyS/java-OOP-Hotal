@@ -44,11 +44,11 @@ public class Booking {
         day += numDay;
 
         if (day > currentDate.getDayOfMonth()){
-            if (month == 12){
+            if (month == 12 && day > 31 ){
                 month = 1;
-                day = numDay;
+                day = day - 31;
                 year +=1;
-            } else if (month == 4 && day > 28 || day > 29 ) {
+            } else if (month == 2 && day > 28 || day > 29 ) {
                 day = numDay;
                 month += 1;
             } else if (day == 32 || day == 31) {
