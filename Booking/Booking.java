@@ -110,10 +110,10 @@ public class Booking {
                 month = Integer.parseInt(parts[1]);
                 year = Integer.parseInt(parts[2]);
 
-                if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 && day > 31){ // เช็ควัน ห้ามเกิน 31 วัน
+                if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){ // เช็ควัน ห้ามเกิน 31 วัน
                     System.out.println("Please input correct date 1");
                 }
-                else if(month == 4 || month == 6 || month == 9 || month == 11 && day > 30){ // เช็ควัน ห้ามเกิน 30 วัน
+                else if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){ // เช็ควัน ห้ามเกิน 30 วัน
                     System.out.println("Please input correct date 2");
                 }
 
@@ -124,7 +124,7 @@ public class Booking {
                     System.out.println("Please input correct date 4");
                 }
 
-                if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
+                else if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
                     check = true;
                 } 
 
