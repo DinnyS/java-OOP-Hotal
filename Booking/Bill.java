@@ -10,6 +10,7 @@ public class Bill {
     private static double[] hotelPrice;
     private static int amountRoom;
     private static int i = 0;
+    private static String checkInDate;
 
     //ที่ใช้เป็นตัวแปร static เพื่อให้ค่าที่เก็บไว้แปะอยู่กลับคลาส เวลาดึงค่าไปมาค่าจะได้ไม่เป็น default
     private double totalPrice;
@@ -18,11 +19,12 @@ public class Bill {
         //รับค่ามาจากคลาส Room เพื่อเอามาคิดราคารวมของ hotel room
         this.bookedDay = bookedDay; //เก็บจำนวนวันที่ได้จองไว้
     }
-    public Bill(int time, int price, String type) {
+    public Bill(int time, int price, String type , String checkInDate) {
         //รับค่ามาจาก MeetingRoom เพื่อเอามาคิดราคารวม
         this.bookedTime = time; // เก็บเวลาที่ได้จองไว้
         this.meetingPrice = price; //เก็ยราคาของ meeting room
         this.bookedMeeting = type; //เก็บ type ของ meeting room
+        this.checkInDate = checkInDate;
 
         if(bookedTime == 1){
             showTime = "All day";
@@ -34,7 +36,10 @@ public class Bill {
             showTime = "Half day (Afternoon)";
         }
         //บอกรายละเอียดช่วงเวลาที่ได้จองห้อง meeting
+        AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , bookedMeeting , checkInDate);
     }
+
+    
 
     public Bill(String a, int numRoom){
         //รับค่ามาจาก HotelRoom เพื่อสร้าง Array ไว้เก็บข้อมูลตามจำนวนห้องที่ user ป้อนเข้ามา

@@ -4,6 +4,7 @@ import java.util.*;
 public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
     private int numRoom;
     private int time;
+    private static String CheckInDate;
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
     }
@@ -17,16 +18,18 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
     public int getTime() {
         return time;
     }
-    protected MeetingRoom(String type, int price, int available) {
+    protected MeetingRoom(String type, int price, int available , String CheckInDate) {
         super(type, price, available);
+        this.CheckInDate = CheckInDate;
     }
 
     private static List<MeetingRoom> meetingRooms = new ArrayList<>();
+
     static {
-        meetingRooms.add(new MeetingRoom("1. The Universe (250 people)", 50000, 1));
-        meetingRooms.add(new MeetingRoom("2. The World (100 people)",30000,1));
-        meetingRooms.add(new MeetingRoom("3. The Mini World (50 people)", 20000,1));
-        meetingRooms.add(new MeetingRoom("4. The Town (50 people)",20000,1));
+        meetingRooms.add(new MeetingRoom("1. The Universe (250 people)", 50000, 1,CheckInDate));
+        meetingRooms.add(new MeetingRoom("2. The World (100 people)",30000,1,CheckInDate));
+        meetingRooms.add(new MeetingRoom("3. The Mini World (50 people)", 20000,1,CheckInDate));
+        meetingRooms.add(new MeetingRoom("4. The Town (50 people)",20000,1,CheckInDate));
     }
     protected static List<MeetingRoom> getMeetingRooms(){
         return meetingRooms;
@@ -76,6 +79,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
             if(!strTime.equals("1") && !strTime.equals("2") && !strTime.equals("3")){
                 System.out.println("\n!!! Please select only the options available here !!!\n");
             }
+            
 
             else {
                 time = Integer.parseInt(strTime);
@@ -85,7 +89,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
 
         }while (true);
 
-        Bill meetingBill = new Bill(getTime(),meetingRooms.get(getNumRoom()-1).getPrice(),meetingRooms.get(getNumRoom()-1).getType());
+        Bill meetingBill = new Bill(getTime(),meetingRooms.get(getNumRoom()-1).getPrice(),meetingRooms.get(getNumRoom()-1).getType(),CheckInDate);
         /*
             ส่งค่าที่ user เลือก ไป constructor ของคลาส Bill
             โดย getTime() คือ เวลาที่เลือกจอง (int)

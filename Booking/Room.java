@@ -41,7 +41,7 @@ public class Room {
 
     Scanner in = new Scanner(System.in);
 
-    Room(int selectBooking){
+    Room(int selectBooking , String CheckInDate){
 
         if (selectBooking == 1){
             HotelRoom hotelRoom = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable());
@@ -49,7 +49,7 @@ public class Room {
             hotelRoom.selectBooking();
 
         } else if (selectBooking == 2) {
-            MeetingRoom meetingRoom = new MeetingRoom(getType(),getPrice(),getCapacity());
+            MeetingRoom meetingRoom = new MeetingRoom(getType(),getPrice(),getCapacity(),CheckInDate);
             meetingRoom.infoRoom();
             meetingRoom.selectBooking();
         }

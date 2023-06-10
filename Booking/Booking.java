@@ -208,7 +208,7 @@ public class Booking {
     public void startBooking(int selectBooking){
         checkIn();
         checkOut(selectBooking);
-        Room room = new Room(selectBooking);
+        Room room = new Room(selectBooking , getCheckInDate());
         /*เริ่มการจองแบบจริงๆ โดยใช้ constructor
         ส่งตัวเลือกการจอง ว่าจะเลือกจองห้องแบบไหน
             1 == จองห้องพักโรงแรม
