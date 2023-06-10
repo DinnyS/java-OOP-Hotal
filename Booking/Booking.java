@@ -41,24 +41,31 @@ public class Booking {
         month = getMonth();
         year = getYear();
 
-        day += numDay;
+        day += numDay; // วัน checkin รวมกับจำนวนวันที่นอน
 
         if (day > currentDate.getDayOfMonth()){
             if (month == 12 && day > 31 ){ // ขึ้นปีใหม่
                 month = 1;
                 day = day - 31;
                 year +=1;
-            } else if (month == 2 && year %4 == 0 && day > 29) { // เดือน 2 ที่มี 29 วัน
+            } 
+            
+            else if (month == 2 && year %4 == 0 && day > 29) { // เดือน 2 ที่มี 29 วัน
                 day = day - 29;
                 month += 1;
-            }else if (month == 2 && day > 28) { // เดือน 2 ที่มี 28 วัน
+            }
+
+            else if (month == 2 && day > 28) { // เดือน 2 ที่มี 28 วัน
                     day = day - 28;
                     month += 1;
-            } else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 && day > 31){ // เดือนที่มี 31 วัน (คม)
+            } 
+
+            else if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){ // เดือนที่มี 31 วัน (คม)
                 day = day - 31;
                 month += 1;
             }
-            else if (month == 4 || month == 6 || month == 9 || month == 11 && day > 30){ // เดือนที่มี 30 วัน (ยน)
+
+            else if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){ // เดือนที่มี 30 วัน (ยน)
                 day = day - 30;
                 month += 1;
             }
@@ -104,22 +111,21 @@ public class Booking {
                 year = Integer.parseInt(parts[2]);
 
                 if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12 && day > 31){ // เช็ควัน ห้ามเกิน 31 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date 1");
                 }
                 else if(month == 4 || month == 6 || month == 9 || month == 11 && day > 30){ // เช็ควัน ห้ามเกิน 30 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date 2");
                 }
 
                 else if (month == 2 && year %4 == 0 && day > 29) { // เดือน 2 ห้ามเกิน 29 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date 3");
                 }
                 else if (month == 2 && day > 28) { // เดือน 2 ห้ามเกิน 28 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date 4");
                 }
 
                 if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
                     check = true;
-
                 } 
 
                 else if ((year > currentDate.getYear() && year < 2026 ) || (year == currentDate.getYear() && month > currentDate.getMonthValue())) {
