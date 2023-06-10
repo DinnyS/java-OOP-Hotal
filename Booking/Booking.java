@@ -111,17 +111,17 @@ public class Booking {
                 year = Integer.parseInt(parts[2]);
 
                 if((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){ // เช็ควัน ห้ามเกิน 31 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date !!");
                 }
                 else if((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){ // เช็ควัน ห้ามเกิน 30 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date !!");
                 }
 
                 else if (month == 2 && year %4 == 0 && day > 29) { // เดือน 2 ห้ามเกิน 29 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date !!");
                 }
                 else if (month == 2 && day > 28) { // เดือน 2 ห้ามเกิน 28 วัน
-                    System.out.println("Please input correct date");
+                    System.out.println("Please input correct date !!");
                 }
 
                 else if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
