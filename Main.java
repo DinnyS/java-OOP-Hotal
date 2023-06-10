@@ -1,5 +1,6 @@
-
 import java.util.Scanner;
+import java.util.regex.Pattern;
+
 import Booking.Booking;
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +22,7 @@ public class Main {
             System.out.println();
             System.out.print(" : ");
 
-            String select = scan.nextLine(); // ใช้ select ในการเลือกหัวข้อ (เป็น String)
+            String select = scan.nextLine().trim(); // ใช้ select ในการเลือกหัวข้อ (เป็น String)
 
 
             // --------------------------- Information Of Hotel ----------------------------------------
@@ -67,8 +68,17 @@ public class Main {
                     System.out.println(" == Select == ");
                     System.out.print(" : ");
 
-                    String strSelectBooking = scan.nextLine();
-                    int selectBooking = Integer.parseInt(strSelectBooking); // จะใช้ตัวแปรเป็น int มีชื่อว่า select booking
+                    String strSelectBooking = scan.nextLine().trim();
+                    int selectBooking = 0;
+
+                    if(Pattern.matches("\\d+$",strSelectBooking)){
+                        selectBooking = Integer.parseInt(strSelectBooking); // จะใช้ตัวแปรเป็น int มีชื่อว่า select booking
+                    }
+                    else{
+                        System.out.println("\n !!!Please enter only integer!!! \n");
+                        break;
+                    }
+
                     Booking booking = new Booking();
 
                     // --------------- Booking Hotel Booking.Room ----------------------

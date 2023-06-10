@@ -117,7 +117,7 @@ public class Booking {
                     System.out.println("Please input correct date");
                 }
 
-                else if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
+                if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
                     check = true;
 
                 } 
