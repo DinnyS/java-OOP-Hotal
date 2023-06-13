@@ -214,8 +214,118 @@ public class Booking {
             1 == จองห้องพักโรงแรม
             2 == จองห้องประชุม
          */
-        name();
-        phone();
+        AvailableMeeting availableM = new AvailableMeeting();
+        List<String> dateOfAll = availableM.getDateOfAll();
+
+        Bill billy = new Bill();
+        int bookedTime = billy.getBookedTime();
+        int numRoom = billy.getNumOfRoom();
+
+        int countDateOfAll = 0;
+        int roomMeeting = 0;
+        boolean foundDateOfAll = false;
+        for (String check : dateOfAll){
+            // เขียนโค้ดเพื่อตรวจสอบและแก้ไขค่าตามเงื่อนไขที่ต้องการ
+            if (check.startsWith(checkInDate) && check.endsWith("1") && numRoom == 1) {
+                AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);//บอกรายละเอียดช่วงเวลาที่ได้จองห้อง meeting
+                foundDateOfAll = true;
+                if(availableM.getMeetCheck() == false){
+                    name();
+                    phone();
+                    bookingSummary(selectBooking);
+                    
+                    System.out.println(" -- Thank you For Booking -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+                else{
+                    System.out.println("------------------------------------------------------------------------------");
+                    System.out.println(" -- Please Enter all data again ;( -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+                
+            }  
+            else if (check.startsWith(checkInDate) && check.endsWith("2") && numRoom == 2) {
+                AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
+                foundDateOfAll = true;
+                if(availableM.getMeetCheck() == false){
+                    name();
+                    phone();
+                    bookingSummary(selectBooking);
+                    
+                    System.out.println(" -- Thank you For Booking -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+                else{
+                    System.out.println("------------------------------------------------------------------------------");
+                    System.out.println(" -- Please Enter all data again ;( -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+            }  
+            else if (check.startsWith(checkInDate) && check.endsWith("3") && numRoom == 3) {
+                AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
+                foundDateOfAll = true;
+                if(availableM.getMeetCheck() == false){
+                    name();
+                    phone();
+                    bookingSummary(selectBooking);
+                    
+                    System.out.println(" -- Thank you For Booking -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+                else{
+                    System.out.println("------------------------------------------------------------------------------");
+                    System.out.println(" -- Please Enter all data again ;( -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+            }  
+            else if (check.startsWith(checkInDate) && check.endsWith("4") && numRoom == 4) {
+                AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
+                foundDateOfAll = true;
+                if(availableM.getMeetCheck() == false){
+                    name();
+                    phone();
+                    bookingSummary(selectBooking);
+                    
+                    System.out.println(" -- Thank you For Booking -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+                else{
+                    System.out.println("------------------------------------------------------------------------------");
+                    System.out.println(" -- Please Enter all data again ;( -- ");
+                    System.out.println("------------------------------------------------------------------------------");
+                    break;
+                }
+            }
+            countDateOfAll++;  
+        }
+
+        if (foundDateOfAll == false && countDateOfAll == dateOfAll.size() && roomMeeting == 0){
+            AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
+            name();
+            phone();
+            bookingSummary(selectBooking);
+            
+            System.out.println(" -- Thank you For Booking -- ");
+            System.out.println("------------------------------------------------------------------------------");
+        }
+
+        if(dateOfAll.isEmpty()){
+            AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
+            name();
+            phone();
+            bookingSummary(selectBooking);
+            
+            System.out.println(" -- Thank you For Booking -- ");
+            System.out.println("------------------------------------------------------------------------------");
+        }
+
     }
 
     public void bookingSummary(int selectBooking){
@@ -230,6 +340,7 @@ public class Booking {
         }
         Room roomBill = new Room(getNumDay(),selectBooking); //ส่งต่า numDay และ selectBooking ไปใช้ใน class Room
         System.out.println("------------------------------------------------------------------------------");
+        
     }
 
 

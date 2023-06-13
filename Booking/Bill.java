@@ -1,7 +1,10 @@
 package Booking;
 
+import java.util.List;
+
 public class Bill {
     private static int bookedTime;
+    private static int numRoom;
     private static String showTime;
     private int bookedDay; //มีแก้ตรงนี้นะ เอา static ออก
     private static String bookedMeeting;
@@ -11,6 +14,7 @@ public class Bill {
     private static int amountRoom;
     private static int i = 0;
     private static String checkInDate;
+    private List dateOfAll;
 
     //ที่ใช้เป็นตัวแปร static เพื่อให้ค่าที่เก็บไว้แปะอยู่กลับคลาส เวลาดึงค่าไปมาค่าจะได้ไม่เป็น default
     private double totalPrice;
@@ -19,12 +23,13 @@ public class Bill {
         //รับค่ามาจากคลาส Room เพื่อเอามาคิดราคารวมของ hotel room
         this.bookedDay = bookedDay; //เก็บจำนวนวันที่ได้จองไว้
     }
-    public Bill(int time, int price, String type , String checkInDate) {
+    public Bill(int time, int price, String type , String checkInDate , int getNumRoom) {
         //รับค่ามาจาก MeetingRoom เพื่อเอามาคิดราคารวม
         this.bookedTime = time; // เก็บเวลาที่ได้จองไว้
         this.meetingPrice = price; //เก็ยราคาของ meeting room
         this.bookedMeeting = type; //เก็บ type ของ meeting room
         this.checkInDate = checkInDate;
+        this.numRoom = getNumRoom;
 
         if(bookedTime == 1){
             showTime = "All day";
@@ -35,8 +40,6 @@ public class Bill {
         else if(bookedTime == 3){
             showTime = "Half day (Afternoon)";
         }
-        //บอกรายละเอียดช่วงเวลาที่ได้จองห้อง meeting
-        AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , bookedMeeting , checkInDate);
     }
 
     
@@ -130,5 +133,12 @@ public class Bill {
 
             i = 0; //กำหนดให้ i = 0 เพื่อให้รีค่ากลับไปใหม่
         }
+    }
+
+    public int getBookedTime(){
+        return bookedTime;
+    }
+    public int getNumOfRoom(){
+        return numRoom;
     }
 }

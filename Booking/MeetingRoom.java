@@ -79,7 +79,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
             if(!strTime.equals("1") && !strTime.equals("2") && !strTime.equals("3")){
                 System.out.println("\n!!! Please select only the options available here !!!\n");
             }
-            
+
 
             else {
                 time = Integer.parseInt(strTime);
@@ -89,7 +89,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
 
         }while (true);
 
-        Bill meetingBill = new Bill(getTime(),meetingRooms.get(getNumRoom()-1).getPrice(),meetingRooms.get(getNumRoom()-1).getType(),CheckInDate);
+        Bill meetingBill = new Bill(getTime(),meetingRooms.get(getNumRoom()-1).getPrice(),meetingRooms.get(getNumRoom()-1).getType(),CheckInDate , getNumRoom());
         /*
             ส่งค่าที่ user เลือก ไป constructor ของคลาส Bill
             โดย getTime() คือ เวลาที่เลือกจอง (int)

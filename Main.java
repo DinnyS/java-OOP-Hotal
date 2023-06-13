@@ -101,7 +101,6 @@ public class Main {
                         System.out.println();
 
                         booking.startBooking(selectBooking); //เข้าหน้าการจอง
-                        booking.bookingSummary(selectBooking); //
                     }
 
                     else if (selectBooking == 3 ) {

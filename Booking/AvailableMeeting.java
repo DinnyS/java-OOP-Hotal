@@ -5,75 +5,316 @@ import java.util.Iterator;
 import java.util.List;
 
 public class AvailableMeeting extends Bill{
-    private static int numBookedRoom;
 
-    private int bookedDay;
-    private int bookedMonth;
-    private int bookedYear;
+    private static boolean MeetFull = false;
 
-    private int timedays;
-    private String typeMeet;
-
-    private int year;
-
-    private String hasbook = "0/0/0";
-
-    private static List<String> dateOfAll = new ArrayList<>();  // arraylist ที่เก็บข้อมูล "Day / Month / Year / เช้า / บ่าย / ทั้งวัน" โดยมีค่าอยู่ 6 ตัวในนั้น ต่อ 1 ตัวใน array
+    private static List<String> dateOfAll = new ArrayList<>();  // arraylist ที่เก็บข้อมูล "Day / Month / Year / เช้า / บ่าย / ทั้งวัน / ห้อง" โดยมีค่าอยู่ 7 ตัวในนั้น ต่อ 1 ตัวใน array
                                                                 // เช่น 10/11/2023/0/0/1 หรือ 10/11/2023/1/1/0 เป็นต้น 
+
+    public AvailableMeeting(){}
                             // เวลาของวัน
                             // เช้า/บ่าย/ทั้งวัน     // ประเภทห้อง        // วันที่จอง
-    public AvailableMeeting(int timeDay , String typeMeet , String checkInDate){
+    public AvailableMeeting(int timeDay , int typeMeet , String checkInDate){
         //this.timedays = timeDay; // เก็บค่าเวลาของวัน
-        this.typeMeet = typeMeet; // เก็บค่าประเภทห้อง
+        //this.typeMeet = typeMeet; // เก็บค่าประเภทห้อง
 
         String[] parts = checkInDate.split("/"); // ตัว check วัน checkIn
             if (parts.length == 3) {
                 int day = Integer.parseInt(parts[0]);
                 int month = Integer.parseInt(parts[1]);
                 int year = Integer.parseInt(parts[2]);
-                System.out.println(day +" "+ month +" "+ year);
+                System.out.println("");
+                System.out.println("Check In : " + day +" "+ month +" "+ year);
+
 
                 int count = 0;
+                int roomMeeting = 0; // เก็บค่าของห้องที่ส่งมา
                 boolean found = false; // เพิ่มตัวแปรเพื่อตรวจสอบว่าเจอค่าที่ตรงกับเงื่อนไขหรือไม่
                 for (String check : dateOfAll) {
+
+                    String checkRoom = dateOfAll.get(count); // Check ตำแหน่งที่ For loop กำลังทำงาน
+                    String[] salat = checkRoom.split("/"); // ตัวแบ่งข้อมูลที่เราเก็บ
+                    int room = Integer.parseInt(salat[6]); // ตำแหน่งที่ 6 ใน array = ตัวที่ 7 ก็คือห้อง 
         
-                    if (check.startsWith(checkInDate)) {
-                        if (check.startsWith(checkInDate + "/" + "0" + "/" + "0" + "/" + "1")) { // เช็ค ทั้งวัน 
-                            System.out.println("Meeting Now is Full...!!!");
+                    // ---------------- Check ห้อง The Universe (1)
+                    if (check.startsWith(checkInDate) && check.endsWith("1") && typeMeet == 1) { // Check ห้อง The Universe (1)
+                        roomMeeting = room; // เซ็ทค่าห้องที่ได้ลงในตัวแปลเก็บค่าห้อง
+                        if (check.startsWith(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "1") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน 
+                            System.out.println("Status : Meeting in This Day Now is Full...!!!");
+                            System.out.println("");
                             found = true;
+                            MeetFull = true;
                             break;
-                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "1" + "/" + "0")) { // เช็ค ทั้งวัน (เช้า + บ่าย)
-                            System.out.println("Meeting Now is Full...!!!");
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "1") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in Morning Now is Full...!!! So you can't booking all day");
+                            System.out.println("");
                             found = true;
+                            MeetFull = true;
                             break;
-                        } else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0") && timeDay == 2) { // เช้า = 0  บ่าย = 1
-                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1"); //แก้ค่า ให้ เป็น ทั้งวัน 
-                            System.out.println("Add Chao ti me bai");
+                        }else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "1") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                                System.out.println("Status : Meeting in Afternoon Now is Full...!!! So you can't booking all day");
+                                System.out.println("");
+                                found = true;
+                                MeetFull = true;
+                                break;
+                        }else if (check.startsWith(checkInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "1") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in This Day Now is Full...!!!");
+                            System.out.println("");
                             found = true;
+                            MeetFull = true;
                             break;
-                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0") && timeDay == 3) { // เช้า = 1  บ่าย = 0
-                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1"); //แก้ค่า ให้ เป็น ทั้งวัน 
-                            System.out.println("Add Bai ti me chao");
+                        } else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "1") && timeDay == 2) { // เช้า = 0  บ่าย = 1
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "1"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
                             found = true;
+                            MeetFull = false;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "1") && timeDay == 3) { // เช้า = 1  บ่าย = 0
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "1"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = false;
                             break;
                         }  else{
-                            System.out.println("Meeting Now is Full...!!!");
+                            System.out.println("Status : Meeting Now is Full...!!!"); 
+                            System.out.println("");
+                            found = true;
+                            MeetFull = true;
+                            // ถ้าเข้าเงื่อนไขของ if มาได้แล้ว แสดงว่ามีข้อมูลอยู่แล้ว ถ้าไม่เข้าเงื่อนไขข้างบนเลยแสดงว่า มัน Error แต่มันไม่มีวันเข้า else ได้
+                        }
+                    }
+
+                    // ---------------- Check ห้อง The World (2)
+                    else if (check.startsWith(checkInDate) && check.endsWith("2") && typeMeet == 2) { // Check ห้อง The World (2)
+                        roomMeeting = room; // เซ็ทค่าห้องที่ได้ลงในตัวแปลเก็บค่าห้อง
+                        if (check.startsWith(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "2") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน 
+                            System.out.println("Status : Meeting in This Day Now is Full...!!!");
+                            System.out.println("");
+                            MeetFull = true;
+                            found = true;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "2") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in Morning Now is Full...!!! So you can't booking all day");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = true;
+                            break;
+                        }else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "2") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                                System.out.println("Status : Meeting in Afternoon Now is Full...!!! So you can't booking all day");
+                                System.out.println("");
+                                found = true;
+                                MeetFull = true;
+                                break;
+                        }else if (check.startsWith(checkInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "2") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in This Day Now is Full...!!!");
+                            System.out.println("");
+                            MeetFull = true;
+                            found = true;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "2") && timeDay == 2) { // เช้า = 0  บ่าย = 1
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "2"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = false;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "2") && timeDay == 3) { // เช้า = 1  บ่าย = 0
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "2"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = false;
+                            break;
+                        }  else{
+                            System.out.println("Status : Meeting Now is Full...!!!"); 
+                            System.out.println("");
+                            found = true;
+                            MeetFull = true;
+                            // ถ้าเข้าเงื่อนไขของ if มาได้แล้ว แสดงว่ามีข้อมูลอยู่แล้ว ถ้าไม่เข้าเงื่อนไขข้างบนเลยแสดงว่า มัน Error แต่มันไม่มีวันเข้า else ได้
+                        }
+                    }
+
+                    // ---------------- Check ห้อง The Mini (3)
+                    else if (check.startsWith(checkInDate) && check.endsWith("3") && typeMeet == 3) { // Check ห้อง The Mini (3)
+                        roomMeeting = room; // เซ็ทค่าห้องที่ได้ลงในตัวแปลเก็บค่าห้อง
+                        if (check.startsWith(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "3") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน 
+                            System.out.println("Status : Meeting in This Day Now is Full...!!!");
+                            System.out.println("");
+                            MeetFull = true;
+                            found = true;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "3") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in Morning Now is Full...!!! So you can't booking all day");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = true;
+                            break;
+                        }else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "3") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                                System.out.println("Status : Meeting in Afternoon Now is Full...!!! So you can't booking all day");
+                                System.out.println("");
+                                found = true;
+                                MeetFull = true;
+                                break;
+                        }else if (check.startsWith(checkInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "3") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in This Day Now is Full...!!!");
+                            System.out.println("");
+                            MeetFull = true;
+                            found = true;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "3") && timeDay == 2) { // เช้า = 0  บ่าย = 1
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "3"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = false;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "3") && timeDay == 3) { // เช้า = 1  บ่าย = 0
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "3"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = false;
+                            break;
+                        }  else{
+                            System.out.println("Status : Meeting Now is Full...!!!");
+                            System.out.println("");
+                            MeetFull = true; 
+                            found = true;
+                            // ถ้าเข้าเงื่อนไขของ if มาได้แล้ว แสดงว่ามีข้อมูลอยู่แล้ว ถ้าไม่เข้าเงื่อนไขข้างบนเลยแสดงว่า มัน Error แต่มันไม่มีวันเข้า else ได้
+                        }
+                    }
+
+                    // ---------------- Check ห้อง The Town (4)
+                    else if (check.startsWith(checkInDate) && check.endsWith("4") && typeMeet == 4) { // Check ห้อง The Town (4)
+                        roomMeeting = room; // เซ็ทค่าห้องที่ได้ลงในตัวแปลเก็บค่าห้อง
+                        if (check.startsWith(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "4") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน 
+                            System.out.println("Status : Meeting in This DayNow is Full...!!!");
+                            System.out.println("");
+                            MeetFull = true;
+                            found = true;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "4") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in Morning Now is Full...!!! So you can't booking all day");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = true;
+                            break;
+                        }else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "4") && timeDay == 1) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                                System.out.println("Status : Meeting in Afternoon Now is Full...!!! So you can't booking all day");
+                                System.out.println("");
+                                found = true;
+                                MeetFull = true;
+                                break;
+                        }else if (check.startsWith(checkInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "4") && (timeDay == 1 || timeDay == 2  || timeDay == 3)) { // เช็ค ทั้งวัน (เช้า + บ่าย)
+                            System.out.println("Status : Meeting in This Day Now is Full...!!!");
+                            System.out.println("");
+                            MeetFull = true;
+                            found = true;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "4") && timeDay == 2) { // เช้า = 0  บ่าย = 1
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "4"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = false;
+                            break;
+                        } else if (check.startsWith(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "4") && timeDay == 3) { // เช้า = 1  บ่าย = 0
+                            dateOfAll.set(count, checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "4"); //แก้ค่า ให้ เป็น ทั้งวัน 
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                            found = true;
+                            MeetFull = false;
+                            break;
+                        }  else{
+                            System.out.println("Status : Meeting Now is Full...!!!"); 
+                            System.out.println("");
+                            MeetFull = true;
+                            found = true;
+                            // ถ้าเข้าเงื่อนไขของ if มาได้แล้ว แสดงว่ามีข้อมูลอยู่แล้ว ถ้าไม่เข้าเงื่อนไขข้างบนเลยแสดงว่า มัน Error แต่มันไม่มีวันเข้า else ได้
                         }
                     }
                     
                     count++;
                 } // จุดสิ้นสุด for loop 
 
-                if (!found && count == dateOfAll.size()) { // check ว่า ถ้าใน for loop ไม่มีค่าที่ตรงกับวันที่เพิ่มมา ให้ เข้าเงื่อนไขนี้
-                    if (timeDay == 1) {
-                        dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1"); // Add ค่า "ทั้งวัน" เข้าไป
-                        System.out.println("Add All");
-                    } else if (timeDay == 2) {
-                        dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0"); // Add ค่า "เช้า" เข้าไป
-                        System.out.println("Add Chao");
-                    } else if (timeDay == 3) {
-                        dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0"); // Add ค่า "บ่าย" เข้าไป
-                        System.out.println("Add Bai");
+
+                if (found == false && count == dateOfAll.size() && roomMeeting == 0) { // check ว่า ถ้าใน for loop ไม่มีค่าที่ตรงกับวันที่เพิ่มมา ให้ เข้าเงื่อนไขนี้
+                    if(typeMeet == 1){
+                        if (timeDay == 1) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "1"); // Add ค่า "ทั้งวัน" เข้าไป
+                            System.out.println("Status : Add All Day Complete");
+                            System.out.println("");
+                        } else if (timeDay == 2) {
+                            dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "1"); // Add ค่า "เช้า" เข้าไป
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                        } else if (timeDay == 3) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "1"); // Add ค่า "บ่าย" เข้าไป
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                        }
+                    }
+                    else if(typeMeet == 2){
+                        if (timeDay == 1) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "2"); // Add ค่า "ทั้งวัน" เข้าไป
+                            System.out.println("Status : Add All Day Complete");
+                            System.out.println("");
+                        } else if (timeDay == 2) {
+                            dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "2"); // Add ค่า "เช้า" เข้าไป
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                        } else if (timeDay == 3) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "2"); // Add ค่า "บ่าย" เข้าไป
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                        }
+                    }
+                    else if(typeMeet == 3){
+                        if (timeDay == 1) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "3"); // Add ค่า "ทั้งวัน" เข้าไป
+                            System.out.println("Status : Add All Day Complete");
+                            System.out.println("");
+                        } else if (timeDay == 2) {
+                            dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "3"); // Add ค่า "เช้า" เข้าไป
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                        } else if (timeDay == 3) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "3"); // Add ค่า "บ่าย" เข้าไป
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                        }
+                    }
+                    else if(typeMeet == 4){
+                        if (timeDay == 1) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "4"); // Add ค่า "ทั้งวัน" เข้าไป
+                            System.out.println("Status : Add All Day Complete");
+                            System.out.println("");
+                        } else if (timeDay == 2) {
+                            dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "4"); // Add ค่า "เช้า" เข้าไป
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                        } else if (timeDay == 3) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "4"); // Add ค่า "บ่าย" เข้าไป
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                        }
+                    }
+                    else{
+                        if (timeDay == 1) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + typeMeet); // Add ค่า "ทั้งวัน" เข้าไป
+                            System.out.println("Status : Add All Day Complete");
+                            System.out.println("");
+                        } else if (timeDay == 2) {
+                            dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + typeMeet); // Add ค่า "เช้า" เข้าไป
+                            System.out.println("Status : Add Morning Complete");
+                            System.out.println("");
+                        } else if (timeDay == 3) {
+                            dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + typeMeet); // Add ค่า "บ่าย" เข้าไป
+                            System.out.println("Status : Add Afternoon Complete");
+                            System.out.println("");
+                        }
                     }
                 }
                     
@@ -82,14 +323,17 @@ public class AvailableMeeting extends Bill{
                     // ลิสต์ dateOfAll ยังไม่มีข้อมูล
                     // ใส่ข้อมูลเริ่มต้นลงในลิสต์
                     if (timeDay == 1) {
-                        dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1"); // Add ค่า "ทั้งวัน" เข้าไป
-                        System.out.println("Add All");
+                        dateOfAll.add(checkInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + typeMeet); // Add ค่า "ทั้งวัน" เข้าไป
+                        System.out.println("Status : Add All Day Complete");
+                        System.out.println("");
                     } else if (timeDay == 2) {
-                        dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0"); // Add ค่า "เช้า" เข้าไป
-                        System.out.println("Add Chao");
+                        dateOfAll.add(checkInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + typeMeet); // Add ค่า "เช้า" เข้าไป
+                        System.out.println("Status : Add Morning Complete");
+                        System.out.println("");
                     } else if (timeDay == 3) {
-                        dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0"); // Add ค่า "บ่าย" เข้าไป
-                        System.out.println("Add Bai");
+                        dateOfAll.add(checkInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + typeMeet); // Add ค่า "บ่าย" เข้าไป
+                        System.out.println("Status : Add Afternoon Complete");
+                        System.out.println("");
                     }
                 } /*else {
                     // ลิสต์ dateOfAll มีข้อมูลอยู่แล้ว
@@ -116,6 +360,17 @@ public class AvailableMeeting extends Bill{
                 }*/
             }
     }
+
+    public List getDateOfAll(){
+        return dateOfAll;
+    }
+
+    public boolean getMeetCheck(){
+        return MeetFull;
+    }
+
+
+
 }
 
 
