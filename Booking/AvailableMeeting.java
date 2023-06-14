@@ -1,7 +1,6 @@
 package Booking;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class AvailableMeeting extends Bill{
@@ -9,7 +8,7 @@ public class AvailableMeeting extends Bill{
     private static boolean MeetFull = false;
 
     private static List<String> dateOfAll = new ArrayList<>();  // arraylist ที่เก็บข้อมูล "Day / Month / Year / เช้า / บ่าย / ทั้งวัน / ห้อง" โดยมีค่าอยู่ 7 ตัวในนั้น ต่อ 1 ตัวใน array
-                                                                // เช่น 10/11/2023/0/0/1 หรือ 10/11/2023/1/1/0 เป็นต้น 
+                                                                // เช่น 10/11/2023/0/0/1/4 หรือ 10/11/2023/1/1/0/2 เป็นต้น 
 
     public AvailableMeeting(){}
                             // เวลาของวัน
