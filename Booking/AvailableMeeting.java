@@ -23,7 +23,7 @@ public class AvailableMeeting extends Bill{
                 int month = Integer.parseInt(parts[1]);
                 int year = Integer.parseInt(parts[2]);
                 System.out.println("");
-                System.out.println("Check In : " + day +" "+ month +" "+ year);
+                System.out.println("Check In : " + day +"/"+ month +"/"+ year);
 
 
                 int count = 0;
