@@ -1,4 +1,6 @@
 package Booking;
+import Booking.Service.MeetingService;
+
 import java.util.*;
 
 public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
@@ -34,9 +36,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
         meetingRooms.add(new MeetingRoom("3. The Mini World (50 people)", 20000,"Empty Allday",CheckInDate));
 
         meetingRooms.add(new MeetingRoom("4. The Town (50 people)",20000,"Empty Allday",CheckInDate));
-        
 
-        
     }
 
     protected static List<MeetingRoom> getMeetingRooms(){
@@ -192,6 +192,11 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
             meetingRooms.get(getNumRoom()-1).getPrice() คือ ราคาของห้องที่ได้จองไว้ (int)
             meetingRooms.get(getNumRoom()-1).getType() คือ type ของห้องที่ได้จองไว้ (String)
          */
+
+        MeetingService meetingService = new MeetingService(getTime(),meetingRooms.get(getNumRoom()-1).getType());
+
+        //ส่งค่าไปเพื่อช่วยในการเลือก package ของ service
+
 
         System.out.println("------------------------------------------------------------------------------");
     }

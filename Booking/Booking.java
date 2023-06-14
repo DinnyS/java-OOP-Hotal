@@ -1,4 +1,6 @@
 package Booking;
+import Booking.Service.Service;
+
 import java.util.*;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
@@ -41,29 +43,34 @@ public class Booking {
         month = getMonth();
         year = getYear();
 
-        day += numDay; // วัน checkin รวมกับจำนวนวันที่นอน
+        day += numDay; // วัน check in รวมกับจำนวนวันที่นอน
 
         if (day > currentDate.getDayOfMonth()){
+
             if (month == 12 && day > 31 ){ // ขึ้นปีใหม่
                 month = 1;
                 day = day - 31;
                 year +=1;
-            } 
-            
-            else if (month == 2 && year %4 == 0 && day > 29) { // เดือน 2 ที่มี 29 วัน
+            }
+
+            // เดือน 2 ที่มี 29 วัน
+            else if (month == 2 && year %4 == 0 && day > 29) {
                 day = day - 29;
                 month += 1;
             }
 
-            else if (month == 2 && day > 28) { // เดือน 2 ที่มี 28 วัน
+            // เดือน 2 ที่มี 28 วัน
+            else if (month == 2 && day > 28) {
                     day = day - 28;
                     month += 1;
-            } 
+            }
 
-            else if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){ // เดือนที่มี 31 วัน (คม)
+            // เดือนที่มี 31 วัน (คม)
+            else if ((month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) && day > 31){
                 day = day - 31;
                 month += 1;
             }
+
 
             else if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30){ // เดือนที่มี 30 วัน (ยน)
                 day = day - 30;
@@ -230,6 +237,7 @@ public class Booking {
                 AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);//บอกรายละเอียดช่วงเวลาที่ได้จองห้อง meeting
                 foundDateOfAll = true;
                 if(availableM.getMeetCheck() == false){
+                    service(selectBooking);
                     name();
                     phone();
                     bookingSummary(selectBooking);
@@ -250,6 +258,7 @@ public class Booking {
                 AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
                 foundDateOfAll = true;
                 if(availableM.getMeetCheck() == false){
+                    service(selectBooking);
                     name();
                     phone();
                     bookingSummary(selectBooking);
@@ -269,6 +278,7 @@ public class Booking {
                 AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
                 foundDateOfAll = true;
                 if(availableM.getMeetCheck() == false){
+                    service(selectBooking);
                     name();
                     phone();
                     bookingSummary(selectBooking);
@@ -288,6 +298,7 @@ public class Booking {
                 AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
                 foundDateOfAll = true;
                 if(availableM.getMeetCheck() == false){
+                    service(selectBooking);
                     name();
                     phone();
                     bookingSummary(selectBooking);
@@ -308,6 +319,7 @@ public class Booking {
 
         if (foundDateOfAll == false && countDateOfAll == dateOfAll.size() && roomMeeting == 0){
             AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
+            service(selectBooking);
             name();
             phone();
             bookingSummary(selectBooking);
@@ -318,6 +330,7 @@ public class Booking {
 
         if(dateOfAll.isEmpty()){
             AvailableMeeting availableMeeting  = new AvailableMeeting(bookedTime , numRoom , checkInDate);
+            service(selectBooking);
             name();
             phone();
             bookingSummary(selectBooking);
@@ -326,6 +339,19 @@ public class Booking {
             System.out.println("------------------------------------------------------------------------------");
         }
 
+    }
+
+    public void service(int selectBooking){
+        System.out.println("\nOther Service");
+        System.out.println("Press 'Y' for booking more service");
+        System.out.println("Press other for summarize order");
+        System.out.println(" == Select == ");
+        System.out.print(" : ");
+        String selectService = in.nextLine().trim().toUpperCase();
+
+        if(selectService.equals("Y")){
+            Service service = new Service(selectBooking);
+        }
     }
 
     public void bookingSummary(int selectBooking){

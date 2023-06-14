@@ -6,13 +6,18 @@ public class Bill {
     private static int bookedTime;
     private static int numRoom;
     private static String showTime;
-    private int bookedDay; //มีแก้ตรงนี้นะ เอา static ออก
+    private int bookedDay;
     private static String bookedMeeting;
     private static String[] bookedHotel;
     private static double meetingPrice;
     private static double[] hotelPrice;
     private static int amountRoom;
     private static int i = 0;
+    private static int people;
+    private static String nameMeetingService;
+    private static double priceMeetingService;
+    private static String nameHotelService;
+    private static double priceHotelService;
     private static String checkInDate;
     private List dateOfAll;
 
@@ -41,9 +46,6 @@ public class Bill {
             showTime = "Half day (Afternoon)";
         }
     }
-
-    
-
     public Bill(String a, int numRoom){
         //รับค่ามาจาก HotelRoom เพื่อสร้าง Array ไว้เก็บข้อมูลตามจำนวนห้องที่ user ป้อนเข้ามา
         //String a สร้างไว้เฉยๆเพื่อกันการซ้ำกับ constructor ที่เก็บค่าจำนวนวันที่ถูกจอง
@@ -59,6 +61,11 @@ public class Bill {
             break;
         }
         i++;
+    }
+    public Bill(int people, String name, double price){
+        this.people = people;
+        this.nameMeetingService = name;
+        this.priceHotelService = price;
     }
     public double calPriceMeeting(){
         if (bookedTime == 1){
@@ -78,6 +85,10 @@ public class Bill {
         }
         return totalPrice*numDay; //เอา totalPrice ที่รวมได้มาคูณกับจำนวนวันที่ user ได้จองไว้เพื่อหาราคารวม
     }
+    public double calMeetingService(int people){
+        return priceHotelService*people;
+    }
+
     public void showBill(){
         /*
             ฟังก์ชันที่เอาไว้สรุปรายการที่ user จองไว้
@@ -90,9 +101,17 @@ public class Bill {
             //แสดงว่า user ได้จองห้องไหนไปบ้าง
 
             System.out.println("Time : " + showTime);
-            //แดสงว่า user ได้จองห้องในเวลาไหน
+            //แสดงว่า user ได้จองห้องในเวลาไหน
 
-            System.out.println("Total price : " + calPriceMeeting() + " THB");
+            System.out.println("Other Service : " + nameMeetingService);
+            //แสดงว่า user ได้เลือก service package ไหน
+
+            System.out.println("---------------------------------------------------------------");
+
+            System.out.println("Meeting room price : " + calPriceMeeting());
+            System.out.println("Other service price " + calMeetingService(people));
+
+            System.out.println("Total price : " + (calPriceMeeting()+calMeetingService(people)) + " THB");
             //แสดงราคารวมของ bill นี้โดยดึงค่ามาจาก calMeetingPrice()
         }
 
