@@ -7,16 +7,17 @@ public class Room {
     private int capacity;
     private int price;
     private int available;
+    private static String availableMeet;
 
-    public Room(String type, int price, int available) {
-        //ใช้ใน hotel room
+    public Room(String type, int price, String availableMeet) {
+        //ใช้ใน Meeting room
         this.type = type;
         this.price = price;
-        this.available = available;
+        this.availableMeet = availableMeet;
     }
 
     public Room(String type, int capacity, int price, int available) {
-        //ใช้ใน meeting room
+        //ใช้ใน Hotel room
         this.type = type;
         this.capacity = capacity;
         this.price = price;
@@ -39,6 +40,10 @@ public class Room {
         return available;
     }
 
+    public String getAvailableMeet(){
+        return availableMeet;
+    }
+
     Scanner in = new Scanner(System.in);
 
     Room(int selectBooking , String CheckInDate){
@@ -49,7 +54,7 @@ public class Room {
             hotelRoom.selectBooking();
 
         } else if (selectBooking == 2) {
-            MeetingRoom meetingRoom = new MeetingRoom(getType(),getPrice(),getCapacity(),CheckInDate);
+            MeetingRoom meetingRoom = new MeetingRoom(getType(),getPrice(),availableMeet,CheckInDate);
             meetingRoom.infoRoom();
             meetingRoom.selectBooking();
         }

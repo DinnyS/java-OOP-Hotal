@@ -18,7 +18,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
     public int getTime() {
         return time;
     }
-    protected MeetingRoom(String type, int price, int available , String CheckInDate) {
+    protected MeetingRoom(String type, int price, String available , String CheckInDate) {
         super(type, price, available);
         this.CheckInDate = CheckInDate;
     }
@@ -26,25 +26,121 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
     private static List<MeetingRoom> meetingRooms = new ArrayList<>();
 
     static {
-        meetingRooms.add(new MeetingRoom("1. The Universe (250 people)", 50000, 1,CheckInDate));
-        meetingRooms.add(new MeetingRoom("2. The World (100 people)",30000,1,CheckInDate));
-        meetingRooms.add(new MeetingRoom("3. The Mini World (50 people)", 20000,1,CheckInDate));
-        meetingRooms.add(new MeetingRoom("4. The Town (50 people)",20000,1,CheckInDate));
+        
+        meetingRooms.add(new MeetingRoom("1. The Universe (250 people)", 50000, "Empty Allday",CheckInDate));
+
+        meetingRooms.add(new MeetingRoom("2. The World (100 people)",30000,"Empty Allday",CheckInDate));
+
+        meetingRooms.add(new MeetingRoom("3. The Mini World (50 people)", 20000,"Empty Allday",CheckInDate));
+
+        meetingRooms.add(new MeetingRoom("4. The Town (50 people)",20000,"Empty Allday",CheckInDate));
+        
+
+        
     }
+
     protected static List<MeetingRoom> getMeetingRooms(){
         return meetingRooms;
     }
+    
     @Override
     public void infoRoom() {
+
+        AvailableMeeting availM = new AvailableMeeting();
+        List<String> dateOfAll = availM.getDateOfAll();
+
+        String meetRoom1 = "Allday";
+        String meetRoom2 = "Allday";
+        String meetRoom3 = "Allday";
+        String meetRoom4 = "Allday";
+
+        int countDateOfAll = 0;
+        int roomMeeting = 0;
+        boolean foundDateOfAll = false;
+
+        for (String check : dateOfAll){
+            if (check.startsWith(CheckInDate) && check.endsWith("1")){
+                if(check.startsWith(CheckInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "1") && check.endsWith("1")){
+                    meetRoom1 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "1") && check.endsWith("1")){
+                    meetRoom1 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "1") && check.endsWith("1")){
+                    meetRoom1 = "Morning";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "1") && check.endsWith("1")){
+                    meetRoom1 = "Afternoon";
+                }
+            }
+            if (check.startsWith(CheckInDate) && check.endsWith("2")){
+                if(check.startsWith(CheckInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "2") && check.endsWith("2")){
+                    meetRoom2 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "2") && check.endsWith("2")){
+                    meetRoom2 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "2") && check.endsWith("2")){
+                    meetRoom2 = "Morning";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "2") && check.endsWith("2")){
+                    meetRoom2 = "Afternoon";
+                }
+            }
+            if (check.startsWith(CheckInDate) && check.endsWith("3")){
+                if(check.startsWith(CheckInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "3") && check.endsWith("3")){
+                    meetRoom3 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "3") && check.endsWith("3")){
+                    meetRoom3 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "3") && check.endsWith("3")){
+                    meetRoom3 = "Morning";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "3") && check.endsWith("3")){
+                    meetRoom3 = "Afternoon";
+                }
+            }
+            if (check.startsWith(CheckInDate) && check.endsWith("4")){
+                if(check.startsWith(CheckInDate + "/" + "0" + "/" + "0" + "/" + "1" + "/" + "4") && check.endsWith("4")){
+                    meetRoom4 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "1" + "/" + "0" + "/" + "4") && check.endsWith("4")){
+                    meetRoom4 = "Full";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "0" + "/" + "1" + "/" + "0" + "/" + "4") && check.endsWith("4")){
+                    meetRoom4 = "Morning";
+                }
+                else if(check.startsWith(CheckInDate + "/" + "1" + "/" + "0" + "/" + "0" + "/" + "4") && check.endsWith("4")){
+                    meetRoom4 = "Afternoon";
+                }
+            }
+            countDateOfAll++;
+        }
+
         List<MeetingRoom> rooms = MeetingRoom.getMeetingRooms();
         System.out.println("------------------------------------------------------------------------------");
         System.out.format("%-40s %-20s %-10s%n", "Room Type", "Price/Day (Baht)", "Room available");
         System.out.println("------------------------------------------------------------------------------");
+        int countRoomMeet = 1;
         for (MeetingRoom meetingRoom : rooms) {
-            System.out.format("%-40s %-20d %-10s%n", meetingRoom.getType(), meetingRoom.getPrice(), meetingRoom.getAvailable());
+            if(countRoomMeet==1){
+                System.out.format("%-40s %-20d %-10s%n", meetingRoom.getType(), meetingRoom.getPrice(), meetRoom1);
+            }
+            else if(countRoomMeet==2){
+                System.out.format("%-40s %-20d %-10s%n", meetingRoom.getType(), meetingRoom.getPrice(), meetRoom2);
+            }
+            else if(countRoomMeet==3){
+                System.out.format("%-40s %-20d %-10s%n", meetingRoom.getType(), meetingRoom.getPrice(), meetRoom3);
+            }
+            else if(countRoomMeet==4){
+                System.out.format("%-40s %-20d %-10s%n", meetingRoom.getType(), meetingRoom.getPrice(), meetRoom4);
+            }
+            countRoomMeet++; 
         }
         System.out.println("------------------------------------------------------------------------------");
     }
+    
     @Override
     public void selectBooking() {
         //เลือก type และ เวลา ที่จะจองห้องประชุม
