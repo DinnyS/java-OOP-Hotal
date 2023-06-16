@@ -151,7 +151,10 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
                 if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3")){
                     System.out.println("\n!!! Please select only the options available here !!!\n");
-                }
+                } 
+                else if (numCustomers >= 4 && numTypeStr.equals("1")) {
+                        System.out.println("\n!!! Sorry, Room type 1 is available for 1-3 customers.\n");
+                    }
 
                 else{
                     numType = Integer.parseInt(numTypeStr);
