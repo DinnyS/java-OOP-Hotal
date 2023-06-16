@@ -5,7 +5,7 @@ import java.util.List;
 
 public class AvailableHotel extends Bill {
 
-    private static List<String> allOfHotel = new ArrayList<>(); // arraylist วัน / เดือน / ปี / จำนวนห้องหลักสิบ / จำนวนห้องหลักหน่วย / ชนิดห้อง
+    private static List<String> allOfHotel = new ArrayList<>(); // arraylist 1 ตัวมี 5 ค่า "วัน / เดือน / ปี / จำนวนห้อง / ชนิดห้อง"
 
     public AvailableHotel(){}
 
@@ -23,11 +23,19 @@ public class AvailableHotel extends Bill {
 
             int count = 0;
             int roomHotel = 0;
+            boolean found = false;
 
             for (String check : allOfHotel) {
                 String checkRoom = allOfHotel.get(count);
                 String[] salat = checkRoom.split("/");
+                int room = Integer.parseInt(salat[4]);
 
+            }
+
+
+
+            if (allOfHotel.isEmpty()){
+                allOfHotel.add(checkInDate + "/" + "available" + "/" + type);
             }
 
     }

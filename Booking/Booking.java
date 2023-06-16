@@ -235,6 +235,22 @@ public class Booking {
         }
     }
 
+    public void startBookingHotel(int selectBooking){
+        checkIn();
+        checkOut(selectBooking);
+        Room room = new Room(selectBooking , getCheckInDate());
+        /*เริ่มการจองแบบจริงๆ โดยใช้ constructor
+        ส่งตัวเลือกการจอง ว่าจะเลือกจองห้องแบบไหน
+            1 == จองห้องพักโรงแรม
+            2 == จองห้องประชุม
+         */
+        service(selectBooking);
+        name();
+        phone();
+        bookingSummary(selectBooking);
+        
+    }
+
     public void startBooking(int selectBooking){
         checkIn();
         checkOut(selectBooking);
