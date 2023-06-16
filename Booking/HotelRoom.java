@@ -80,9 +80,15 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                         System.out.print("Enter number of room(s): ");
                         numRoomSTR = in.nextLine().trim();
                     }
+                    else if(number <= 0){
+                        System.out.println("Number of room(s) cannot exceed lower than 1. Please enter again.");
+                        System.out.print("Enter number of room(s): ");
+                        numRoomSTR = in.nextLine().trim();
+                    }
+                    else{}
                 }
 
-            } while (!(Pattern.matches("^\\d+$", numRoomSTR) && Integer.parseInt(numRoomSTR) <= 40));
+            } while (!(Pattern.matches("^\\d+$", numRoomSTR) && Integer.parseInt(numRoomSTR) <= 40  && Integer.parseInt(numRoomSTR) > 1));
 
             number = Integer.parseInt(numRoomSTR);
             numRoomSTR= String.valueOf(number);
@@ -111,7 +117,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
         //loop ถาม user ตามจำนวนห้องที่จองว่าแต่ละห้องมีผู้พักกี่คน และ จพเลือก type ไหน
         for (int i = 1; i <= getNumRoom(); i++) {
 
-            if (i == 0) {
+            if (i <= 0) {
                 i = 1;
                 System.out.println("\n!!! Please enter the information again !!!\n");
             }
@@ -165,7 +171,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 else{
                     numType = Integer.parseInt(numTypeStr);
                     setNumType(numType);
-                    Bill hotelBill = new Bill(hotelRooms.get(getNumType()-1).getPrice(),hotelRooms.get(getNumType()-1).getType());
+                    Bill hotelBill = new Bill(hotelRooms.get(getNumType()-1).getPrice(),hotelRooms.get(getNumType()-1).getType(),numType);
                     /*
                         ส่งค่าที่ user เลือก ไป constructor ของคลาส Bill
                         โดย hotelRooms.get(getNumType()-1).getPrice() คือ ราคาของห้องที่ user จองไว้

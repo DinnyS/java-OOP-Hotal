@@ -19,6 +19,7 @@ public class Bill {
     private static String[][] detailHotelService;
     private static double[] priceHotelService;
     private static String checkInDate;
+    private static int hotelRoomType;
 
     private List dateOfAll;
 
@@ -53,10 +54,12 @@ public class Bill {
         this.amountRoom = numRoom;
         this.hotelPrice = new double[numRoom];  //สร้าง Array เก็บ detail ของห้องที่ user กดจอง
         this.bookedHotel = new String[numRoom]; //สร้าง Array เก็บ ราคา ของห้องที่ user กดจอง
+
     }
-    public Bill(int price, String type){
+    public Bill(int price, String type , int roomType){
         // รับค่ามาจาก HotelRoom เพื่อเอามาคิดราคารวม
         while (i < amountRoom){
+            this.hotelRoomType = roomType;
             this.bookedHotel[i] = type; //เก็บ detail ของห้องที่ user กดจองไว้ใน array
             this.hotelPrice[i] = price;//เก็บราคาของห้องที่ user กดจองไว้ใน array
             break;
@@ -204,5 +207,9 @@ public class Bill {
     }
     public int getNumOfRoom(){
         return numRoom;
+    }
+
+    public int getHotelType(){
+        return hotelRoomType;
     }
 }

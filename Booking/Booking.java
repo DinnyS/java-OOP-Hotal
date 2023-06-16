@@ -5,6 +5,8 @@ import java.util.*;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
+import javax.sound.sampled.AudioFileFormat.Type;
+
 public class Booking {
     private int year;
     private int month;
@@ -235,7 +237,9 @@ public class Booking {
         }
     }
 
-    public void startBookingHotel(int selectBooking){
+    // -------------------- Hotel --------------------------------
+
+    public void startBookingHotel(int selectBooking){ 
         checkIn();
         checkOut(selectBooking);
         Room room = new Room(selectBooking , getCheckInDate());
@@ -244,12 +248,24 @@ public class Booking {
             1 == จองห้องพักโรงแรม
             2 == จองห้องประชุม
          */
+        Bill bils = new Bill();
+
+        AvailableHotel avaHotel = new AvailableHotel();
+        List<String> allOfHotel = avaHotel.getAllOfHotel();
+
+        int countDay = 0;
+        for(int i = 1; i<=getNumDay();i++){
+            countDay++;
+        AvailableHotel avaHotelservice = new AvailableHotel(checkInDate,getNumDay(),bils.getHotelType(),countDay);
+        }
         service(selectBooking);
         name();
         phone();
         bookingSummary(selectBooking);
-        
+    
     }
+
+ // -------------------- Meeting --------------------------------
 
     public void startBooking(int selectBooking){
         checkIn();
