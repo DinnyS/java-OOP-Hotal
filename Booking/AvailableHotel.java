@@ -9,14 +9,14 @@ public class AvailableHotel extends Bill {
 
     public AvailableHotel(){}
 
-    public AvailableHotel(int day, int month, int year, int available, int type, String checkInDate){
+    public AvailableHotel(String checkInDate, int available, int type){
         
-        String[] parts = checkInDate.split("/");
-            if (parts.length == 4) {
-                day = Integer.parseInt(parts[0]);
-                month = Integer.parseInt(parts[1]);
-                year = Integer.parseInt(parts[2]);
-                type = Integer.parseInt(parts[3]);
+        String[] partsCheckIn = checkInDate.split("/");
+            if (partsCheckIn.length == 3) {
+                int day = Integer.parseInt(partsCheckIn[0]);
+                int month = Integer.parseInt(partsCheckIn[1]);
+                int year = Integer.parseInt(partsCheckIn[2]);
+
                 System.out.println("");
                 System.out.println("Check In : " + day +"/"+ month +"/"+ year + "/" + type);
             }
