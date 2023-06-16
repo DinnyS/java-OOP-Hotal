@@ -85,6 +85,7 @@ public class Bill {
     }
     public double calHotelPrice(int numDay){
         //เอาราคาที่เก็บไว้ใน array มารวมกัน ใน totalPrice
+        int totalPrice = 0;
         for(int a = 0; a < hotelPrice.length; a++){
             totalPrice += hotelPrice[a];
         }
@@ -95,7 +96,7 @@ public class Bill {
     }
 
     public double calHotelService(){
-        totalPrice = 0;
+        int totalPrice = 0;
         for(int b = 0; b < priceHotelService.length; b++){
             if(priceHotelService[b] == 0){
                 break;
@@ -182,7 +183,7 @@ public class Bill {
 
             System.out.println("Other service price : " + calHotelService());
 
-            System.out.println("Total price : " + (calHotelPrice(bookedDay)+(calHotelService())) + " THB");
+            System.out.println("Total price : " + (calHotelPrice(bookedDay)+calHotelService()) + " THB");
 
             i = 0; //กำหนดให้ i = 0 เพื่อให้รีค่ากลับไปใหม่
         }

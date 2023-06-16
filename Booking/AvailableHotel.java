@@ -24,7 +24,16 @@ public class AvailableHotel extends Bill {
             int count = 0;
             int roomHotel = 0;
 
-            for (String check : allOfHotel) {}
+            for (String check : allOfHotel) {
+                
+
+
+
+
+
+
+
+            }
 
 
 
