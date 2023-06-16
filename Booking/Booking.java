@@ -161,8 +161,25 @@ public class Booking {
         if (selectBooking == 1){ //Hotel room
             System.out.println("----------- Check out -----------");
             do{ //ใช้ loop เพื่อเชคค่า input ที่เข้ามาว่าถูกต้องไหม ถ้าไม่ถูกให้วนถามใหม่
-                System.out.print("How long will you be staying ? (Night): ");
-                String strNumDay = in.nextLine().trim(); //ถามจำนวนวันที่จะเข้าพัก
+                System.out.println("! The hotel will not allow customers to book our rooms online for more than 30 nights.");
+                System.out.println("!! If you wish to stay more than 30 nights, please contact the hotel reception directly.");
+                System.out.print("How long will you be staying? (Night): ");
+                String strNumDay = in.nextLine().trim();
+                int numDay;
+
+                do {
+                    if (Pattern.matches("^\\d+$", strNumDay)) {
+                        numDay = Integer.parseInt(strNumDay);
+                        if (numDay > 30) {
+                            System.out.println("Number of nights cannot exceed 30! Please enter again.");
+                            System.out.print("How long will you be staying? (Night): ");
+                            strNumDay = in.nextLine().trim();
+                        }
+                    }
+                } while (!(Pattern.matches("^\\d+$", strNumDay) && Integer.parseInt(strNumDay) <= 30));
+
+                numDay = Integer.parseInt(strNumDay);
+                strNumDay = String.valueOf(numDay);
                 if (Pattern.matches("\\d+$",strNumDay)){ //input amount of day in String ✓✓
                     numDay = Integer.parseInt(strNumDay);
                     setCheckOutDate(numDay);
