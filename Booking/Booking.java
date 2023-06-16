@@ -76,6 +76,7 @@ public class Booking {
                 day = day - 30;
                 month += 1;
             }
+
         }
 
         checkOutDate = day + "/" + month + "/" + year;
@@ -130,6 +131,11 @@ public class Booking {
                 else if (month == 2 && day > 28) { // เดือน 2 ห้ามเกิน 28 วัน
                     System.out.println("Please input correct date !!");
                 }
+                else if (month < 1 || month > 12) { // ห้ามเกินเดือน12 และห้ามต่ำกว่า1
+                    System.out.println("Please input correct date !!");
+                }
+
+
 
                 else if ((year == currentDate.getYear() && year < 2026 ) && month == currentDate.getMonthValue() && day >= currentDate.getDayOfMonth()) {
                     check = true;
@@ -180,6 +186,8 @@ public class Booking {
 
                 numDay = Integer.parseInt(strNumDay);
                 strNumDay = String.valueOf(numDay);
+
+
                 if (Pattern.matches("\\d+$",strNumDay)){ //input amount of day in String ✓✓
                     numDay = Integer.parseInt(strNumDay);
                     setCheckOutDate(numDay);
