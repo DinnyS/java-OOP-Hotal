@@ -72,7 +72,7 @@ public class Bill {
         this.nameMeetingService = name;
         this.priceMeetingService = price;
     }
-    public Bill(String[][] detail, double[] price,String check){
+    public Bill(String[][] detail, double[] price){
         //รับค่ามาจาก hotel service
         this.detailHotelService = detail;
         this.priceHotelService = price;
