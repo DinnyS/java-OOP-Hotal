@@ -19,6 +19,7 @@ public class Bill {
     private static String[][] detailHotelService;
     private static double[] priceHotelService;
     private static String checkInDate;
+
     private List dateOfAll;
 
     //ที่ใช้เป็นตัวแปร static เพื่อให้ค่าที่เก็บไว้แปะอยู่กลับคลาส เวลาดึงค่าไปมาค่าจะได้ไม่เป็น default
@@ -121,13 +122,18 @@ public class Bill {
             System.out.println("Time : " + showTime);
             //แสดงว่า user ได้จองห้องในเวลาไหน
 
-            System.out.println("Other Service : " + nameMeetingService);
-            //แสดงว่า user ได้เลือก service package ไหน
+            if(people != 0) {
+                System.out.println("Other Service : " + nameMeetingService);
+                //แสดงว่า user ได้เลือก service package ไหน
+            }
 
             System.out.println("-----------------------------------------------------------------------------");
 
             System.out.println("Meeting room price : " + calPriceMeeting());
-            System.out.println("Other service price " + calMeetingService(people));
+
+            if(people != 0){
+                System.out.println("Other service price " + calMeetingService(people));
+            }
 
             System.out.println("Total price : " + (calPriceMeeting()+calMeetingService(people)) + " THB");
             //แสดงราคารวมของ bill นี้โดยดึงค่ามาจาก calMeetingPrice()
@@ -165,23 +171,27 @@ public class Bill {
 
             //แสดงว่า user ได้จองห้องไหนไปบ้าง แล้วจองไปกี่ห้อง
 
-            System.out.println("Other service :");
 
-            for (int a = 0; a < 10; a++){
-                if(priceHotelService[a] == 0){
-                    break;
+                System.out.println("Other service :");
+
+                for (int a = 0; a < 10; a++){
+                    if(priceHotelService[a] == 0){
+                        break;
+                    }
+                    else {
+                        System.out.println("   "+detailHotelService[a][0]+"  "+detailHotelService[a][1]);
+                    }
                 }
-                else {
-                    System.out.println("   "+detailHotelService[a][0]+"  "+detailHotelService[a][1]);
-                }
-            }
+
 
             System.out.println("-----------------------------------------------------------------------------");
 
             System.out.println("Hotel room price : " + calHotelPrice(bookedDay) + " THB");
             //แสดงราคารวมของ bill นี้โดยดึงค่ามาจาก calHotelPrice(int numDay)
 
-            System.out.println("Other service price : " + calHotelService());
+
+                System.out.println("Other service price : " + calHotelService());
+
 
             System.out.println("Total price : " + (calHotelPrice(bookedDay)+calHotelService()) + " THB");
 
