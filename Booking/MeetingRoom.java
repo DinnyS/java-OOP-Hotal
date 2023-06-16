@@ -119,7 +119,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
         }
 
         List<MeetingRoom> rooms = MeetingRoom.getMeetingRooms();
-        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("\u001B[36m------------------------------------------------------------------------------");
         System.out.format("%-40s %-20s %-10s%n", "Room Type", "Price/Day (Baht)", "Room available");
         System.out.println("------------------------------------------------------------------------------");
         int countRoomMeet = 1;
@@ -138,7 +138,7 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
             }
             countRoomMeet++; 
         }
-        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------\u001B[0m");
     }
     
     @Override

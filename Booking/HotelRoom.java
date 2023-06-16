@@ -27,13 +27,15 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     public HotelRoom(String type, int capacity, int price, int available) {
         super(type, capacity, price, available);
     }
-    private static List<HotelRoom> hotelRooms = new ArrayList<>();
+    protected static List<HotelRoom> hotelRooms = new ArrayList<>();
 
     static {
         hotelRooms.add(new HotelRoom("1. Basic Room", 3, 3500, 20));
         hotelRooms.add(new HotelRoom("2. Deluxe Room", 6, 5500, 15));
         hotelRooms.add(new HotelRoom("3. Super Deluxe Room", 8, 8000, 5));
     }
+
+
     protected static List<HotelRoom> getHotelRooms() {
         return hotelRooms;
     }
@@ -52,14 +54,14 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     @Override
     public void infoRoom() {
         List<HotelRoom> rooms = HotelRoom.getHotelRooms();
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("\u001B[33m-----------------------------------------------------------------------------");
         System.out.format("%-30s %-15s %-15s %-10s%n", "Room Type", "Capacity", "Price (Baht)", "Room available");
         System.out.println("-----------------------------------------------------------------------------");
         for (HotelRoom hotelRoom : rooms) {
             //แสดง detail ต่างๆ ของของให้ user ได้เลือก
             System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), hotelRoom.getAvailable());
         }
-        System.out.println("-----------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------\u001B[0m");
     }
 
     @Override
@@ -151,7 +153,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
                 if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3")){
                     System.out.println("\n!!! Please select only the options available here !!!\n");
-                } 
+                }
                 else if ((numCustomers >= 4 && numCustomers < 9) && numTypeStr.equals("1")) {
                     System.out.println("\n!!! Sorry, Room type 1 is available for 1-3 customers.\n");
                 }
