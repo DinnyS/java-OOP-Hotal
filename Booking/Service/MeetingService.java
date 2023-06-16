@@ -3,7 +3,6 @@ package Booking.Service;
 import Booking.Bill;
 import Booking.SelectBooking;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,8 +10,8 @@ import java.util.Scanner;
 public class MeetingService extends Service implements InfoService, SelectBooking {
     private static int time;
     private static int people;
-    public MeetingService(String order,String name, double price, String limit) {
-        super(order,name, price, limit);
+    public MeetingService(String order,String name, double price, String moreDetail) {
+        super(order,name, price, moreDetail);
     }
     public MeetingService(int time, String type){
         this.time = time;
@@ -24,11 +23,11 @@ public class MeetingService extends Service implements InfoService, SelectBookin
     private static List<MeetingService> meetingServices = new ArrayList<>();
 
     static {
-        meetingServices.add(new MeetingService("A.","2 coffee breaks + 1 lunch",800,"only full day"));
-        meetingServices.add(new MeetingService("B.","1 coffee break + 1 lunch",650,"only half day"));
-        meetingServices.add(new MeetingService("C.","3 coffee breaks",450,"all package"));
-        meetingServices.add(new MeetingService("D.","International buffet with Soft Drink",950,"all package"));
-        meetingServices.add(new MeetingService("E.","Seafood buffet with Soft Drink",1200,"all package"));
+        meetingServices.add(new MeetingService("A.","2 coffee breaks + 1 lunch",600,"only full day"));
+        meetingServices.add(new MeetingService("B.","1 coffee break + 1 lunch",450,"only half day"));
+        meetingServices.add(new MeetingService("C.","3 coffee breaks",250,"all package"));
+        meetingServices.add(new MeetingService("D.","International buffet with Soft Drink",750,"all package"));
+        meetingServices.add(new MeetingService("E.","Seafood buffet with Soft Drink",1000,"all package"));
     }
 
     protected static List<MeetingService> getMeetingService(){
@@ -37,8 +36,8 @@ public class MeetingService extends Service implements InfoService, SelectBookin
 
     @Override
     public void infoService() {
-        List<MeetingService> rooms = MeetingService.getMeetingService();
-        System.out.println("---------------------------------------------------------------");
+        List<MeetingService> services = MeetingService.getMeetingService();
+        System.out.println("\n---------------------------------------------------------------");
         System.out.format("%-40s %-20s\n", "Package", "Price/Person (Baht)");
         System.out.println("---------------------------------------------------------------");
 
@@ -74,7 +73,7 @@ public class MeetingService extends Service implements InfoService, SelectBookin
         Scanner scan = new Scanner(System.in);
 
         do{
-            System.out.println("Select type of package : ");
+            System.out.print("Select type of package [A-E]: ");
             String selectPackage = scan.nextLine().trim().toUpperCase();
 
             if (selectPackage.equals("A")){

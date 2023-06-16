@@ -365,11 +365,11 @@ public class Booking {
     }
 
     public void service(int selectBooking){
-        System.out.println("\nOther Service");
-        System.out.println("Press 'Y' for booking more service");
-        System.out.println("Press other for summarize order");
+        System.out.println(" ===== Other Service =====");
+        System.out.println("   Press 'Y' for booking more service");
+        System.out.println("   Press other for summarize order");
         System.out.println(" == Select == ");
-        System.out.print(" : ");
+        System.out.print("  : ");
         String selectService = in.nextLine().trim().toUpperCase();
 
         if(selectService.equals("Y")){
@@ -389,13 +389,5 @@ public class Booking {
         }
         Room roomBill = new Room(getNumDay(),selectBooking); //ส่งต่า numDay และ selectBooking ไปใช้ใน class Room
         System.out.println("------------------------------------------------------------------------------");
-        
     }
-
-
-
-
-
-
-
 }

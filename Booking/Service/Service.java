@@ -1,10 +1,12 @@
 package Booking.Service;
 
+import Booking.Service.HotelService.HotelService;
+
 public class Service {
     private String order;
     private String name;
     private double price;
-    private String limit;
+    private String moreDetail;
 
     public String getOrder(){
         return order;
@@ -30,39 +32,37 @@ public class Service {
         this.price = price;
     }
 
-    public String getLimit() {
-        return limit;
+    public String getMoreDetail() {
+        return moreDetail;
     }
 
-    public void setLimit(String limit) {
-        this.limit = limit;
+    public void setMoreDetail(String limit) {
+        this.moreDetail = limit;
     }
 
     public Service(){}
-    public Service(String order, String name, double price, String limit){
-        //ใช้กับ meeting room
+
+    public Service(String order, String name, double price, String moreDetail){
+        //constructor for meeting room
         this.order = order;
         this.name = name;
         this.price = price;
-        this.limit = limit;
+        this.moreDetail = moreDetail;
     }
 
-    public Service(String order, String name, double price){
-        //ใช้กับ hotel Room
-        this.order = order;
-        this.name = name;
-        this.price = price;
-    }
-
-    public Service(int selectBooking){
+     public Service(int selectBooking){
         if (selectBooking == 1){
-
+            HotelService hotelService = new HotelService(getOrder(),getName(),getPrice(),getMoreDetail());
+            hotelService.infoService();
+            hotelService.selectBooking();
         }
 
         else if (selectBooking == 2) {
-            MeetingService meetingService = new MeetingService(getOrder(),getName(),getPrice(),getLimit());
+            MeetingService meetingService = new MeetingService(getOrder(),getName(),getPrice(),getMoreDetail());
             meetingService.infoService();
             meetingService.selectBooking();
         }
     }
+
+
 }
