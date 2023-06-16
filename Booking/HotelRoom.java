@@ -69,8 +69,23 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             //ถาม user ว่าจะจองกี่ห้อง
             System.out.print("Enter number of room(s) : ");
             String numRoomSTR = in.nextLine().trim();
+            int number;
+            do {
+                if (Pattern.matches("^\\d+$", numRoomSTR)) {
+                    number = Integer.parseInt(numRoomSTR);
+                    if (number > 40) {
+                        System.out.println("Number of room(s) cannot exceed 40. Please enter again.");
+                        System.out.print("Enter number of room(s): ");
+                        numRoomSTR = in.nextLine().trim();
+                    }
+                }
 
-            if (Pattern.matches("\\d+$",numRoomSTR)){
+            } while (!(Pattern.matches("^\\d+$", numRoomSTR) && Integer.parseInt(numRoomSTR) <= 40));
+
+            number = Integer.parseInt(numRoomSTR);
+            numRoomSTR= String.valueOf(number);
+
+             if (Pattern.matches("\\d+$",numRoomSTR)){
                 numRoom = Integer.parseInt(numRoomSTR);
                 setNumRoom(numRoom);
 
@@ -136,7 +151,14 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
                 if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3")){
                     System.out.println("\n!!! Please select only the options available here !!!\n");
+                } 
+                else if ((numCustomers >= 4 && numCustomers < 9) && numTypeStr.equals("1")) {
+                    System.out.println("\n!!! Sorry, Room type 1 is available for 1-3 customers.\n");
                 }
+                else if ((numCustomers >= 7 && numCustomers <= 8) && numTypeStr.equals("2")) {
+                    System.out.println("\n!!! Sorry, Room type 2 is available for 4-6 customers.\n");
+                }
+
 
                 else{
                     numType = Integer.parseInt(numTypeStr);
