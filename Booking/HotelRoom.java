@@ -78,10 +78,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                         System.out.print("Enter number of room(s): ");
                         numRoomSTR = in.nextLine().trim();
                     }
-                } else {
-                    System.out.println("Invalid input. Please enter a valid number.");
                 }
-
 
             } while (!(Pattern.matches("^\\d+$", numRoomSTR) && Integer.parseInt(numRoomSTR) <= 40));
 
