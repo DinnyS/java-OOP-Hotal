@@ -372,6 +372,8 @@ public class Booking {
         System.out.print("  : ");
         String selectService = in.nextLine().trim().toUpperCase();
 
+        Bill checkService = new Bill(selectService);
+
         if(selectService.equals("Y")){
             Service service = new Service(selectBooking);
         }

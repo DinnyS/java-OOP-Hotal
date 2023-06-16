@@ -110,6 +110,6 @@ public class HotelService extends Service implements InfoService, SelectBooking 
             if(!con.equals("Y")){break;}
         }while (true);
 
-        Bill bill = new Bill(detailHotelService,priceHotelService);
+        Bill bill = new Bill(detailHotelService,priceHotelService,"check");
     }
 }

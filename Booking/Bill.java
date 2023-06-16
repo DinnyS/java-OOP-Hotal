@@ -18,12 +18,13 @@ public class Bill {
     private static double priceMeetingService;
     private static String[][] detailHotelService;
     private static double[] priceHotelService;
-    private static String checkInDate;
+    private String checkInDate;
 
     private List dateOfAll;
 
     //ที่ใช้เป็นตัวแปร static เพื่อให้ค่าที่เก็บไว้แปะอยู่กลับคลาส เวลาดึงค่าไปมาค่าจะได้ไม่เป็น default
     private double totalPrice = 0;
+    private static String checkService;
     public Bill(){}
     public Bill(int bookedDay){
         //รับค่ามาจากคลาส Room เพื่อเอามาคิดราคารวมของ hotel room
@@ -63,12 +64,15 @@ public class Bill {
         }
         i++;
     }
+    public Bill(String checkService){
+        this.checkService = checkService;
+    }
     public Bill(int people, String name, double price){
         this.people = people;
         this.nameMeetingService = name;
         this.priceMeetingService = price;
     }
-    public Bill(String[][] detail, double[] price){
+    public Bill(String[][] detail, double[] price,String check){
         //รับค่ามาจาก hotel service
         this.detailHotelService = detail;
         this.priceHotelService = price;
@@ -122,7 +126,7 @@ public class Bill {
             System.out.println("Time : " + showTime);
             //แสดงว่า user ได้จองห้องในเวลาไหน
 
-            if(people != 0) {
+            if(checkService.equals("Y")){
                 System.out.println("Other Service : " + nameMeetingService);
                 //แสดงว่า user ได้เลือก service package ไหน
             }
@@ -131,7 +135,7 @@ public class Bill {
 
             System.out.println("Meeting room price : " + calPriceMeeting());
 
-            if(people != 0){
+            if(checkService.equals("Y")){
                 System.out.println("Other service price " + calMeetingService(people));
             }
 
@@ -170,30 +174,27 @@ public class Bill {
             }
 
             //แสดงว่า user ได้จองห้องไหนไปบ้าง แล้วจองไปกี่ห้อง
-
-
-                System.out.println("Other service :");
+            if(checkService.equals("Y")){
+                 System.out.println("Other service :");
 
                 for (int a = 0; a < 10; a++){
-                    if(priceHotelService[a] == 0){
-                        break;
-                    }
-                    else {
-                        System.out.println("   "+detailHotelService[a][0]+"  "+detailHotelService[a][1]);
-                    }
+                    if(priceHotelService[a] == 0){break;}
+                    else {System.out.println("   "+detailHotelService[a][0]+"  "+detailHotelService[a][1]);}
                 }
-
+            }
 
             System.out.println("-----------------------------------------------------------------------------");
 
             System.out.println("Hotel room price : " + calHotelPrice(bookedDay) + " THB");
             //แสดงราคารวมของ bill นี้โดยดึงค่ามาจาก calHotelPrice(int numDay)
 
-
+            if(checkService.equals("Y")) {
                 System.out.println("Other service price : " + calHotelService());
-
-
-            System.out.println("Total price : " + (calHotelPrice(bookedDay)+calHotelService()) + " THB");
+                System.out.println("Total price : " + (calHotelPrice(bookedDay)+calHotelService()) + " THB");
+            }
+            else {
+                System.out.println("Total price : " + (calHotelPrice(bookedDay)) + " THB");
+            }
 
             i = 0; //กำหนดให้ i = 0 เพื่อให้รีค่ากลับไปใหม่
         }
