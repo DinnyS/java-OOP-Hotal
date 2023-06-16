@@ -25,21 +25,10 @@ public class AvailableHotel extends Bill {
             int roomHotel = 0;
 
             for (String check : allOfHotel) {
-                
-
-
-
-
-
-
+                String checkRoom = allOfHotel.get(count);
+                String[] salat = checkRoom.split("/");
 
             }
-
-
-
-
-
-
 
     }
 }
