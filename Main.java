@@ -88,7 +88,7 @@ public class Main {
                         System.out.println(" ===== Booking Hotel Booking.Room ===== ");
                         System.out.println();
 
-                        booking.startBooking(selectBooking); //เข้าหน้าการจอง
+                        booking.startBookingHotel(selectBooking); //เข้าหน้าการจอง
                     }
 
 
