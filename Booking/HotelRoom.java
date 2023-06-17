@@ -24,6 +24,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     public int getNumType() {
         return numType;
     }
+    public HotelRoom(){}
     public HotelRoom(String type, int capacity, int price, int available) {
         super(type, capacity, price, available);
     }
@@ -88,7 +89,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                     else{}
                 }
 
-            } while (!(Pattern.matches("^\\d+$", numRoomSTR) && Integer.parseInt(numRoomSTR) <= 40  && Integer.parseInt(numRoomSTR) > 1));
+            } while (!(Pattern.matches("^\\d+$", numRoomSTR) && Integer.parseInt(numRoomSTR) <= 40  && Integer.parseInt(numRoomSTR) > 0));
 
             number = Integer.parseInt(numRoomSTR);
             numRoomSTR= String.valueOf(number);

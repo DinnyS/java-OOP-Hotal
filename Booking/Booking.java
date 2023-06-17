@@ -249,14 +249,17 @@ public class Booking {
             2 == จองห้องประชุม
          */
         Bill bils = new Bill();
+        int amountRoom = bils.getamountRoom();
 
         AvailableHotel avaHotel = new AvailableHotel();
         List<String> allOfHotel = avaHotel.getAllOfHotel();
 
-        int countDay = 0;
-        for(int i = 1; i<=getNumDay();i++){
-            countDay++;
-        AvailableHotel avaHotelservice = new AvailableHotel(checkInDate,getNumDay(),bils.getHotelType(),countDay);
+        for(int countR = 1; countR<=amountRoom; countR++){
+            int countDay = 0;
+            for(int i = 0; i<=getNumDay()-1;i++){
+                new AvailableHotel(checkInDate,getNumDay(),bils.getHotelType(),countDay);
+                countDay++;
+            }
         }
         service(selectBooking);
         name();

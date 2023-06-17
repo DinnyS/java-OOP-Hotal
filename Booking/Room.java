@@ -9,6 +9,8 @@ public class Room {
     private int available;
     private static String availableMeet;
 
+    public Room(){}
+
     public Room(String type, int price, String availableMeet) {
         //ใช้ใน Meeting room
         this.type = type;

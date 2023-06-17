@@ -34,7 +34,7 @@ public class AvailableHotel extends Bill {
                     month += 1;
                 }
                 // เดือน 2 ที่มี 28 วัน
-                else if (month == 2 && day > 28) {
+                else if (month == 2 && day > 28 && year %4 != 0) {
                         day = day - 28;
                         month += 1;
                 }
@@ -53,62 +53,94 @@ public class AvailableHotel extends Bill {
                 System.out.println("Check In : " + day +"/"+ month +"/"+ year + "/" + type);
             
 
-            int count = 0;
-            int roomHotel = 0;
+            int count = 0; // ตัวนับว่าตอนนี้ถึงตัวไหนของ List
             boolean found = false;
 
-            for (String check : allOfHotel) {
-                String checkRoom = allOfHotel.get(count);
-                String[] salat = checkRoom.split("/");
-                int room = Integer.parseInt(salat[4]);
+            for (String check : allOfHotel) { // เช็คค่าทุกตัวที่มีใน allOfHotel ทั้งหมด
+
+                String checkRoom = allOfHotel.get(count); //รับค่าข้อมูลตัวที่กำลัง check
+                String[] salat = checkRoom.split("/"); // ตัวแบ่ง part ของข้อมูล
+                int activeRoom = Integer.parseInt(salat[3]); // check จำนวนห้องที่ว่าง
 
                  if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("1")){
-                    found = true;
+                    if(activeRoom > 0){
+                        allOfHotel.set(count,(day+"/"+month+"/"+year) + "/" + (activeRoom-1) + "/" + "1");
+                        found = true;
+                        break;
+                    }
+                    else{
+                        System.out.println(day+"/"+month+"/"+year + " : now is Full");
+                        found = true;
+                        break;
+                    }
                  }
                  else if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("2")){
-                    found = true;
+                    if(activeRoom > 0){
+                        allOfHotel.set(count,(day+"/"+month+"/"+year) + "/" + (activeRoom-1) + "/" + "2");
+                        found = true;
+                        break;
+                    }
+                    else{
+                        System.out.println(day+"/"+month+"/"+year + " : now is Full");
+                        found = true;
+                        break;
+                    }
                  }
                  else if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("3")){
-                    found = true;
+                    if(activeRoom > 0){
+                        allOfHotel.set(count,(day+"/"+month+"/"+year) + "/" + (activeRoom-1) + "/" + "3");
+                        found = true;
+                        break;
+                    }
+                    else{
+                        System.out.println(day+"/"+month+"/"+year + " : now is Full");
+                        found = true;
+                        break;
+                    }
                  }
+                
 
+                 count++;
             }
 
 
             if(found == false && numDayS > 0 ){ // ถ้าไม่มีค่าใน List แต่ List ไม่ได้ว่าง
                 if(type == 1){
-                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + "1");
+                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (20-1) + "/" + "1"); // ห้อง 1
                 }
                 else if(type == 2){
-                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + "2");
+                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (15-1) + "/" + "2"); // ห้อง 2
                 }
                 else if(type == 3){
-                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + "3");
+                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (5-1) + "/" + "3"); // ห้อง 3
                 }
-                else{
+                /*else{
                     allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + type);
-                }
+                }*/
             }
 
 
             if (allOfHotel.isEmpty()){ // ถ้า List ไม่มีค่าอะไรด้านในเลย
                 if(type == 1){
-                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + "1");
+                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (20-1) + "/" + "1"); // ห้อง 1
                 }
                 else if(type == 2){
-                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + "2");
+                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (15-1) + "/" + "2"); // ห้อง 2
                 }
                 else if(type == 3){
-                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + "3");
+                    allOfHotel.add((day+"/"+month+"/"+year) + "/" + (5-1) + "/" + "3"); // ห้อง 3
                 }
-                else{
+                /*else{
                     allOfHotel.add((day+"/"+month+"/"+year) + "/" + (40-1) + "/" + type);
-                }
+                }*/
             }
         }
 
+        /*for(int i = 0; i<allOfHotel.size(); i++){
+            System.out.println(allOfHotel);
+        }*/
+        System.out.println(allOfHotel);
     }
-
 
 
 

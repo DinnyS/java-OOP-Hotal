@@ -22,7 +22,6 @@ public class Bill {
     private static String checkInDate;
     private static int hotelRoomType;
 
-    private String checkInDate;
 
     private List dateOfAll;
 
@@ -215,5 +214,9 @@ public class Bill {
 
     public int getHotelType(){
         return hotelRoomType;
+    }
+
+    public int getamountRoom(){
+        return amountRoom;
     }
 }
