@@ -55,8 +55,6 @@ public class MeetingRoom extends Room implements InfoRoom , SelectBooking{
         String meetRoom4 = "Allday";
 
         int countDateOfAll = 0;
-        int roomMeeting = 0;
-        boolean foundDateOfAll = false;
 
         for (String check : dateOfAll){
             if (check.startsWith(CheckInDate) && check.endsWith("1")){

@@ -7,13 +7,14 @@ import java.util.List;
 public class AvailableHotel extends Bill {
 
     int availableRoom = 40;
+    private static boolean hotelFull = false;
 
     private static List<String> allOfHotel = new ArrayList<>(); // arraylist 1 ตัวมี 5 ค่า "วัน / เดือน / ปี / จำนวนห้อง / ชนิดห้อง"
 
     public AvailableHotel(){}
 
-                            // วัน/เดือน/ปี   /  จำนวนวันที่นอน / ชนิดห้อง
-    public AvailableHotel(String checkInDate, int numDayS, int type , int countDay){
+                            // วัน/เดือน/ปี   /  จำนวนวันที่นอน / ชนิดห้อง / นับวันที่อยู่
+    public AvailableHotel(String checkInDate, int numDayS, int type , int countDay){ // จะเป็นการ add or set ทีละวัน
         
         String[] partsCheckIn = checkInDate.split("/");
             if (partsCheckIn.length == 3) {
@@ -62,7 +63,7 @@ public class AvailableHotel extends Bill {
                 String[] salat = checkRoom.split("/"); // ตัวแบ่ง part ของข้อมูล
                 int activeRoom = Integer.parseInt(salat[3]); // check จำนวนห้องที่ว่าง
 
-                 if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("1")){
+                 if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("1") && type == 1){
                     if(activeRoom > 0){
                         allOfHotel.set(count,(day+"/"+month+"/"+year) + "/" + (activeRoom-1) + "/" + "1");
                         found = true;
@@ -71,10 +72,11 @@ public class AvailableHotel extends Bill {
                     else{
                         System.out.println(day+"/"+month+"/"+year + " : now is Full");
                         found = true;
+                        hotelFull = true;
                         break;
                     }
                  }
-                 else if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("2")){
+                 else if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("2") && type == 2){
                     if(activeRoom > 0){
                         allOfHotel.set(count,(day+"/"+month+"/"+year) + "/" + (activeRoom-1) + "/" + "2");
                         found = true;
@@ -83,10 +85,11 @@ public class AvailableHotel extends Bill {
                     else{
                         System.out.println(day+"/"+month+"/"+year + " : now is Full");
                         found = true;
+                        hotelFull = true;
                         break;
                     }
                  }
-                 else if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("3")){
+                 else if (check.startsWith(day+"/"+month+"/"+year) && check.endsWith("3") && type == 3){
                     if(activeRoom > 0){
                         allOfHotel.set(count,(day+"/"+month+"/"+year) + "/" + (activeRoom-1) + "/" + "3");
                         found = true;
@@ -95,6 +98,7 @@ public class AvailableHotel extends Bill {
                     else{
                         System.out.println(day+"/"+month+"/"+year + " : now is Full");
                         found = true;
+                        hotelFull = true;
                         break;
                     }
                  }
@@ -104,7 +108,7 @@ public class AvailableHotel extends Bill {
             }
 
 
-            if(found == false && numDayS > 0 ){ // ถ้าไม่มีค่าใน List แต่ List ไม่ได้ว่าง
+            if(found == false  /* && numDayS > 0/* */ && count == allOfHotel.size()){ // ถ้าไม่มีค่าใน List แต่ List ไม่ได้ว่าง
                 if(type == 1){
                     allOfHotel.add((day+"/"+month+"/"+year) + "/" + (20-1) + "/" + "1"); // ห้อง 1
                 }
@@ -146,5 +150,9 @@ public class AvailableHotel extends Bill {
 
     public List getAllOfHotel(){
         return allOfHotel;
+    }
+
+    public boolean getHotelFull(){
+        return hotelFull;
     }
 }

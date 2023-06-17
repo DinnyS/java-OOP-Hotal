@@ -1,4 +1,5 @@
 package Booking;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -6,6 +7,22 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     private int numRoom;
     private int numCustomers;
     private int numType;
+    private static String CheckInDate;
+    private static int[] selectHRoom = new int[31];
+    private static int countRoomH = 0;
+
+    public int getCountRoomH(){ // ส่งค่า countRoomH ออก
+        return countRoomH;
+    }
+
+    public void setSelectHRoom(int numType , int countOfR){ // set ค่าของ array โดยที่ แทนค่าด้วย numType ตำแหน่ง countOfR
+        this.selectHRoom[countOfR] = numType;
+    }
+
+    public int[] getSelectHRoom(){ // ส่ง selectHRoom ออก
+        return selectHRoom;
+    }
+
     public void setNumRoom(int numRoom) {
         this.numRoom = numRoom;
     }
@@ -25,15 +42,16 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
         return numType;
     }
     public HotelRoom(){}
-    public HotelRoom(String type, int capacity, int price, int available) {
+    public HotelRoom(String type, int capacity, int price, int available,String CheckInDate) {
         super(type, capacity, price, available);
+        this.CheckInDate = CheckInDate;
     }
     protected static List<HotelRoom> hotelRooms = new ArrayList<>();
 
     static {
-        hotelRooms.add(new HotelRoom("1. Basic Room", 3, 3500, 20));
-        hotelRooms.add(new HotelRoom("2. Deluxe Room", 6, 5500, 15));
-        hotelRooms.add(new HotelRoom("3. Super Deluxe Room", 8, 8000, 5));
+        hotelRooms.add(new HotelRoom("1. Basic Room", 3, 3500, 20 , CheckInDate));
+        hotelRooms.add(new HotelRoom("2. Deluxe Room", 6, 5500, 15 , CheckInDate));
+        hotelRooms.add(new HotelRoom("3. Super Deluxe Room", 8, 8000, 5 , CheckInDate));
     }
 
 
@@ -54,19 +72,75 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
     @Override
     public void infoRoom() {
+
+        //String[] availableOfHotelR = new String[3];
+        String availableOfHotelR1 = "20";
+        String availableOfHotelR2 = "15";
+        String availableOfHotelR3 = "5";
+
+        int nubRoom = 1;
+        AvailableHotel avHotel = new AvailableHotel();
+        List<String> allOfHotel= avHotel.getAllOfHotel();
+        int countNaja = 0;
+
+        for (String check : allOfHotel){ //check ข้อมูลที่มีใน list
+
+            String checkRoom = allOfHotel.get(countNaja); //รับค่าข้อมูลตัวที่กำลัง check
+            String[] salat = checkRoom.split("/"); // ตัวแบ่ง part ของข้อมูล
+            int activeRoom = Integer.parseInt(salat[3]); // check จำนวนห้องที่ว่าง
+
+
+            
+            if(check.startsWith(CheckInDate) && check.endsWith("1")){ // Check ห้องแรก
+                if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
+                    availableOfHotelR1 = Integer.toString(activeRoom); // แปลงค่าจาก int เป็น String
+                }
+                else{ // ถ้าไม่ว่าง
+                    availableOfHotelR1 = "Full"; // set ห้องเป็นเต็ม
+                }
+            }
+            else if(check.startsWith(CheckInDate) && check.endsWith("2")){ // Check ห้อง 2
+                if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
+                    availableOfHotelR2 = Integer.toString(activeRoom);
+                }
+                else{ // ถ้าไม่ว่าง
+                    availableOfHotelR2 = "Full"; // set ห้องเป็นเต็ม
+                }
+            }
+            else if(check.startsWith(CheckInDate) && check.endsWith("3")){ // Check ห้อง 3
+                if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
+                    availableOfHotelR3 = Integer.toString(activeRoom);
+                }
+                else{ // ถ้าไม่ว่าง
+                    availableOfHotelR3 = "Full"; // set ห้องเป็นเต็ม
+                }
+            }
+            countNaja++;
+        }
+
         List<HotelRoom> rooms = HotelRoom.getHotelRooms();
         System.out.println("\u001B[33m-----------------------------------------------------------------------------");
         System.out.format("%-30s %-15s %-15s %-10s%n", "Room Type", "Capacity", "Price (Baht)", "Room available");
         System.out.println("-----------------------------------------------------------------------------");
         for (HotelRoom hotelRoom : rooms) {
             //แสดง detail ต่างๆ ของของให้ user ได้เลือก
-            System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), hotelRoom.getAvailable());
+            if(nubRoom == 1){
+                System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR1);
+            }
+            else if(nubRoom == 2){
+                System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR2);
+            }
+            else if(nubRoom == 3){
+                System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR3);
+            }
+            nubRoom++;
         }
         System.out.println("-----------------------------------------------------------------------------\u001B[0m");
     }
 
     @Override
     public void selectBooking() {
+        int countOfR = 0;
         do{
             //input number of room in String ✓✓
             //ถาม user ว่าจะจองกี่ห้อง
@@ -172,6 +246,9 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 else{
                     numType = Integer.parseInt(numTypeStr);
                     setNumType(numType);
+                    setSelectHRoom(numType , countOfR);
+                    countRoomH++;
+                    countOfR++;
                     Bill hotelBill = new Bill(hotelRooms.get(getNumType()-1).getPrice(),hotelRooms.get(getNumType()-1).getType(),numType);
                     /*
                         ส่งค่าที่ user เลือก ไป constructor ของคลาส Bill

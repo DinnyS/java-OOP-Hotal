@@ -51,7 +51,7 @@ public class Room {
     Room(int selectBooking , String CheckInDate){
 
         if (selectBooking == 1){
-            HotelRoom hotelRoom = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable());
+            HotelRoom hotelRoom = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable(),CheckInDate);
             hotelRoom.infoRoom();
             hotelRoom.selectBooking();
 

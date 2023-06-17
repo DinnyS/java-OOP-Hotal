@@ -217,6 +217,6 @@ public class Bill {
     }
 
     public int getamountRoom(){
-        return amountRoom;
+        return hotelRoomType;
     }
 }
