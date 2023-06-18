@@ -2,6 +2,7 @@ package Booking;
 import java.lang.reflect.Array;
 import java.util.*;
 import java.util.regex.Pattern;
+import com.sun.tools.javac.Main;
 
 public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     private int numRoom;
@@ -123,8 +124,9 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             }
             count++;
         }
-        /*System.out.print("\u001B[31m");
-        System.out.println("   4. Exit the booking...  ");*/
+        System.out.print("\u001B[31m");
+        System.out.println("   4. Exit This Program...  ");
+        //System.out.println("   4. Exit the booking...  ");
         System.out.print("\u001B[0m");
     }
 
@@ -302,9 +304,9 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
 
                 else{
-                    
                     numType = Integer.parseInt(numTypeStr);
                     if(numType == 4){
+                        System.exit(0);
                         break;
                     }
                   
