@@ -266,6 +266,7 @@ public class Booking {
                     countRder++;
                 }
 
+
                 if(avaHotel.getHotelFull() == true){
                     /*avaHotel.ResetAllOfHotel(restdata);
                     System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
@@ -277,8 +278,9 @@ public class Booking {
         }
             if(avaHotel.getHotelFull() == true){
                 avaHotel.ResetAllOfHotel(restdata);
-                avaHotel.setHotelFull(refullhotel);
+                //avaHotel.setHotelFull(refullhotel);
                 showBillNaja = false;
+                bookingSummary(selectBooking);
                 System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
                 System.out.println("------------------------------------------------------------------------------");
                 System.out.println("Please input All data Again...");
