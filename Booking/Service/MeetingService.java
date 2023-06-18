@@ -23,9 +23,9 @@ public class MeetingService extends Service implements InfoService, SelectBookin
     private static List<MeetingService> meetingServices = new ArrayList<>();
 
     static {
-        meetingServices.add(new MeetingService("A.","2 coffee breaks + 1 lunch",600,"only full day"));
-        meetingServices.add(new MeetingService("B.","1 coffee break + 1 lunch",450,"only half day"));
-        meetingServices.add(new MeetingService("C.","3 coffee breaks",250,"all package"));
+        meetingServices.add(new MeetingService("A.","2 coffee breaks + 1 lunch",500,"only full day"));
+        meetingServices.add(new MeetingService("B.","1 coffee break + 1 lunch",350,"only half day"));
+        meetingServices.add(new MeetingService("C.","3 coffee breaks",200,"all package"));
         meetingServices.add(new MeetingService("D.","International buffet with Soft Drink",750,"all package"));
         meetingServices.add(new MeetingService("E.","Seafood buffet with Soft Drink",1000,"all package"));
     }
@@ -37,7 +37,7 @@ public class MeetingService extends Service implements InfoService, SelectBookin
     @Override
     public void infoService() {
         List<MeetingService> services = MeetingService.getMeetingService();
-        System.out.println("\n---------------------------------------------------------------");
+        System.out.println("\n\u001B[34m---------------------------------------------------------------");
         System.out.format("%-40s %-20s\n", "Package", "Price/Person (Baht)");
         System.out.println("---------------------------------------------------------------");
 
@@ -62,9 +62,9 @@ public class MeetingService extends Service implements InfoService, SelectBookin
             System.out.format("%-2s %-40s %-10s\n",
                     meetingServices.get(4).getOrder(), meetingServices.get(4).getName(), meetingServices.get(4).getPrice());
         }
-
-        System.out.println("The number of people is based on the maximum capacity of the room.");
         System.out.println("---------------------------------------------------------------");
+        System.out.println("The number of people is based on the maximum capacity of the room.");
+        System.out.println("---------------------------------------------------------------\u001B[34m");
     }
 
     @Override
@@ -97,8 +97,9 @@ public class MeetingService extends Service implements InfoService, SelectBookin
                 break;
             }
             else{
-                System.out.println("\n!!! Please select only the options available here !!!\n");
+                System.out.println("\u001B[31m!!! Please select only the options available here !!!\u001B[0m");
             }
         }while (true);
+        System.out.println();
     }
 }

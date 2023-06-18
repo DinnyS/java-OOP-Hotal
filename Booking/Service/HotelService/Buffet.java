@@ -14,15 +14,21 @@ public class Buffet extends HotelService{
 
     public void receiveValue(){
         Scanner sc = new Scanner(System.in);
+        System.out.println("");
         do{
             System.out.print("Enter amount of customer : ");
             String peopleSTR = sc.nextLine().trim();
             if (Pattern.matches("\\d+$",peopleSTR)){
                 people = Integer.parseInt(peopleSTR);
-                break;
+                if(people < 1){
+                    System.out.println("\u001B[31m!!!must be booked at least 1 hour!!!\u001B[0m");
+                }
+                else {
+                    break;
+                }
             }
             else{
-                System.out.println("\n !!!Please enter only integer!!! \n");
+                System.out.println("\u001B[31m!!!Please enter only integer!!!\u001B[0m");
             }
         }while (true);
 

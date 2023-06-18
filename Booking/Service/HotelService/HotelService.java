@@ -21,7 +21,7 @@ public class HotelService extends Service implements InfoService, SelectBooking 
     private static List<HotelService> hotelServices = new ArrayList<>();
 
     static {
-        PickUp pickUp = new PickUp("A","Car pick-up",600,"per day");
+        PickUp pickUp = new PickUp("A","Car pick-up",350,"per round");
         Buffet buffet = new Buffet("B","Premium buffet with Soft Drink",1200,"per person");
         ThaiMassage thaiMassage = new ThaiMassage("C","Thai massage",400,"per hour");
         FootMassage footMassage = new FootMassage("D","Foot massage",400,"per hour");
@@ -39,13 +39,13 @@ public class HotelService extends Service implements InfoService, SelectBooking 
     @Override
     public void infoService() {
         List<HotelService> services = HotelService.getHotelService();
-        System.out.println("------------------------------------------------------------------------------");
-        System.out.format("%-2s %-40s %-10s\n","","Package","Price (THB)");
+        System.out.println("\u001B[35m------------------------------------------------------------------------------");
+        System.out.format("%-2s %-50s %-10s\n","","Package","Price (THB)");
         System.out.println("------------------------------------------------------------------------------");
         for (HotelService hotelService : services) {
             System.out.format("%-2s %-40s %-10s %-10s\n",hotelService.getOrder(),hotelService.getName(),hotelService.getPrice(),hotelService.getMoreDetail());
         }
-        System.out.println("------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------\u001B[0m");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class HotelService extends Service implements InfoService, SelectBooking 
         priceHotelService = new double[5];
 
         do{
-            System.out.print("Select type of package [A-E]: ");
+            System.out.print("Select type of package [A-D]: ");
             String selectPackage = scan.nextLine().trim().toUpperCase();
 
             if(selectPackage.equals("A")){
@@ -96,11 +96,11 @@ public class HotelService extends Service implements InfoService, SelectBooking 
             }
 
             else {
-                System.out.println("\n!!! Please select only the options available here !!!\n");
+                System.out.println("\u001B[31m!!! Please select only the options available here !!!\u001B[0m");
             }
 
             if(count == 5){
-                System.out.println("\nA order is full\n");
+                System.out.println("\u001B[31mA order is full\u001B[0m");
                 break;
             }
 
@@ -111,5 +111,6 @@ public class HotelService extends Service implements InfoService, SelectBooking 
         }while (true);
 
         Bill bill = new Bill(detailHotelService,priceHotelService);
+        System.out.println();
     }
 }

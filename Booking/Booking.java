@@ -179,26 +179,19 @@ public class Booking {
                 String strNumDay = in.nextLine().trim();
                 int numDay;
 
-                do {
-                    if (Pattern.matches("^\\d+$", strNumDay)) {
-                        numDay = Integer.parseInt(strNumDay);
-                        if (numDay > 30) {
-                            System.out.println("Number of nights cannot exceed 30! Please enter again.");
-                            System.out.print("How long will you be staying? (Night): ");
-                            strNumDay = in.nextLine().trim();
-                        }
-                    }
-                } while (!(Pattern.matches("^\\d+$", strNumDay) && (Integer.parseInt(strNumDay) <= 30)));
-
-                numDay = Integer.parseInt(strNumDay);
-                strNumDay = String.valueOf(numDay);
-
-
                 if (Pattern.matches("\\d+$",strNumDay)){ //input amount of day in String ✓✓
                     numDay = Integer.parseInt(strNumDay);
-                    setCheckOutDate(numDay);
-                    setNumDay(numDay);
-                    break;
+                    if(numDay > 30){
+                        System.out.println("Number of nights cannot exceed 30! Please enter again.");
+                    }
+                    else if(numDay < 1){
+                        System.out.println("Number of nights cannot late than 1! Please enter again.");
+                    }
+                    else{
+                        setCheckOutDate(numDay);
+                        setNumDay(numDay);
+                        break;
+                    }
                 }
                 else{
                     System.out.println("\n !!!Please enter only integer!!! \n");
