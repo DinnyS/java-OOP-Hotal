@@ -1,12 +1,11 @@
 package Booking.Service.HotelService;
 
-import Booking.Booking;
-
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class PickUp extends HotelService{
-    private static int day;
+    private int round;
+    private static String detail;
     private double totalPrice;
     public PickUp(){}
     public PickUp(String order, String name, double price, String moreDetail) {
@@ -15,16 +14,16 @@ public class PickUp extends HotelService{
     public void receiveValue(){
         Scanner sc = new Scanner(System.in);
         do{
-            Booking booking = new Booking();
-            System.out.print("Enter amount of day : ");
-            String daySTR = sc.nextLine().trim();
-            if (Pattern.matches("\\d+$",daySTR)){
-                day = Integer.parseInt(daySTR);
-                if(day < 1){
-                    System.out.println("\u001B[31m!!!must be booked at least 1 hour!!!\u001B[0m");
-                }
-                else if(day > (booking.getNumDay()+1)){
-                    System.out.println("\u001B[31m!!!You cannot book more than the number of days you stay!!!\u001B[0m");
+            System.out.println("1. Pick up customers from the airport to the hotel");
+            System.out.println("2. Pick up customers from the hotel to the airport");
+            System.out.println("3. Pick up and drop off customers between the airport and the hotel");
+            System.out.println(" == Select == ");
+            System.out.print("  : ");
+            String roundSTR = sc.nextLine().trim();
+            if (Pattern.matches("\\d+$",roundSTR)){
+                round = Integer.parseInt(roundSTR);
+                if(round < 1 || round > 3){
+                    System.out.println("\u001B[31m!!!must be booked at least 1 day!!!\u001B[0m");
                 }
                 else {
                     break;
@@ -38,10 +37,24 @@ public class PickUp extends HotelService{
         calPrice();
     }
     public double calPrice(){
-        totalPrice = 600*day;
+        if(round != 3){
+            totalPrice = 350;
+        }
+        else{
+            totalPrice = 700;
+        }
         return totalPrice;
     }
     public String showDetail(){
-        return day+" day(s)";
+        if(round == 1){
+            detail = "Pick up customers from the airport to the hotel";
+        }
+        else if(round == 2){
+            detail = "Pick up customers from the hotel to the airport";
+        }
+        else{
+            detail = "Pick up and drop off customers between the airport and the hotel";
+        }
+        return detail;
     }
 }

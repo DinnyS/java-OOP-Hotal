@@ -37,7 +37,7 @@ public class MeetingService extends Service implements InfoService, SelectBookin
     @Override
     public void infoService() {
         List<MeetingService> services = MeetingService.getMeetingService();
-        System.out.println("\n---------------------------------------------------------------");
+        System.out.println("\n\u001B[34m---------------------------------------------------------------");
         System.out.format("%-40s %-20s\n", "Package", "Price/Person (Baht)");
         System.out.println("---------------------------------------------------------------");
 
@@ -64,7 +64,7 @@ public class MeetingService extends Service implements InfoService, SelectBookin
         }
         System.out.println("---------------------------------------------------------------");
         System.out.println("The number of people is based on the maximum capacity of the room.");
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------\u001B[34m");
     }
 
     @Override
