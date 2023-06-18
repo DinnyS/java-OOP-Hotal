@@ -56,7 +56,7 @@ public class HotelService extends Service implements InfoService, SelectBooking 
         priceHotelService = new double[5];
 
         do{
-            System.out.print("Select type of package [A-E]: ");
+            System.out.print("Select type of package [A-D]: ");
             String selectPackage = scan.nextLine().trim().toUpperCase();
 
             if(selectPackage.equals("A")){
@@ -111,5 +111,6 @@ public class HotelService extends Service implements InfoService, SelectBooking 
         }while (true);
 
         Bill bill = new Bill(detailHotelService,priceHotelService);
+        System.out.println();
     }
 }

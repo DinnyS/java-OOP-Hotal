@@ -15,15 +15,24 @@ public class ThaiMassage extends HotelService {
     }
     public void receiveValue(){
         Scanner sc = new Scanner(System.in);
+        System.out.println("This package can be booked up to 5 hours.");
         do{
-            System.out.print("How long a hour : ");
+            System.out.print("Enter the number of hours you want : ");
             String hourSTR = sc.nextLine().trim();
             if (Pattern.matches("\\d+$",hourSTR)){
                 hour = Integer.parseInt(hourSTR);
-                break;
+                if(hour < 1){
+                    System.out.println("\u001B[31m!!!must be booked at least 1 hour!!!\u001B[0m");
+                }
+                else if(hour > 5){
+                    System.out.println("\u001B[31m!!!This package can be booked up to 5 hours.!!!\u001B[0m");
+                }
+                else{
+                    break;
+                }
             }
             else{
-                System.out.println("\n !!!Please enter only integer!!! \n");
+                System.out.println("\u001B[31m!!!Please enter only integer!!!\u001B[0m");
             }
         }while (true);
 
