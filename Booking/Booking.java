@@ -168,8 +168,10 @@ public class Booking {
             System.out.println("");
             System.out.println("----------- Check out -------------------------------------------------------");
             do{ //ใช้ loop เพื่อเชคค่า input ที่เข้ามาว่าถูกต้องไหม ถ้าไม่ถูกให้วนถามใหม่
-                System.out.println("! The hotel will not allow customers to book our rooms online for more than 30 nights.");
-                System.out.println("!! If you wish to stay more than 30 nights, please contact the hotel reception directly.");
+                System.out.print("\u001B[31m");
+                System.out.println("- The hotel will not allow customers to book our rooms online for more than 30 nights.");
+                System.out.println("- If you wish to stay more than 30 nights, please contact the hotel reception directly.");
+                System.out.print("\u001B[0m");
                 System.out.println("-----------------------------------------------------------------------------");
                 System.out.print("How long will you be staying? (Night): ");
                 String strNumDay = in.nextLine().trim();
