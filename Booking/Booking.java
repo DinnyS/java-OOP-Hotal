@@ -17,6 +17,8 @@ public class Booking {
     private String name;
     private String phone;
 
+    private static List<String> restdata = new ArrayList<>();
+
     LocalDate currentDate = LocalDate.now();
     public int getNumDay() {
         return numDay;
@@ -268,12 +270,20 @@ public class Booking {
                 }
 
                 if(avaHotel.getHotelFull() == true){
+                    /*avaHotel.ResetAllOfHotel(restdata);
                     System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
                     System.out.println("------------------------------------------------------------------------------");
+                    System.out.println("Please input All data Again...");*/
                     break;
-                }
+
             }
+        }
             if(avaHotel.getHotelFull() == true){
+                avaHotel.ResetAllOfHotel(restdata);
+                System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
+                System.out.println("------------------------------------------------------------------------------");
+                System.out.println("Please input All data Again...");
+                avaHotel.setHotelFull();
                 break;
             }
 
@@ -289,7 +299,16 @@ public class Booking {
 
             countDay++;
         }
+        if(avaHotel.getHotelFull() == false){
+            restdata.clear();
+            restdata = new ArrayList<>(avaHotel.getAllOfHotel());
+            /*Collections.copy(restdata, avaHotel.getAllOfHotel());
+            Collections.reverse(restdata);*/
+
+
+        }
         
+        //System.out.println(restdata);
     
     }
 

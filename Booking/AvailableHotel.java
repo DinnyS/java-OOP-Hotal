@@ -51,8 +51,8 @@ public class AvailableHotel extends Bill {
                 }
                 
 
-                System.out.println("");
-                System.out.println("Check In : " + day +"/"+ month +"/"+ year + "/" + type);
+                //System.out.println("");
+                //System.out.println("Check In : " + day +"/"+ month +"/"+ year + "/" + type);
             
 
             int count = 0; // ตัวนับว่าตอนนี้ถึงตัวไหนของ List
@@ -150,8 +150,7 @@ public class AvailableHotel extends Bill {
         //System.out.println(allOfHotel);
     }
 
-
-
+    
     public List getAllOfHotel(){
         return allOfHotel;
     }
@@ -162,5 +161,13 @@ public class AvailableHotel extends Bill {
 
     public String getDateFullHotel(){
         return dateFullHotel;
+    }
+
+    public void ResetAllOfHotel(List allOfHotelRe){
+        this.allOfHotel = allOfHotelRe;
+    }
+
+    public void setHotelFull(){
+        this.hotelFull = false;
     }
 }

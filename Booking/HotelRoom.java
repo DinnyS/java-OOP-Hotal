@@ -299,7 +299,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 System.out.print("Enter the number : ");
                 String numTypeStr = in.nextLine().trim();
 
-                if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3")){
+                if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3") && !numTypeStr.equals("4")){
                     System.out.println("\n!!! Please select only the options available here !!!\n");
                 }
                 else if ((numCustomers >= 4 && numCustomers < 9) && numTypeStr.equals("1")) {
@@ -311,10 +311,12 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
 
                 else{
+                    
                     numType = Integer.parseInt(numTypeStr);
                     if(numType == 4){
                         break;
                     }
+                  
                     setNumType(numType);
                     setSelectHRoom(numType , countOfR);
                     countRoomH++;
