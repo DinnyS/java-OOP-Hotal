@@ -52,7 +52,7 @@ public class Room {
 
         if (selectBooking == 1){
             HotelRoom hotelRoom = new HotelRoom(getType(),getCapacity(),getPrice(),getAvailable(),CheckInDate);
-            //hotelRoom.infoRoom();
+            hotelRoom.infoRoom();
             hotelRoom.selectBooking();
 
         } else if (selectBooking == 2) {

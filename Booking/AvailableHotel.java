@@ -112,8 +112,6 @@ public class AvailableHotel extends Bill {
                  count++;
             }
             
-            if(hotelFull = true && found == true);
-
 
             if(found == false  /* && numDayS > 0/* */ && count == allOfHotel.size()){ // ถ้าไม่มีค่าใน List แต่ List ไม่ได้ว่าง
                 if(type == 1){
@@ -150,7 +148,7 @@ public class AvailableHotel extends Bill {
         /*for(int i = 0; i<allOfHotel.size(); i++){
             System.out.println(allOfHotel);
         }*/
-        System.out.println(allOfHotel);
+        //System.out.println(allOfHotel);
     }
 
  
@@ -171,7 +169,7 @@ public class AvailableHotel extends Bill {
         allOfHotel = allOfHotelRe;
     }
 
-    public void setHotelFull(Boolean refullhotel){
+    public void setHotelFull(){
         hotelFull = false;
     }
 }

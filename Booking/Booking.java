@@ -246,7 +246,7 @@ public class Booking {
         checkIn();
 
         HotelRoom hRoom = new HotelRoom();
-        hRoom.infoRoom();
+        //hRoom.infoRoom();
 
         checkOut(selectBooking);
         Room room = new Room(selectBooking , getCheckInDate());
@@ -268,17 +268,17 @@ public class Booking {
 
 
                 if(avaHotel.getHotelFull() == true){
-                    /*avaHotel.ResetAllOfHotel(restdata);
+                    avaHotel.ResetAllOfHotel(restdata);
                     System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
                     System.out.println("------------------------------------------------------------------------------");
-                    System.out.println("Please input All data Again...");*/
+                    System.out.println("Please input All data Again...");
                     break;
-
             }
+
         }
             if(avaHotel.getHotelFull() == true){
                 avaHotel.ResetAllOfHotel(restdata);
-                //avaHotel.setHotelFull(refullhotel);
+                avaHotel.setHotelFull();
                 showBillNaja = false;
                 bookingSummary(selectBooking);
                 System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
