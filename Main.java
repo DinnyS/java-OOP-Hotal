@@ -117,7 +117,7 @@ public class Main {
 
 
 
-
+/* 
 
             // ================================ ADMIN ====================================================
 
@@ -152,7 +152,7 @@ public class Main {
                     }
                 }while (true);
 
-            } // Loop ของ Admin
+            } // Loop ของ Admin*/
 
 
         }while (true); // Loop ของ Main Menu
