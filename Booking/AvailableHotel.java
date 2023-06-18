@@ -7,6 +7,7 @@ import java.util.List;
 public class AvailableHotel extends Bill {
 
     int availableRoom = 40;
+
     private static boolean hotelFull = false;
     private static String dateFullHotel = "";
 
@@ -150,6 +151,7 @@ public class AvailableHotel extends Bill {
         //System.out.println(allOfHotel);
     }
 
+ 
     
     public List getAllOfHotel(){
         return allOfHotel;
@@ -167,7 +169,7 @@ public class AvailableHotel extends Bill {
         this.allOfHotel = allOfHotelRe;
     }
 
-    public void setHotelFull(){
-        this.hotelFull = false;
+    public void setHotelFull(Boolean refullhotel){
+        this.hotelFull = refullhotel;
     }
 }

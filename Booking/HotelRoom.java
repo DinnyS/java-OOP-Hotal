@@ -199,7 +199,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 else if(nubRoom == 3){
                     System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR3);
                 }*/
-            nubRoom++;
+            //nubRoom++;
             count++;
         }
         System.out.println("-----------------------------------------------------------------------------\u001B[0m");

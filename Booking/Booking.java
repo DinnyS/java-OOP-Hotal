@@ -17,7 +17,10 @@ public class Booking {
     private String name;
     private String phone;
 
+    private static int rubka;
+
     private static List<String> restdata = new ArrayList<>();
+    private static boolean refullhotel = false;
 
     LocalDate currentDate = LocalDate.now();
     public int getNumDay() {
@@ -273,10 +276,10 @@ public class Booking {
         }
             if(avaHotel.getHotelFull() == true){
                 avaHotel.ResetAllOfHotel(restdata);
+                avaHotel.setHotelFull(refullhotel);
                 System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
                 System.out.println("------------------------------------------------------------------------------");
                 System.out.println("Please input All data Again...");
-                avaHotel.setHotelFull();
                 break;
             }
 
@@ -295,6 +298,8 @@ public class Booking {
         if(avaHotel.getHotelFull() == false){
             restdata.clear();
             restdata = new ArrayList<>(avaHotel.getAllOfHotel());
+            refullhotel = avaHotel.getHotelFull();
+            refullhotel = false;
             /*Collections.copy(restdata, avaHotel.getAllOfHotel());
             Collections.reverse(restdata);*/
 
