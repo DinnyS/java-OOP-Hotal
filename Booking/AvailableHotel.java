@@ -8,6 +8,7 @@ public class AvailableHotel extends Bill {
 
     int availableRoom = 40;
     private static boolean hotelFull = false;
+    private static String dateFullHotel = "";
 
     private static List<String> allOfHotel = new ArrayList<>(); // arraylist 1 ตัวมี 5 ค่า "วัน / เดือน / ปี / จำนวนห้อง / ชนิดห้อง"
 
@@ -73,6 +74,7 @@ public class AvailableHotel extends Bill {
                         System.out.println(day+"/"+month+"/"+year + " : now is Full");
                         found = true;
                         hotelFull = true;
+                        dateFullHotel = (day+"/"+month+"/"+year);
                         break;
                     }
                  }
@@ -86,6 +88,7 @@ public class AvailableHotel extends Bill {
                         System.out.println(day+"/"+month+"/"+year + " : now is Full");
                         found = true;
                         hotelFull = true;
+                        dateFullHotel = (day+"/"+month+"/"+year);
                         break;
                     }
                  }
@@ -99,6 +102,7 @@ public class AvailableHotel extends Bill {
                         System.out.println(day+"/"+month+"/"+year + " : now is Full");
                         found = true;
                         hotelFull = true;
+                        dateFullHotel = (day+"/"+month+"/"+year);
                         break;
                     }
                  }
@@ -143,7 +147,7 @@ public class AvailableHotel extends Bill {
         /*for(int i = 0; i<allOfHotel.size(); i++){
             System.out.println(allOfHotel);
         }*/
-        System.out.println(allOfHotel);
+        //System.out.println(allOfHotel);
     }
 
 
@@ -154,5 +158,9 @@ public class AvailableHotel extends Bill {
 
     public boolean getHotelFull(){
         return hotelFull;
+    }
+
+    public String getDateFullHotel(){
+        return dateFullHotel;
     }
 }

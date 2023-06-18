@@ -165,10 +165,13 @@ public class Booking {
     private void checkOut(int selectBooking){ //รับค่ามาเชตว่าจองห้องโรงแรมหรือห้องประชุม
 
         if (selectBooking == 1){ //Hotel room
-            System.out.println("----------- Check out -----------");
+            System.out.println("");
+            System.out.println("----------- Check out -------------------------------------------------------");
             do{ //ใช้ loop เพื่อเชคค่า input ที่เข้ามาว่าถูกต้องไหม ถ้าไม่ถูกให้วนถามใหม่
-                System.out.println("! The hotel will not allow customers to book our rooms online for more than 30 nights.");
-                System.out.println("!! If you wish to stay more than 30 nights, please contact the hotel reception directly.");
+                System.out.print("\u001B[31m");
+                System.out.println("- The hotel will not allow customers to book our rooms online for more than 30 nights.");
+                System.out.println("- If you wish to stay more than 30 nights, please contact the hotel reception directly.");
+                System.out.print("\u001B[0m");
                 System.out.println("-----------------------------------------------------------------------------");
                 System.out.print("How long will you be staying? (Night): ");
                 String strNumDay = in.nextLine().trim();
@@ -242,39 +245,36 @@ public class Booking {
 
     public void startBookingHotel(int selectBooking){ 
         checkIn();
+
+        HotelRoom hRoom = new HotelRoom();
+        hRoom.infoRoom();
+
         checkOut(selectBooking);
         Room room = new Room(selectBooking , getCheckInDate());
-        /*เริ่มการจองแบบจริงๆ โดยใช้ constructor
-        ส่งตัวเลือกการจอง ว่าจะเลือกจองห้องแบบไหน
-            1 == จองห้องพักโรงแรม
-            2 == จองห้องประชุม
-         */
         Bill bils = new Bill();
         int amountRoom = bils.getamountRoom();
 
-        HotelRoom hRoom = new HotelRoom();
-
         AvailableHotel avaHotel = new AvailableHotel();
         List<String> allOfHotel = avaHotel.getAllOfHotel();
-        for(int i =0; i<=15;i++){
-        System.out.print(hRoom.getSelectHRoom()[i] + "");
-        }
 
         int countDay = 0;
         for(int i = 0; i<=getNumDay()-1;i++){ // นับวันที่นอน
             int countRder = 0;
             for(int countR = 0; countR<hRoom.getCountRoomH(); countR++){ // นับห้อง
 
-                //if(avaHotel.getHotelFull() == false){
+                if(avaHotel.getHotelFull() == false){
                     new AvailableHotel(checkInDate,getNumDay(),/*bils.getHotelType()*/hRoom.getSelectHRoom()[countRder],countDay);
                     countRder++;
-                //}
+                }
 
                 if(avaHotel.getHotelFull() == true){
-                    System.out.println("Sorry This Room is Full on");
+                    System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
                     System.out.println("------------------------------------------------------------------------------");
                     break;
                 }
+            }
+            if(avaHotel.getHotelFull() == true){
+                break;
             }
 
             if(i == (getNumDay()-1)){

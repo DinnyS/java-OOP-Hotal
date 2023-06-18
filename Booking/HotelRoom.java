@@ -10,6 +10,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     private static String CheckInDate;
     private static int[] selectHRoom = new int[31];
     private static int countRoomH = 0;
+    private static String[] availableOfHotelR = new String[3];
 
     public int getCountRoomH(){ // ส่งค่า countRoomH ออก
         return countRoomH;
@@ -60,23 +61,10 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     }
 
     private static void suggestRoom(List<? extends Room> rooms, int numCustomers) {
-        //แสดงห้องที่เหมาะกับำนวนลูกค้าที่เข้าพัก
-        for (Room room : rooms) {
 
-            if (room.getCapacity() >= numCustomers && room.getAvailable() > 0) {
-                numCustomers++;
-                System.out.format("%-2s %-30s%n", "",room.getType());
-            }
-        }
-    }
-
-    @Override
-    public void infoRoom() {
-
-        //String[] availableOfHotelR = new String[3];
-        String availableOfHotelR1 = "20";
-        String availableOfHotelR2 = "15";
-        String availableOfHotelR3 = "5";
+        availableOfHotelR[0] = "20";
+        availableOfHotelR[1] = "15";
+        availableOfHotelR[2] = "5";
 
         int nubRoom = 1;
         AvailableHotel avHotel = new AvailableHotel();
@@ -93,47 +81,126 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             
             if(check.startsWith(CheckInDate) && check.endsWith("1")){ // Check ห้องแรก
                 if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
-                    availableOfHotelR1 = Integer.toString(activeRoom); // แปลงค่าจาก int เป็น String
+                    availableOfHotelR[0] = Integer.toString(activeRoom); // แปลงค่าจาก int เป็น String
                 }
                 else{ // ถ้าไม่ว่าง
-                    availableOfHotelR1 = "Full"; // set ห้องเป็นเต็ม
+                    availableOfHotelR[0] = "Full"; // set ห้องเป็นเต็ม
                 }
             }
             else if(check.startsWith(CheckInDate) && check.endsWith("2")){ // Check ห้อง 2
                 if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
-                    availableOfHotelR2 = Integer.toString(activeRoom);
+                    availableOfHotelR[1] = Integer.toString(activeRoom);
                 }
                 else{ // ถ้าไม่ว่าง
-                    availableOfHotelR2 = "Full"; // set ห้องเป็นเต็ม
+                    availableOfHotelR[1] = "Full"; // set ห้องเป็นเต็ม
                 }
             }
             else if(check.startsWith(CheckInDate) && check.endsWith("3")){ // Check ห้อง 3
                 if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
-                    availableOfHotelR3 = Integer.toString(activeRoom);
+                    availableOfHotelR[2] = Integer.toString(activeRoom);
                 }
                 else{ // ถ้าไม่ว่าง
-                    availableOfHotelR3 = "Full"; // set ห้องเป็นเต็ม
+                    availableOfHotelR[2] = "Full"; // set ห้องเป็นเต็ม
+                }
+            }
+            countNaja++;
+        }
+        //แสดงห้องที่เหมาะกับำนวนลูกค้าที่เข้าพัก
+        int count = 0;
+        System.out.print("\u001B[32m");
+        for (Room room : rooms) { // 3 ห้อง 
+            if(room.getCapacity() >= numCustomers && availableOfHotelR[count].equals("Full") && count == 0){
+
+            }
+
+            else if (room.getCapacity() >= numCustomers && !availableOfHotelR[count].equals("Full") && count == 0) { // ห้อง แรก
+                numCustomers++;
+                System.out.format("%-2s %-30s%n", "",room.getType());
+            }
+            else if (room.getCapacity() >= numCustomers && !availableOfHotelR[count].equals("Full") && count == 1) { // ห้อง 2
+                numCustomers++;
+                System.out.format("%-2s %-30s%n", "",room.getType());
+            }
+            else if (room.getCapacity() >= numCustomers && !availableOfHotelR[count].equals("Full") && count == 2) { // ห้อง 3
+                numCustomers++;
+                System.out.format("%-2s %-30s%n", "",room.getType());
+            }
+            count++;
+        }
+        System.out.print("\u001B[31m");
+        System.out.println("   4. Exit the booking...  ");
+        System.out.print("\u001B[0m");
+    }
+
+    @Override
+    public void infoRoom() {
+
+        availableOfHotelR[0] = "20";
+        availableOfHotelR[1] = "15";
+        availableOfHotelR[2] = "5";
+        /*String availableOfHotelR1 = "20";
+        String availableOfHotelR2 = "15";
+        String availableOfHotelR3 = "5";*/
+
+        int nubRoom = 1;
+        AvailableHotel avHotel = new AvailableHotel();
+        List<String> allOfHotel= avHotel.getAllOfHotel();
+        int countNaja = 0;
+
+        for (String check : allOfHotel){ //check ข้อมูลที่มีใน list
+
+            String checkRoom = allOfHotel.get(countNaja); //รับค่าข้อมูลตัวที่กำลัง check
+            String[] salat = checkRoom.split("/"); // ตัวแบ่ง part ของข้อมูล
+            int activeRoom = Integer.parseInt(salat[3]); // check จำนวนห้องที่ว่าง
+
+
+            
+            if(check.startsWith(CheckInDate) && check.endsWith("1")){ // Check ห้องแรก
+                if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
+                    availableOfHotelR[0] = Integer.toString(activeRoom); // แปลงค่าจาก int เป็น String
+                }
+                else{ // ถ้าไม่ว่าง
+                    availableOfHotelR[0] = "Full"; // set ห้องเป็นเต็ม
+                }
+            }
+            else if(check.startsWith(CheckInDate) && check.endsWith("2")){ // Check ห้อง 2
+                if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
+                    availableOfHotelR[1] = Integer.toString(activeRoom);
+                }
+                else{ // ถ้าไม่ว่าง
+                    availableOfHotelR[1] = "Full"; // set ห้องเป็นเต็ม
+                }
+            }
+            else if(check.startsWith(CheckInDate) && check.endsWith("3")){ // Check ห้อง 3
+                if(activeRoom > 0){ // ถ้าห้องยังว่างอยู่
+                    availableOfHotelR[2] = Integer.toString(activeRoom);
+                }
+                else{ // ถ้าไม่ว่าง
+                    availableOfHotelR[2] = "Full"; // set ห้องเป็นเต็ม
                 }
             }
             countNaja++;
         }
 
+        int count = 0;
         List<HotelRoom> rooms = HotelRoom.getHotelRooms();
         System.out.println("\u001B[33m-----------------------------------------------------------------------------");
         System.out.format("%-30s %-15s %-15s %-10s%n", "Room Type", "Capacity", "Price (Baht)", "Room available");
         System.out.println("-----------------------------------------------------------------------------");
         for (HotelRoom hotelRoom : rooms) {
             //แสดง detail ต่างๆ ของของให้ user ได้เลือก
-            if(nubRoom == 1){
-                System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR1);
-            }
-            else if(nubRoom == 2){
-                System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR2);
-            }
-            else if(nubRoom == 3){
-                System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR3);
-            }
+            System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR[count]);
+                /*if(nubRoom == 1){
+                    System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR1);
+                }
+                else if(nubRoom == 2){
+                    System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR2);
+                }
+                else if(nubRoom == 3){
+                    System.out.format("%-30s %-15d %-15d %-10s%n", hotelRoom.getType(), hotelRoom.getCapacity(), hotelRoom.getPrice(), availableOfHotelR3);
+                }*/
             nubRoom++;
+            count++;
         }
         System.out.println("-----------------------------------------------------------------------------\u001B[0m");
     }
@@ -245,6 +312,9 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
                 else{
                     numType = Integer.parseInt(numTypeStr);
+                    if(numType == 4){
+                        break;
+                    }
                     setNumType(numType);
                     setSelectHRoom(numType , countOfR);
                     countRoomH++;
