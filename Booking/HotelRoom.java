@@ -12,6 +12,10 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
     private static int countRoomH = 0;
     private static String[] availableOfHotelR = new String[3];
 
+    private static boolean r1 = false;
+    private static boolean r2 = false;
+    private static boolean r3 = false;
+
     public int getCountRoomH(){ // ส่งค่า countRoomH ออก
         return countRoomH;
     }
@@ -115,14 +119,17 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
             else if (room.getCapacity() >= numCustomers && !availableOfHotelR[count].equals("Full") && count == 0) { // ห้อง แรก
                 numCustomers++;
+                r1 = true;
                 System.out.format("%-2s %-30s%n", "",room.getType());
             }
             else if (room.getCapacity() >= numCustomers && !availableOfHotelR[count].equals("Full") && count == 1) { // ห้อง 2
                 numCustomers++;
+                r2 = true;
                 System.out.format("%-2s %-30s%n", "",room.getType());
             }
             else if (room.getCapacity() >= numCustomers && !availableOfHotelR[count].equals("Full") && count == 2) { // ห้อง 3
                 numCustomers++;
+                r3 = true;
                 System.out.format("%-2s %-30s%n", "",room.getType());
             }
             count++;
@@ -298,6 +305,10 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
                 System.out.print("Enter the number : ");
                 String numTypeStr = in.nextLine().trim();
+
+                if(r1 == true){
+                    
+                }
 
                 if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3") && !numTypeStr.equals("4")){
                     System.out.println("\n!!! Please select only the options available here !!!\n");

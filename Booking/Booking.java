@@ -17,7 +17,8 @@ public class Booking {
     private String name;
     private String phone;
 
-    private static int rubka;
+
+    private static boolean showBillNaja = true;
 
     private static List<String> restdata = new ArrayList<>();
     private static boolean refullhotel = false;
@@ -277,6 +278,7 @@ public class Booking {
             if(avaHotel.getHotelFull() == true){
                 avaHotel.ResetAllOfHotel(restdata);
                 avaHotel.setHotelFull(refullhotel);
+                showBillNaja = false;
                 System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
                 System.out.println("------------------------------------------------------------------------------");
                 System.out.println("Please input All data Again...");
@@ -287,7 +289,8 @@ public class Booking {
                 service(selectBooking);
                 name();
                 phone();
-                bookingSummary(selectBooking);
+                if(showBillNaja == true){bookingSummary(selectBooking);}
+                
                 System.out.println("Thank you For Booking :)");
                 System.out.println("------------------------------------------------------------------------------");
                 break;
@@ -466,7 +469,12 @@ public class Booking {
             //ถ้าเป็นการของโรงแรม จะมีการโชว์วัน check out
             System.out.println("Check out : " + getCheckOutDate());
         }
-        Room roomBill = new Room(getNumDay(),selectBooking); //ส่งต่า numDay และ selectBooking ไปใช้ใน class Room
+        if(selectBooking == 2){
+            Room roomBill = new Room(getNumDay(),selectBooking); //ส่งต่า numDay และ selectBooking ไปใช้ใน class Room
+        }
+        if(showBillNaja == true){
+            Room roomBill = new Room(getNumDay(),selectBooking); //ส่งต่า numDay และ selectBooking ไปใช้ใน class Room
+        }
         System.out.println("------------------------------------------------------------------------------");
     }
 }
