@@ -207,47 +207,30 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             System.out.print("Enter number of room(s) : ");
             String numRoomSTR = in.nextLine().trim();
             int number;
-            do {
+            
                 if (Pattern.matches("^\\d+$", numRoomSTR)) {
                     number = Integer.parseInt(numRoomSTR);
                     if (number > 40) {
                         System.out.println("Number of room(s) cannot exceed 40. Please enter again.");
-                        System.out.print("Enter number of room(s): ");
-                        numRoomSTR = in.nextLine().trim();
                     }
                     else if(number <= 0){
                         System.out.println("Number of room(s) cannot exceed lower than 1. Please enter again.");
-                        System.out.print("Enter number of room(s): ");
-                        numRoomSTR = in.nextLine().trim();
+                    }
+                    else{
+                        setNumRoom(numRoom);
+                        
+                        number = Integer.parseInt(numRoomSTR);
+                        numRoomSTR= String.valueOf(number);
+                        break;
                     }
                 }
-
-            } while (!(Pattern.matches("^\\d+$", numRoomSTR) && Integer.parseInt(numRoomSTR) <= 40  && Integer.parseInt(numRoomSTR) > 0));
-
-            number = Integer.parseInt(numRoomSTR);
-            numRoomSTR= String.valueOf(number);
-
-             if (Pattern.matches("\\d+$",numRoomSTR)){
-                numRoom = Integer.parseInt(numRoomSTR);
-                setNumRoom(numRoom);
-
-                Bill storeBill = new Bill("for create array",getNumRoom());
-                //ส่งค่าจำนวนห้องที่จองไป constructor ในคลาส Bill เพื่อสร้าง array ไว้เก็บข้อมูล
-
-                if (getNumRoom() > 40) {
-                    //ถ้า user กรอกจำนวนห้องมามากกว่า 40 ระบบะเซตให้จำนวนห้องที่ลูกค้าจะจองเป็น 40 ทันที่
-                    setNumRoom(40);
+                else{
+                        System.out.println("\n !!!Please enter only integer!!! \n");
                 }
 
-                break;
-            }
-
-            else{
-                System.out.println("\n !!!Please enter only integer!!! \n");
-            }
-
         }while (true);
-
+ Bill storeBill = new Bill("for create array",getNumRoom());
+                        //ส่งค่าจำนวนห้องที่จองไป constructor ในคลาส Bill เพื่อสร้าง array ไว้เก็บข้อมูล 
         //loop ถาม user ตามจำนวนห้องที่จองว่าแต่ละห้องมีผู้พักกี่คน และ จพเลือก type ไหน
         for (int i = 1; i <= getNumRoom(); i++) {
 
@@ -325,7 +308,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
             }while(true);
 
             System.out.println("-----------------------------------------------------------------------------");
-
+            
         }
     }
 }
