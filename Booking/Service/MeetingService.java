@@ -77,12 +77,23 @@ public class MeetingService extends Service implements InfoService, SelectBookin
             String selectPackage = scan.nextLine().trim().toUpperCase();
 
             if (selectPackage.equals("A")){
-                Bill bill = new Bill(people, meetingServices.get(0).getName(), meetingServices.get(0).getPrice());
-                break;
+                if(time == 2 || time == 3){
+                    System.out.println("\u001B[31m!!! Please select only the options available here !!!\u001B[0m");
+                }
+                else{
+                    Bill bill = new Bill(people, meetingServices.get(0).getName(), meetingServices.get(0).getPrice());
+                    break;
+                }
+                
             }
             else if (selectPackage.equals("B")){
-                Bill bill = new Bill(people, meetingServices.get(1).getName(), meetingServices.get(1).getPrice());
+                if(time == 1){
+                    System.out.println("\u001B[31m!!! Please select only the options available here !!!\u001B[0m");
+                }
+                else{
+                    Bill bill = new Bill(people, meetingServices.get(1).getName(), meetingServices.get(1).getPrice());
                 break;
+                }
             }
             else if (selectPackage.equals("C")){
                 Bill bill = new Bill(people, meetingServices.get(2).getName(), meetingServices.get(2).getPrice());
