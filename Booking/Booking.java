@@ -479,4 +479,7 @@ public class Booking {
         }
         System.out.println("------------------------------------------------------------------------------");
     }
+
+    public class Main {
+    }
 }

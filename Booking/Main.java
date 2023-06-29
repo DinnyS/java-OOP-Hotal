@@ -1,8 +1,14 @@
+package Booking;
 import java.util.Scanner;
 import java.util.regex.Pattern;
-
-import Booking.Booking;
 public class Main {
+
+    public Main(){}
+
+    public static void mainRun(){
+        main(null);
+    }
+
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
@@ -19,7 +25,9 @@ public class Main {
             System.out.println(" == Select == "); // เลือกหัวข้อ
             System.out.println(" 1. Information Hotel Booking.Room "); // ข้อมูลของโรงแรม
             System.out.println(" 2. Booking"); // การจอง
-            System.out.println();
+            System.out.println("\u001B[31m"); 
+            System.out.println(" 3. Exit The program"); // ออกจากระบบ
+            System.out.println("\u001B[0m");
             System.out.print(" : ");
 
             String select = scan.nextLine().trim(); // ใช้ select ในการเลือกหัวข้อ (เป็น String)
@@ -112,6 +120,10 @@ public class Main {
                     }
 
                 }while (true);} // Loop ของ Booking
+
+            else if(select.equals("3")){
+                System.exit(0);
+            }
 
 
 
