@@ -350,15 +350,27 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                     numTypeStr = in.nextLine().trim();
 
                     if(numTypeStr.equals("1") && availableOfHotelR[0] == 0){
+                        System.out.println("\u001B[31m");
+                        System.out.println("-----------------------------------------------------------------------------");
                         System.out.println(" Sorry Room Now is Full Please Try Again...");
+                        System.out.println("-----------------------------------------------------------------------------");
+                        System.out.println("\u001B[0m");
                     }
 
                     else if(numTypeStr.equals("2") && availableOfHotelR[1] == 0){
+                        System.out.println("\u001B[31m");
+                        System.out.println("-----------------------------------------------------------------------------");
                         System.out.println(" Sorry Room Now is Full Please Try Again...");
+                        System.out.println("-----------------------------------------------------------------------------");
+                        System.out.println("\u001B[0m");
                     }
 
                     else if(numTypeStr.equals("3") && availableOfHotelR[2] == 0){
+                        System.out.println("\u001B[31m");
+                        System.out.println("-----------------------------------------------------------------------------");
                         System.out.println(" Sorry Room Now is Full Please Try Again...");
+                        System.out.println("-----------------------------------------------------------------------------");
+                        System.out.println("\u001B[0m");
                     }
 
                     if(numTypeStr.equals("1") && availableOfHotelR[0] > 0){
