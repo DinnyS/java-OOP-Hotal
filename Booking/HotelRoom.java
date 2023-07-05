@@ -71,7 +71,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
         int nubRoom = 1;
         AvailableHotel avHotel = new AvailableHotel();
-        List<String> allOfHotel= avHotel.getAllOfHotel();
+        List<String> allOfHotel= new ArrayList<>(avHotel.getAllOfHotel());
         Booking bok = new Booking();
         String cRoom = bok.getCheckInDate();
 
@@ -130,10 +130,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
         System.out.print("\u001B[0m");
     }
 
-    @Override
-    public void infoRoom() {
-
-        int[] availableOfHotelR = new int[3];
+    public static int[] infoRoomCheck(int[] availableOfHotelR) {
 
         availableOfHotelR[0] = 20;
         availableOfHotelR[1] = 15;
@@ -141,7 +138,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
         int nubRoom = 1;
         AvailableHotel avHotel = new AvailableHotel();
-        List<String> allOfHotel= avHotel.getAllOfHotel();
+        List<String> allOfHotel= new ArrayList<>(avHotel.getAllOfHotel());
         Booking bok = new Booking();
 
         boolean found1 = false;
@@ -160,6 +157,49 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                     availableOfHotelR[0] = activeRoom;
 
                     
+            }
+            else if (check.startsWith(CheckInDate) && check.endsWith("2")){
+                    availableOfHotelR[1] = activeRoom;
+
+            }
+            else if (check.startsWith(CheckInDate) && check.endsWith("3")){
+                    availableOfHotelR[2] = activeRoom;
+
+
+            }
+            countt++;
+        }
+        return availableOfHotelR;
+    }
+
+
+    @Override
+    public void infoRoom() {
+
+        int[] availableOfHotelR = new int[3];
+
+        availableOfHotelR[0] = 20;
+        availableOfHotelR[1] = 15;
+        availableOfHotelR[2] = 5;
+
+        int nubRoom = 1;
+        AvailableHotel avHotel = new AvailableHotel();
+        List<String> allOfHotel = new ArrayList<>(avHotel.getAllOfHotel());
+        Booking bok = new Booking();
+/* 
+        boolean found1 = false;
+        boolean found2 = false;
+        boolean found3 = false;
+*/
+        int countt = 0;
+         for (String check : allOfHotel){
+        
+                String checkRoom = allOfHotel.get(countt); //รับค่าข้อมูลตัวที่กำลัง check
+                String[] salat = checkRoom.split("/"); // ตัวแบ่ง part ของข้อมูล
+                int activeRoom = Integer.parseInt(salat[3]); // check จำนวนห้องที่ว่าง
+
+            if (check.startsWith(CheckInDate) && check.endsWith("1")){
+                    availableOfHotelR[0] = activeRoom;
             }
             else if (check.startsWith(CheckInDate) && check.endsWith("2")){
                     availableOfHotelR[1] = activeRoom;
@@ -299,12 +339,52 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
 
             do{
                 //เลือก type ของห้อง ตามที่ระบบแนะนำมาโดยอ้างอิงจากจำนวนผู้เข้าพัก
-                System.out.println("You can choose type of room :");// เลือกรูปแบบของห้อง
-                suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
-                System.out.print("Enter the number : ");
-                String numTypeStr = in.nextLine().trim();
+                String numTypeStr;
+                int[] availableOfHotelR = new int[3];
+                availableOfHotelR = infoRoomCheck(availableOfHotelR);
 
+                while(true){
+                    System.out.println("You can choose type of room :");// เลือกรูปแบบของห้อง
+                    suggestRoom(HotelRoom.getHotelRooms(), numCustomers);
+                    System.out.print("Enter the number : ");
+                    numTypeStr = in.nextLine().trim();
 
+                    if(numTypeStr.equals("1") && availableOfHotelR[0] == 0){
+                        System.out.println(" Sorry Room Now is Full Please Try Again...");
+                    }
+
+                    else if(numTypeStr.equals("2") && availableOfHotelR[1] == 0){
+                        System.out.println(" Sorry Room Now is Full Please Try Again...");
+                    }
+
+                    else if(numTypeStr.equals("3") && availableOfHotelR[2] == 0){
+                        System.out.println(" Sorry Room Now is Full Please Try Again...");
+                    }
+
+                    if(numTypeStr.equals("1") && availableOfHotelR[0] > 0){
+                        availableOfHotelR[0]--;
+                        break;
+                    }
+
+                    if(numTypeStr.equals("2") && availableOfHotelR[1] > 0){
+                        availableOfHotelR[1]--;
+                        break;
+                    }
+
+                    if(numTypeStr.equals("3") && availableOfHotelR[2] > 0){
+                        availableOfHotelR[2]--;
+                        break;
+                    }
+                    if(numTypeStr.equals("4")){
+                        break;
+                    }
+                    else{
+                        System.out.println("Please select only the options available here !!!");
+                    }
+                    
+                }
+
+                 
                 if (!numTypeStr.equals("1") && !numTypeStr.equals("2") && !numTypeStr.equals("3") && !numTypeStr.equals("4")){
                     System.out.println("\n!!! Please select only the options available here !!!\n");
                 }
@@ -314,7 +394,7 @@ public class HotelRoom extends Room implements InfoRoom , SelectBooking{
                 else if ((numCustomers >= 7 && numCustomers <= 8) && numTypeStr.equals("2")) {
                     System.out.println("\n!!! Sorry, Room type 2 is available for 4-6 customers.\n");
                 }
-
+                
 
                 else{
                     numType = Integer.parseInt(numTypeStr);

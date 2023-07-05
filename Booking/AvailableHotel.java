@@ -166,7 +166,9 @@ public class AvailableHotel extends Bill {
     }
 
     public void ResetAllOfHotel(List allOfHotelRe){
+        allOfHotelRe = new ArrayList<>(allOfHotelRe);
         allOfHotel = allOfHotelRe;
+        //System.out.println(allOfHotelRe);
     }
 
     public void setHotelFull(){

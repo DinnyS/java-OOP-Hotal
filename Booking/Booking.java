@@ -20,7 +20,9 @@ public class Booking {
 
     private static boolean showBillNaja = true;
 
-    private static List<String> restdata = new ArrayList<>();
+    static AvailableHotel avaHotel = new AvailableHotel();
+
+    private List<String> restdata = new ArrayList<>();
     private static boolean refullhotel = false;
 
     LocalDate currentDate = LocalDate.now();
@@ -253,8 +255,9 @@ public class Booking {
         Bill bils = new Bill();
         int amountRoom = bils.getamountRoom();
 
-        AvailableHotel avaHotel = new AvailableHotel();
+        //AvailableHotel avaHotel = new AvailableHotel();
         List<String> allOfHotel = avaHotel.getAllOfHotel();
+        List<String> restdata = new ArrayList<>(avaHotel.getAllOfHotel());
 
         int countDay = 0;
         for(int i = 0; i<=getNumDay()-1;i++){ // นับวันที่นอน
@@ -280,7 +283,7 @@ public class Booking {
                 avaHotel.ResetAllOfHotel(restdata);
                 avaHotel.setHotelFull();
                 showBillNaja = false;
-                bookingSummary(selectBooking);
+                //bookingSummary(selectBooking);
                 System.out.println("Sorry This Room is Full on " + avaHotel.getDateFullHotel());
                 System.out.println("------------------------------------------------------------------------------");
                 System.out.println("Please input All data Again...");
@@ -303,6 +306,7 @@ public class Booking {
         if(avaHotel.getHotelFull() == false){
             restdata.clear();
             restdata = new ArrayList<>(avaHotel.getAllOfHotel());
+
             refullhotel = avaHotel.getHotelFull();
             refullhotel = false;
             /*Collections.copy(restdata, avaHotel.getAllOfHotel());

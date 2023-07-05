@@ -64,7 +64,7 @@ public class MeetingService extends Service implements InfoService, SelectBookin
         }
         System.out.println("---------------------------------------------------------------");
         System.out.println("The number of people is based on the maximum capacity of the room.");
-        System.out.println("---------------------------------------------------------------\u001B[34m");
+        System.out.println("---------------------------------------------------------------\u001B[0m");
     }
 
     @Override
